@@ -28,6 +28,7 @@ ecmascript-runtime@0.2.6
 ejson@1.0.7
 es5-shim@4.1.14
 fastclick@1.0.7
+fourseven:scss@3.4.1
 geojson-utils@1.0.4
 hot-code-push@1.0.0
 html-tools@1.0.5
@@ -59,10 +60,10 @@ reactive-var@1.0.6
 reload@1.1.4
 retry@1.0.4
 routepolicy@1.0.6
+seba:minifiers-autoprefixer@0.0.2
 session@1.1.1
 spacebars@1.0.7
 spacebars-compiler@1.0.7
-standard-minifiers@1.0.2
 templating-tools@1.0.0
 tracker@1.0.9
 ui@1.0.8
