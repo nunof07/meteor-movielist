@@ -20,3 +20,9 @@ seba:minifiers-autoprefixer
 jquery
 nmccready:angular-simple-logger
 anti:i18n
+accounts-password
+carlosbaraza:accounts-ui-bootstrap-3-angular
+twbs:bootstrap
+fortawesome:fontawesome
+enforcer:angular-ui-bootstrap
+angular:angular-animate

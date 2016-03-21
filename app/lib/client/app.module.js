@@ -2,5 +2,8 @@ angular
     .module('movielist', [
         'angular-meteor',
         'ui.router',
-        'nemLogging'
+        'ui.bootstrap',
+        'ngAnimate',
+        'nemLogging',
+        'accounts.ui'
     ]);
