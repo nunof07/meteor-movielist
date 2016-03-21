@@ -1,5 +1,6 @@
 angular
     .module('movielist', [
         'angular-meteor',
-        'ui.router'
+        'ui.router',
+        'nemLogging'
     ]);

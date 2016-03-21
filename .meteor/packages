@@ -8,7 +8,6 @@ meteor-base             # Packages every Meteor app needs to have
 mobile-experience       # Packages for a great mobile UX
 mongo                   # The database Meteor supports right now
 session                 # Client-side reactive dictionary for your app
-jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
 
 es5-shim                # ECMAScript 5 compatibility for older browsers.
@@ -18,3 +17,5 @@ angularui:angular-ui-router
 meteorhacks:inject-initial
 fourseven:scss
 seba:minifiers-autoprefixer
+jquery
+nmccready:angular-simple-logger
