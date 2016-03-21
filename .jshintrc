@@ -60,8 +60,13 @@
         "_": false,
         "angular": false,
         "Accounts": false,
+        "DDPRateLimiter": false,
         
         "Inject": false,
-        "i18n": false
+        "i18n": false,
+        "SimpleSchema": false,
+        "ValidatedMethod": false,
+        
+        "Lists": true
     }
 }

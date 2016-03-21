@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h2 ml-i18n="{{ listFormCtrl.title }}"></h2>
+</div>
+<div class="modal-body">
+    <form id="listForm" name="listForm" role="form"
+          ng-submit="listFormCtrl.submit()">
+        <fieldset ng-disabled="listFormCtrl.isSubmitting">
+            
+            <div class="form-group"
+                ng-class="{'has-error': listForm.nameInput.$invalid && !listForm.nameInput.$pristine}">
+                <label for="nameInput" ml-i18n="lists.form.name"></label>
+                <input ng-model="listFormCtrl.list.name"
+                    id="nameInput" name="nameInput"
+                    type="text" ng-required="true"
+                    autofocus
+                    class="form-control">
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input ng-model="listFormCtrl.list.isPublic"
+                           type="checkbox">
+                    <span ml-i18n="lists.form.isPublic"></span>
+                </label>
+            </div>
+            <div ng-messages="listFormCtrl.error" ng-show="listFormCtrl.error" class="alert alert-danger" role="alert">
+                <p ng-message="saveFailed">
+                    <span ml-i18n="lists.form.errors.saveFailed"></span>
+                </p>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="modal-footer">
+    <fieldset ng-disabled="listFormCtrl.isSubmitting">
+        <button class="btn btn-primary" type="button"
+                ng-disabled="listForm.$invalid"
+                ng-click="listFormCtrl.submit()">
+            <i ng-show="listFormCtrl.isSubmitting" class="icon i-loading"></i>
+            <span ml-i18n="forms.save"></span>
+        </button>
+        <button class="btn btn-link btn-soft" type="button"
+                formnovalidate
+                ng-click="listFormCtrl.cancel()"
+                ml-i18n="forms.cancel">
+        </button>
+    </fieldset>
+</div>

@@ -4,6 +4,7 @@ angular
         'ui.router',
         'ui.bootstrap',
         'ngAnimate',
+        'ngMessages',
         'nemLogging',
         'accounts.ui'
     ]);
