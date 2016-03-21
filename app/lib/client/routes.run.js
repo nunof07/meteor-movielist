@@ -9,7 +9,7 @@ function routesRun($rootScope, $state, $timeout) {
     function onStateChangeSuccess(previousRoute, currentRoute) {
         const hasTitle = currentRoute.data && currentRoute.data.title;
         const title = hasTitle ? currentRoute.data.title : '';
-        const defaultTitle = i18n('title');
+        const defaultTitle = i18n('siteName');
         document.title = defaultTitle + (hasTitle ? ' | ' + title : '');
     }
 }

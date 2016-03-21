@@ -59,6 +59,7 @@
         "Mongo": false,
         "_": false,
         "angular": false,
+        "Accounts": false,
         
         "Inject": false,
         "i18n": false
