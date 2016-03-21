@@ -60,6 +60,7 @@
         "_": false,
         "angular": false,
         
-        "Inject": false
+        "Inject": false,
+        "i18n": false
     }
 }

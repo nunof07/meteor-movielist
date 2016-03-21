@@ -19,3 +19,4 @@ fourseven:scss
 seba:minifiers-autoprefixer
 jquery
 nmccready:angular-simple-logger
+anti:i18n

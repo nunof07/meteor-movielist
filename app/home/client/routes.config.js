@@ -8,7 +8,7 @@ function routesConfig($stateProvider) {
             url: '/',
             template: '<ml-home></ml-home>',
             data: {
-                title: 'Home'
+                title: i18n('home.title')
             }
         });
 }

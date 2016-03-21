@@ -3,6 +3,7 @@ angular-meteor-data@0.3.0
 angular-templates@1.0.0
 angular:angular@1.4.8
 angularui:angular-ui-router@0.2.15
+anti:i18n@0.4.3
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
