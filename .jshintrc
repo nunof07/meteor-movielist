@@ -67,6 +67,7 @@
         "SimpleSchema": false,
         "ValidatedMethod": false,
         
+        "ML": true,
         "Lists": true
     }
 }
