@@ -19,6 +19,10 @@ ML.createMethods(Lists, [
         name: 'hasAccess',
         fields: [{ listId: ML.fields.id }],
         run: listsHasAccess
+    }, {
+        name: 'update',
+        fields: [{ listId: ML.fields.id }, 'name', 'isPublic'],
+        run: listsUpdate
     }
 ]);
 
@@ -56,4 +60,19 @@ function listsHasAccess({ listId }) {
             return list.isEditableBy(this.userId);
         }
     } 
+}
+function listsUpdate({ listId, name, isPublic }) {
+    if (!this.userId) {
+        throw new Meteor.Error('unauthorized', 'Must be logged in to update a list');
+    }
+    
+    if (!listsHasAccess.call(this, { listId })) {
+        throw new Meteor.Error('unauthorized', 'User not authorized to update list');
+    }
+    
+    return Lists.update(listId, { $set: {
+        name,
+        isPublic,
+        modifiedAt: new Date(),
+    } });
 }

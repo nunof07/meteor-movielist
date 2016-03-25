@@ -11,18 +11,27 @@ function listDetailsDirective() {
     };
 }
 
-function ListDetailsController($scope, $stateParams, $reactive, titleService) {
+function ListDetailsController($scope, $stateParams, $reactive, titleService, modalService) {
     const listDetailsCtrl = this;
     $reactive(listDetailsCtrl).attach($scope);
     listDetailsCtrl.subscribe('listDetails.user', getListId);
     listDetailsCtrl.autorun(list);
+    listDetailsCtrl.editList = editList;
     return;
     
     function list() {
         listDetailsCtrl.list = Lists.findOne({ _id: $stateParams.listId });
-        titleService.setTitle(listDetailsCtrl.list.name);
+        
+        if (listDetailsCtrl.list) {
+            titleService.setTitle(listDetailsCtrl.list.name);
+        }
     }
     function getListId() {
         return [{ listId: $stateParams.listId }];
+    }
+    function editList() {
+        modalService.open('<ml-edit-list></ml-edit-list>',
+            $scope,
+            { list: listDetailsCtrl.list });
     }
 }

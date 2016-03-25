@@ -6,7 +6,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
+.i-movielist {
+    // fa-film
+    &:before {
+        content: "\f008";
+    }
+}
 .i-loading {
     // fa-spin
     animation: fa-spin 2s infinite linear;
@@ -17,17 +22,15 @@
         content: "\f1ce";
     }
 }
-
 .i-add {
     // fa-plus-circle
     &:before {
         content: "\f055";
     }
 }
-
-.i-movielist {
-    // fa-film
+.i-edit {
+    // fa-pencil
     &:before {
-        content: "\f008";
+        content: "\f040";
     }
 }

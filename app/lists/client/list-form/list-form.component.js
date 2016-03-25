@@ -6,11 +6,11 @@ function listFormDirective() {
     return {
         restrict: 'E',
         scope: {
-            onSubmit: '=',
-            onCancel: '=',
-            list: '=',
-            title: '@',
-            error: '='
+            onSubmit: '=mlOnSubmit',
+            onCancel: '=mlOnCancel',
+            list: '=mlList',
+            title: '=mlTitle',
+            error: '=mlError'
         },
         bindToController: true,
         templateUrl: 'app/lists/client/list-form/list-form.html',

@@ -4,6 +4,10 @@
             <span ng-bind="listDetailsCtrl.list.name"></span>
             <small ng-show="listDetailsCtrl.list.isPublic"
                    ml-i18n="lists.labels.isPublic"></small>
+            <button type="button" class="btn btn-primary"
+                    ng-click="listDetailsCtrl.editList()">
+                <span class="icon i-edit"></span>
+            </button>
         </h1>
     </div>
 </div>
