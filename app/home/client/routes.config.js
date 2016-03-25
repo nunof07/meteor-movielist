@@ -1,8 +1,8 @@
 angular
     .module('movielist')
-    .config(routesConfig);
+    .config(homeRoutesConfig);
 
-function routesConfig($stateProvider) {
+function homeRoutesConfig($stateProvider) {
     $stateProvider
         .state('home', {
             url: '/',

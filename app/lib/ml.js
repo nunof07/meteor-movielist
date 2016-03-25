@@ -1,6 +1,9 @@
 ML = {};
 ML.createCollection = createCollection;
 ML.createMethods = createMethods;
+ML.fields = {
+    id: { type: String, regEx: SimpleSchema.RegEx.Id }
+};
 
 function createCollection(name, fields, publicFields) {
     const collection = new Mongo.Collection(name);

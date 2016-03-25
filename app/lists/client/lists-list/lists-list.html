@@ -1,10 +1,12 @@
-<div class="list-group">
-    <a ng-repeat="list in listsListCtrl.lists"
-       href="#"
-       class="list-group-item">
-        <span ng-show="list.isPublic"
-              ml-i18n="lists.labels.isPublic"
-              class="badge"></span>
-        <span ng-bind="list.name"></span>
-    </a>
+<div class="lists-list">
+    <div class="list-group">
+        <a ng-repeat="list in listsListCtrl.lists"
+           ui-sref="listDetails({ listId: list._id })"
+           class="list-group-item">
+            <span ng-show="list.isPublic"
+                ml-i18n="lists.labels.isPublic"
+                class="badge"></span>
+            <span ng-bind="list.name"></span>
+        </a>
+    </div>
 </div>

@@ -7,11 +7,11 @@ function listsListDirective() {
         restrict: 'E',
         templateUrl: 'app/lists/client/lists-list/lists-list.html',
         controllerAs: 'listsListCtrl',
-        controller: listsListController
+        controller: ListsListController
     };
 }
 
-function listsListController($scope, $reactive) {
+function ListsListController($scope, $reactive) {
     const listsListCtrl = this;
     $reactive(listsListCtrl).attach($scope);
     listsListCtrl.subscribe('lists.user');

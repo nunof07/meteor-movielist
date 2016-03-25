@@ -7,11 +7,11 @@ function addListDirective() {
         restrict: 'E',
         templateUrl: 'app/lists/client/add-list/add-list.html',
         controllerAs: 'addListCtrl',
-        controller: addListController
+        controller: AddListController
     };
 }
 
-function addListController($scope, $reactive, logger) {
+function AddListController($scope, $reactive, logger) {
     const addListCtrl = this;
     addListCtrl.list = {
         name: '',
