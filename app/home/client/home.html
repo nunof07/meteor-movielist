@@ -1,3 +1,10 @@
 <div id="home">
-    <a href="#" ng-click="homeCtrl.newList()">New list</a>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary"
+                ng-click="homeCtrl.newList()">
+            <span class="icon i-add"></span>
+            <span ml-i18n="lists.actions.new"></span>
+        </button>
+    </div>
+    <ml-lists-list></ml-lists-list>
 </div>

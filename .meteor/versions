@@ -28,6 +28,7 @@ caching-html-compiler@1.0.2
 callback-hook@1.0.4
 carlosbaraza:accounts-ui-bootstrap-3-angular@0.1.0
 check@1.1.0
+coffeescript@1.0.11
 dburles:collection-helpers@1.0.4
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2
@@ -76,6 +77,11 @@ npm-mongo@1.4.39_1
 observe-sequence@1.0.7
 ordered-dict@1.0.4
 pbastowski:angular-babel@1.0.9
+peerlibrary:assert@0.2.5
+peerlibrary:fiber-utils@0.6.0
+peerlibrary:reactive-mongo@0.1.1
+peerlibrary:reactive-publish@0.2.0
+peerlibrary:server-autorun@0.5.2
 promise@0.5.1
 raix:eventemitter@0.1.3
 random@1.0.5

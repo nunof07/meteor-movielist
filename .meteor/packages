@@ -33,3 +33,4 @@ aldeed:collection2
 dburles:collection-helpers
 accounts-base
 angular:angular-messages
+peerlibrary:reactive-publish

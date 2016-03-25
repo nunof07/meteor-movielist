@@ -6,10 +6,16 @@ function i18nListsStartup() {
             form: {
                 add: 'Create new list',
                 name: 'Name',
-                isPublic: 'Share list with other members',
+                isPublic: 'Allow anyone to view or edit',
                 errors: {
                     saveFailed: 'An error occured while saving the list. Please try again.'
                 }
+            },
+            labels: {
+                isPublic: 'Public'
+            },
+            actions: {
+                new: 'New list'
             }
         }
     });
