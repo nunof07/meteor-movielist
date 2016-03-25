@@ -34,3 +34,4 @@ dburles:collection-helpers
 accounts-base
 angular:angular-messages
 peerlibrary:reactive-publish
+angular-meteor-auth

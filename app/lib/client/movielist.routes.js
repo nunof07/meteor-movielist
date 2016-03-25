@@ -1,8 +1,8 @@
 angular
     .module('movielist')
-    .config(routesConfig);
+    .config(appRoutes);
 
-function routesConfig($urlRouterProvider, $locationProvider) {
+function appRoutes($urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/');
 }

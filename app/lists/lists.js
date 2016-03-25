@@ -15,12 +15,18 @@ ML.createMethods(Lists, [
         name: 'insert',
         fields: ['name', 'isPublic'],
         run: listsInsert
+    }, {
+        name: 'hasAccess',
+        fields: [{ listId: ML.fields.id }],
+        run: listsHasAccess
     }
 ]);
 
-function listIsEditableBy() {
-    if (Meteor.userId()) {
-        return this.ownerId === Meteor.userId();
+function listIsEditableBy(userId) {
+    userId = userId || Meteor.userId();
+    
+    if (userId) {
+        return this.ownerId === userId;
     }
     
     return false;
@@ -37,4 +43,17 @@ function listsInsert({name, isPublic}) {
         createdAt: new Date(),
         modifiedAt: new Date(),
     });
+}
+function listsHasAccess({ listId }) {
+    if (!this.userId) {
+        return false;
+    } else {
+        const list = Lists.findOne(listId);
+        
+        if (!list) {
+            return false;
+        } else {
+            return list.isEditableBy(this.userId);
+        }
+    } 
 }

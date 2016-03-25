@@ -11,7 +11,7 @@ function listDetailsDirective() {
     };
 }
 
-function ListDetailsController($scope, $stateParams, $reactive) {
+function ListDetailsController($scope, $stateParams, $reactive, titleService) {
     const listDetailsCtrl = this;
     $reactive(listDetailsCtrl).attach($scope);
     listDetailsCtrl.subscribe('listDetails.user', getListId);
@@ -20,6 +20,7 @@ function ListDetailsController($scope, $stateParams, $reactive) {
     
     function list() {
         listDetailsCtrl.list = Lists.findOne({ _id: $stateParams.listId });
+        titleService.setTitle(listDetailsCtrl.list.name);
     }
     function getListId() {
         return [{ listId: $stateParams.listId }];

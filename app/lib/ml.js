@@ -76,8 +76,18 @@ function createMethod(collection, name, fieldNames, callback) {
             
             for (let i = 0; i < fieldNames.length; i++) {
                 const fieldName = fieldNames[i];
-                const field = collection.fields[fieldName];
-                result[fieldName] = field;
+                
+                if (_.isString(fieldName)) {
+                    const field = collection.fields[fieldName];
+                    result[fieldName] = field;
+                } else {
+                    for (const property in fieldName) {
+                        if (fieldName.hasOwnProperty(property)) {
+                            result[property] = fieldName[property];
+                            break;
+                        }
+                    }
+                }
             }
             
             return result;
