@@ -20,28 +20,30 @@ function listFormDirective() {
 }
 
 function ListFormController($scope, $reactive) {
-    const listFormCtrl = this;
-    listFormCtrl.isSubmitting = false;
-    listFormCtrl.submit = submit;
-    listFormCtrl.cancel = cancel;
-    $reactive(listFormCtrl).attach($scope);
+    const ctrl = this;
+    $reactive(ctrl).attach($scope);
+    
+    ctrl.isSubmitting = false;
+    
+    ctrl.submit = submit;
+    ctrl.cancel = cancel;
     return;
     
     function submit() {
-        if (angular.isFunction(listFormCtrl.onSubmit)) {
-            listFormCtrl.error = false;
-            listFormCtrl.isSubmitting = true;
-            listFormCtrl.onSubmit(listFormCtrl.list, submitDone);
+        if (angular.isFunction(ctrl.onSubmit)) {
+            ctrl.error = false;
+            ctrl.isSubmitting = true;
+            ctrl.onSubmit(ctrl.list, submitDone);
         }
         return;
         
         function submitDone() {
-            listFormCtrl.isSubmitting = false;
+            ctrl.isSubmitting = false;
         }
     }
     function cancel() {
-        if (angular.isFunction(listFormCtrl.onCancel)) {
-            listFormCtrl.onCancel();
+        if (angular.isFunction(ctrl.onCancel)) {
+            ctrl.onCancel();
         }
     }
 }

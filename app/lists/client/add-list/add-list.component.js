@@ -12,21 +12,23 @@ function addListDirective() {
 }
 
 function AddListController($scope, $reactive, logger) {
-    const addListCtrl = this;
-    addListCtrl.list = {
+    const ctrl = this;
+    $reactive(ctrl).attach($scope);
+    
+    ctrl.list = {
         name: '',
         isPublic: false
     };
-    addListCtrl.error = false;
-    addListCtrl.addList = addList;
-    addListCtrl.cancel = cancel;
-    $reactive(addListCtrl).attach($scope);
+    ctrl.error = false;
+    
+    ctrl.addList = addList;
+    ctrl.cancel = cancel;
     return;
     
     function addList(list, done) {
         const data = {
-            name: addListCtrl.list.name,
-            isPublic: addListCtrl.list.isPublic
+            name: ctrl.list.name,
+            isPublic: ctrl.list.isPublic
         };
         Lists.methods.insert.call(data, addListResult);
         return;
@@ -34,9 +36,9 @@ function AddListController($scope, $reactive, logger) {
         function addListResult(err, res) {
             if (err) {
                 logger.error('Error adding list', err);
-                addListCtrl.error = {saveFailed: true};
+                ctrl.error = {saveFailed: true};
             } else {
-                addListCtrl.cancel();
+                ctrl.cancel();
             }
             done();
         }

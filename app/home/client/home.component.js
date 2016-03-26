@@ -12,9 +12,10 @@ function homeDirective() {
 }
 
 function HomeController($scope, $reactive, modalService) {
-    const homeCtrl = this;
-    homeCtrl.newList = newList;
-    $reactive(homeCtrl).attach($scope);
+    const ctrl = this;
+    $reactive(ctrl).attach($scope);
+    
+    ctrl.newList = newList;
     return;
     
     function newList() {

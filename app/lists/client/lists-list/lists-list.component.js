@@ -12,10 +12,11 @@ function listsListDirective() {
 }
 
 function ListsListController($scope, $reactive) {
-    const listsListCtrl = this;
-    $reactive(listsListCtrl).attach($scope);
-    listsListCtrl.subscribe('lists.user');
-    listsListCtrl.helpers({
+    const ctrl = this;
+    $reactive(ctrl).attach($scope);
+    ctrl.subscribe('lists.user');
+    
+    ctrl.helpers({
         lists
     });
     return;

@@ -12,30 +12,32 @@ function deleteListDirective() {
 }
 
 function DeleteListController($scope, $reactive, $timeout, logger) {
-    const deleteListCtrl = this;
-    $reactive(deleteListCtrl).attach($scope);
-    deleteListCtrl.list = $scope.list;
-    deleteListCtrl.error = false;
-    deleteListCtrl.isSubmitting = false;
-    deleteListCtrl.deleteList = deleteList;
-    deleteListCtrl.close = close;
+    const ctrl = this;
+    $reactive(ctrl).attach($scope);
+    
+    ctrl.list = $scope.list;
+    ctrl.error = false;
+    ctrl.isSubmitting = false;
+    
+    ctrl.deleteList = deleteList;
+    ctrl.close = close;
     return;
     
     function deleteList() {
-        deleteListCtrl.error = false;
-        deleteListCtrl.isSubmitting = true;
+        ctrl.error = false;
+        ctrl.isSubmitting = true;
         const data = {
-            listId: deleteListCtrl.list._id
+            listId: ctrl.list._id
         };
         Lists.methods.delete.call(data, deleteListResult);
         return;
         
         function deleteListResult(err, res) {
-            deleteListCtrl.isSubmitting = false;
+            ctrl.isSubmitting = false;
             
             if (err) {
                 logger.error('Error delete list', err);
-                deleteListCtrl.error = {deleteFailed: true};
+                ctrl.error = {deleteFailed: true};
             } else {
                 $scope.$close(true);
             }

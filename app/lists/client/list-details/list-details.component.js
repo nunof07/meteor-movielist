@@ -12,19 +12,20 @@ function listDetailsDirective() {
 }
 
 function ListDetailsController($scope, $stateParams, $reactive, $state, titleService, modalService) {
-    const listDetailsCtrl = this;
-    $reactive(listDetailsCtrl).attach($scope);
-    listDetailsCtrl.subscribe('listDetails.user', getListId);
-    listDetailsCtrl.autorun(list);
-    listDetailsCtrl.editList = editList;
-    listDetailsCtrl.deleteList = deleteList;
+    const ctrl = this;
+    $reactive(ctrl).attach($scope);
+    ctrl.subscribe('listDetails.user', getListId);
+    ctrl.autorun(list);
+    
+    ctrl.editList = editList;
+    ctrl.deleteList = deleteList;
     return;
     
     function list() {
-        listDetailsCtrl.list = Lists.findOne({ _id: $stateParams.listId });
+        ctrl.list = Lists.findOne({ _id: $stateParams.listId });
         
-        if (listDetailsCtrl.list) {
-            titleService.setTitle(listDetailsCtrl.list.name);
+        if (ctrl.list) {
+            titleService.setTitle(ctrl.list.name);
         }
     }
     function getListId() {
@@ -33,12 +34,12 @@ function ListDetailsController($scope, $stateParams, $reactive, $state, titleSer
     function editList() {
         modalService.open('<ml-edit-list></ml-edit-list>',
             $scope,
-            { list: listDetailsCtrl.list });
+            { list: ctrl.list });
     }
     function deleteList() {
         const deleteModal = modalService.open('<ml-delete-list></ml-delete-list>',
             $scope,
-            { list: listDetailsCtrl.list });
+            { list: ctrl.list });
         
         deleteModal.result.then(function (deleted) {
             if (deleted) {

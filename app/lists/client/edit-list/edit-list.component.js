@@ -12,20 +12,22 @@ function editListDirective() {
 }
 
 function EditListController($scope, $reactive, logger) {
-    const editListCtrl = this;
-    $reactive(editListCtrl).attach($scope);
-    editListCtrl.list = angular.copy($scope.list);
-    editListCtrl.name = $scope.list.name;
-    editListCtrl.error = false;
-    editListCtrl.updateList = updateList;
-    editListCtrl.cancel = cancel;
+    const ctrl = this;
+    $reactive(ctrl).attach($scope);
+    
+    ctrl.list = angular.copy($scope.list);
+    ctrl.name = $scope.list.name;
+    ctrl.error = false;
+    
+    ctrl.updateList = updateList;
+    ctrl.cancel = cancel;
     return;
     
     function updateList(list, done) {
         const data = {
-            listId: editListCtrl.list._id,
-            name: editListCtrl.list.name,
-            isPublic: editListCtrl.list.isPublic
+            listId: ctrl.list._id,
+            name: ctrl.list.name,
+            isPublic: ctrl.list.isPublic
         };
         Lists.methods.update.call(data, updateListResult);
         return;
@@ -33,9 +35,9 @@ function EditListController($scope, $reactive, logger) {
         function updateListResult(err, res) {
             if (err) {
                 logger.error('Error updating list', err);
-                editListCtrl.error = {saveFailed: true};
+                ctrl.error = {saveFailed: true};
             } else {
-                editListCtrl.cancel();
+                ctrl.cancel();
             }
             done();
         }
