@@ -11,12 +11,13 @@ function listDetailsDirective() {
     };
 }
 
-function ListDetailsController($scope, $stateParams, $reactive, titleService, modalService) {
+function ListDetailsController($scope, $stateParams, $reactive, $state, titleService, modalService) {
     const listDetailsCtrl = this;
     $reactive(listDetailsCtrl).attach($scope);
     listDetailsCtrl.subscribe('listDetails.user', getListId);
     listDetailsCtrl.autorun(list);
     listDetailsCtrl.editList = editList;
+    listDetailsCtrl.deleteList = deleteList;
     return;
     
     function list() {
@@ -33,5 +34,16 @@ function ListDetailsController($scope, $stateParams, $reactive, titleService, mo
         modalService.open('<ml-edit-list></ml-edit-list>',
             $scope,
             { list: listDetailsCtrl.list });
+    }
+    function deleteList() {
+        const deleteModal = modalService.open('<ml-delete-list></ml-delete-list>',
+            $scope,
+            { list: listDetailsCtrl.list });
+        
+        deleteModal.result.then(function (deleted) {
+            if (deleted) {
+                $state.go('home');
+            }
+        });
     }
 }

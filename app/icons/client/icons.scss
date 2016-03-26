@@ -34,3 +34,9 @@
         content: "\f040";
     }
 }
+.i-delete {
+    // fa-trash
+    &:before {
+        content: "\f1f8";
+    }
+}

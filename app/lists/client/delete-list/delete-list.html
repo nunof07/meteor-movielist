@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h2 ml-i18n="lists.delete.title" ml-i18n-params="[deleteListCtrl.list.name]"></h2>
+</div>
+<div class="modal-body">
+    <p ml-i18n="lists.delete.message"></p>
+    <div ng-messages="deleteListCtrl.error" ng-show="deleteListCtrl.error" class="alert alert-danger" role="alert">
+        <p ng-message="deleteFailed">
+            <span ml-i18n="lists.delete.deleteFailed"></span>
+        </p>
+    </div>
+</div>
+<div class="modal-footer">
+    <fieldset ng-disabled="deleteListCtrl.isSubmitting">
+        <button class="btn btn-danger" type="button"
+                ng-disabled="listForm.$invalid"
+                ng-click="deleteListCtrl.deleteList()">
+            <i ng-show="deleteListCtrl.isSubmitting" class="icon i-loading"></i>
+            <span ml-i18n="forms.delete"></span>
+        </button>
+        <button class="btn btn-link btn-soft" type="button"
+                formnovalidate
+                ng-click="deleteListCtrl.close()"
+                ml-i18n="forms.cancel">
+        </button>
+    </fieldset>
+</div>

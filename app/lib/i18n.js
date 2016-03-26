@@ -7,7 +7,8 @@ function i18nStartup() {
         siteName: 'MovieList',
         forms: {
             save: 'Save',
-            cancel: 'Cancel'
+            cancel: 'Cancel',
+            delete: 'Delete'
         }
     });
 }

@@ -3,14 +3,22 @@ Meteor.publish('listDetails.user', publisUserListDetails);
 
 function getUserListsSelector(userId) {
     const publicListSelector = { isPublic: true };
-    const isOwnerSelector = { $and: [
-        { ownerId: userId },
-        { ownerId: { $exists: true } }
-    ] };
-    const selector = { $or: [
-        publicListSelector,
-        isOwnerSelector
-    ]};
+    const isOwnerSelector = {
+        $and: [
+            { ownerId: userId },
+            { ownerId: { $exists: true } }
+        ]
+    };
+    const notDeletedSelector = { isDeleted: { $ne: true } };
+    const selector = {
+        $and: [
+            { $or: [
+                publicListSelector,
+                isOwnerSelector
+            ] },
+            notDeletedSelector
+        ]
+    };
     
     return selector;
 }

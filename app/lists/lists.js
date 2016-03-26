@@ -2,6 +2,7 @@ Lists = ML.createCollection('Lists', {
     name: { type: String },
     isPublic: { type: Boolean },
     ownerId: { type: String, regEx: SimpleSchema.RegEx.Id, denyUpdate: true },
+    isDeleted: { type: Boolean, optional: true },
     createdAt: { type: Date, denyUpdate: true },
     modifiedAt: { type: Date },
 }, ['name', 'isPublic', 'ownerId']);
@@ -23,6 +24,10 @@ ML.createMethods(Lists, [
         name: 'update',
         fields: [{ listId: ML.fields.id }, 'name', 'isPublic'],
         run: listsUpdate
+    }, {
+        name: 'delete',
+        fields: [{ listId: ML.fields.id }],
+        run: listsDelete
     }
 ]);
 
@@ -62,10 +67,6 @@ function listsHasAccess({ listId }) {
     } 
 }
 function listsUpdate({ listId, name, isPublic }) {
-    if (!this.userId) {
-        throw new Meteor.Error('unauthorized', 'Must be logged in to update a list');
-    }
-    
     if (!listsHasAccess.call(this, { listId })) {
         throw new Meteor.Error('unauthorized', 'User not authorized to update list');
     }
@@ -73,6 +74,16 @@ function listsUpdate({ listId, name, isPublic }) {
     return Lists.update(listId, { $set: {
         name,
         isPublic,
+        modifiedAt: new Date(),
+    } });
+}
+function listsDelete({ listId }) {
+    if (!listsHasAccess.call(this, { listId })) {
+        throw new Meteor.Error('unauthorized', 'User not authorized to update list');
+    }
+    
+    return Lists.update(listId, { $set: {
+        isDeleted: true,
         modifiedAt: new Date(),
     } });
 }
