@@ -1,0 +1,12 @@
+<div class="add-movie-from-tmdb">
+    <input type="text"
+        ng-model="addMovieFromTmdbCtrl.query"
+        placeholder="Search movie"
+        uib-typeahead="movie as movie.title for movie in addMovieFromTmdbCtrl.search($viewValue)"
+        typeahead-loading="addMovieFromTmdbCtrl.isLoading"
+        typeahead-no-results="addMovieFromTmdbCtrl.noResults"
+        ypeahead-template-url="app/movies/client/add-movie-from-tmdb/tmdb-movie.html"
+        class="form-control">
+    <i ng-show="addMovieFromTmdbCtrl.isLoading" class="icon i-loading"></i>
+    <span ng-show="addMovieFromTmdbCtrl.noResults" ml-i18n="movies.noResults"></span>
+</div>

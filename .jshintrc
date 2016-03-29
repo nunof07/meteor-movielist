@@ -68,6 +68,7 @@
         "ValidatedMethod": false,
         
         "ML": true,
-        "Lists": true
+        "Lists": true,
+        "Movies": true
     }
 }

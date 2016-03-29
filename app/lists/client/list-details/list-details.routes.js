@@ -15,11 +15,12 @@ function listsDetailsRoutes($stateProvider) {
     
     function isAuthorized($q, $stateParams, logger) {
         const defer = $q.defer();
-                    
-        // check if user is authorized
         Lists.methods.hasAccess.call({
             listId: $stateParams.listId
-        }, (err, res) => {
+        }, hasAccessResult);
+        return defer.promise;
+        
+        function hasAccessResult(err, res) {
             if (err) {
                 logger.error('Error checking authorization', err);
             }
@@ -29,8 +30,6 @@ function listsDetailsRoutes($stateProvider) {
             } else {
                 defer.reject('AUTH_ERROR');
             }
-        });
-
-        return defer.promise;
+        }
     }
 }

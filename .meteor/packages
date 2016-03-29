@@ -35,3 +35,7 @@ accounts-base
 angular:angular-messages
 peerlibrary:reactive-publish
 angular-meteor-auth
+meteorhacks:npm
+
+
+npm-container

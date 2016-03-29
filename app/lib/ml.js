@@ -2,7 +2,8 @@ ML = {};
 ML.createCollection = createCollection;
 ML.createMethods = createMethods;
 ML.fields = {
-    id: { type: String, regEx: SimpleSchema.RegEx.Id }
+    id: { type: String, regEx: SimpleSchema.RegEx.Id },
+    string: { type: String }
 };
 
 function createCollection(name, fields, publicFields) {
