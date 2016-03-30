@@ -1,0 +1,1 @@
+MovieDb = Meteor.npmRequire('moviedb')(Meteor.settings.private.tmdb);

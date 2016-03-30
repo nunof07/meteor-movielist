@@ -66,9 +66,11 @@
         "i18n": false,
         "SimpleSchema": false,
         "ValidatedMethod": false,
+        "Async": false,
         
         "ML": true,
         "Lists": true,
-        "Movies": true
+        "Movies": true,
+        "MovieDb": true
     }
 }
