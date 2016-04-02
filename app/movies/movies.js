@@ -36,18 +36,25 @@ function moviesSearchTmdb({query}) {
     } else {
         const response = Async.runSync(runMovieSearch);
         
-        return response.result.results;
+        if (response.error) {
+            throw new Meteor.Error('moviedb-error', response.error);
+        } else if (response.result) {
+            return response.result.results;
+        } else {
+            return [];
+        }
     }
     
     function runMovieSearch(done) {
-        return MovieDb.searchMovie({query}, onSearchResults);
+        if (MovieDb) {
+            return MovieDb.searchMovie({query}, onSearchResults);
+        } else {
+            done('MovieDb not available', null);
+            return;
+        }
         
         function onSearchResults(error, results) {
-            if (error) {
-                throw new Meteor.Error('moviedb-error', error);
-            } else {
-                done(null, results);
-            }
+            done(error, results);
         }
     }
 }
