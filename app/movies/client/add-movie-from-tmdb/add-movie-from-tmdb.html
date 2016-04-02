@@ -8,6 +8,20 @@
         typeahead-template-url="app/movies/client/add-movie-from-tmdb/tmdb-movie.html"
         typeahead-wait-ms="1000"
         class="form-control">
-    <i ng-show="addMovieFromTmdbCtrl.isLoading" class="icon i-loading"></i>
-    <span ng-show="addMovieFromTmdbCtrl.noResults" ml-i18n="movies.noResults"></span>
+    <div ng-show="addMovieFromTmdbCtrl.isLoading" class="alert alert-success" role="alert">
+        <i class="icon i-loading"></i>
+        <span ml-i18n="loading"></span>
+    </div>
+    <div ng-show="addMovieFromTmdbCtrl.noResults && !addMovieFromTmdbCtrl.error" class="alert alert-info" role="alert">
+        <i class="icon i-info"></i>
+        <span ml-i18n="movies.noResults"></span>
+    </div>
+    <div ng-show="addMovieFromTmdbCtrl.error.searchFailed" class="alert alert-warning" role="alert">
+        <i class="icon i-warning"></i>
+        <span ml-i18n="movies.searchFailed" ml-i18n-params="addMovieFromTmdbCtrl.errorMessage"></span>
+    </div>
+    <div ng-show="addMovieFromTmdbCtrl.error.addFailed" class="alert alert-error" role="alert">
+        <i class="icon i-error"></i>
+        <span ml-i18n="movies.addFailed" ml-i18n-params="addMovieFromTmdbCtrl.errorMessage"></span>
+    </div>
 </div>

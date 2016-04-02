@@ -9,6 +9,7 @@ function i18nStartup() {
             save: 'Save',
             cancel: 'Cancel',
             delete: 'Delete'
-        }
+        },
+        loading: 'Loading...'
     });
 }

@@ -40,3 +40,27 @@
         content: "\f1f8";
     }
 }
+.i-success {
+    // fa-check-circle
+    &:before {
+        content: "\f058";
+    }
+}
+.i-info {
+    // fa-info-circle
+    &:before {
+        content: "\f05a";
+    }
+}
+.i-warning {
+    // fa-exclamation-triangle
+    &:before {
+        content: "\f071";
+    }
+}
+.i-error {
+    // fa-times-circle
+    &:before {
+        content: "\f057";
+    }
+}

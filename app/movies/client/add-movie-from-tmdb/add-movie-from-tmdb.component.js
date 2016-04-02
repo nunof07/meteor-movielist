@@ -18,6 +18,7 @@ function AddMovieFromTmdbController($scope, $reactive, $q, logger) {
     ctrl.isLoading = false;
     ctrl.noResults = false;
     ctrl.error = false;
+    ctrl.errorMessage = false;
     ctrl.query = '';
     
     ctrl.search = search;
@@ -25,6 +26,8 @@ function AddMovieFromTmdbController($scope, $reactive, $q, logger) {
     
     function search(query) {
         const defer = $q.defer();
+        ctrl.error = false;
+        ctrl.errorMessage = false;
         Movies.methods.searchTmdb.call({ query }, searchResult);
         return defer.promise;
         
@@ -32,6 +35,7 @@ function AddMovieFromTmdbController($scope, $reactive, $q, logger) {
             if (err) {
                 logger.error('Error searching TMDb', err);
                 ctrl.error = {searchFailed: true};
+                ctrl.errorMessage = err.reason;
                 defer.reject(err);
             } else {
                 defer.resolve(res);
