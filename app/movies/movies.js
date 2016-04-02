@@ -39,7 +39,8 @@ function moviesSearchTmdb({query}) {
         if (response.error) {
             throw new Meteor.Error('moviedb-error', response.error);
         } else if (response.result) {
-            return response.result.results;
+            // only return first 6 results
+            return response.result.results.slice(0, 6);
         } else {
             return [];
         }
