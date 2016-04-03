@@ -15,10 +15,11 @@ function ListDetailsController($scope, $stateParams, $reactive, $state, titleSer
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('listDetails.user', getListId);
-    ctrl.autorun(list);
     
     ctrl.editList = editList;
     ctrl.deleteList = deleteList;
+    
+    ctrl.autorun(list);
     return;
     
     function list() {

@@ -14,11 +14,12 @@ function homeDirective() {
 function HomeController($scope, $reactive, modalService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
-    ctrl.autorun(updateIsLoggedIn);
     
     ctrl.isLoggedIn = false;
     
     ctrl.newList = newList;
+    
+    ctrl.autorun(updateIsLoggedIn);
     return;
     
     function newList() {

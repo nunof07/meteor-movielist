@@ -11,7 +11,7 @@ function addMovieFromTmdbDirective() {
     };
 }
 
-function AddMovieFromTmdbController($scope, $reactive, $q, logger) {
+function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, logger) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     
@@ -19,11 +19,24 @@ function AddMovieFromTmdbController($scope, $reactive, $q, logger) {
     ctrl.noResults = false;
     ctrl.error = false;
     ctrl.errorMessage = false;
-    ctrl.query = '';
+    ctrl.noResults = false;
+    ctrl.result = '';
+    ctrl.addSuccess = false;
+    ctrl.isSubmitting = false;
     
     ctrl.search = search;
+    ctrl.add = add;
+    ctrl.dismissAddSuccess = dismissAddSuccess;
+    ctrl.canSubmit = canSubmit;
     return;
     
+    function getErrorMessage(err) {
+        if (angular.isObject(err) && err.reason) {
+            return err.reason;
+        } else {
+            return '' + err;
+        }
+    }
     function search(query) {
         const defer = $q.defer();
         ctrl.error = false;
@@ -35,11 +48,44 @@ function AddMovieFromTmdbController($scope, $reactive, $q, logger) {
             if (err) {
                 logger.error('Error searching TMDb', err);
                 ctrl.error = {searchFailed: true};
-                ctrl.errorMessage = err.reason;
+                ctrl.errorMessage = getErrorMessage(err);
                 defer.reject(err);
             } else {
                 defer.resolve(res);
             }
         }
+    }
+    function add() {
+        if (ctrl.canSubmit()) {
+            ctrl.error = false;
+            ctrl.errorMessage = false;
+            ctrl.addSuccess = false;
+            ctrl.isSubmitting = true;
+            const data = {
+                tmdbId: ctrl.result.id
+            };
+            Movies.methods.insertOrUpdateFromTmdb.call(data, insertResult);
+        }
+        return;
+        
+        function insertResult(err, res) {
+            if (err) {
+                logger.error('Error adding movie from TMDb', err);
+                ctrl.error = {addFailed: true};
+                ctrl.errorMessage = getErrorMessage(err);
+            } else {
+                ctrl.addSuccess = true;
+                $timeout(dismissAddSuccess, 2500);
+            }
+            ctrl.isSubmitting = false;
+            $scope.$apply();
+        }
+    }
+    function dismissAddSuccess() {
+        ctrl.addSuccess = false;
+    }
+    function canSubmit() {
+        return !ctrl.isSubmitting &&
+            ctrl.result && ctrl.result.id;
     }
 }

@@ -7,15 +7,21 @@ function i18nService() {
     return;
     
     function get(key, params) {
-        if (angular.isUndefined(params)) {
-            return i18n(key);
-        } else {
-            if (!angular.isArray(params)) {
-                params = [params];
+        const args = getArgs(key, params);
+        return i18n.apply(null, args);
+        
+        function getArgs(key, params) {
+            if (angular.isUndefined(params)) {
+                if (!angular.isArray(key)) {
+                    key = [key];
+                }
+                return key;
+            } else {
+                if (!angular.isArray(params)) {
+                    params = [params];
+                }
+                return [key].concat(params);
             }
-            const args = [key].concat(params);
-            
-            return i18n.apply(null, args);
         }
     }
 }

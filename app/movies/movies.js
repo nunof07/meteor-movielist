@@ -10,7 +10,7 @@ Movies = ML.createCollection('Movies', {
     genres: { type: [String] },
     runtime: { type: Number, min: 0 },
     
-    posterUrl: { type: String, regEx: SimpleSchema.RegEx.Url, optional: true },
+    tmdbPosterUrl: { type: String, optional: true },
     trailerYouTubeId: { type: String, optional: true },
     
     createdAt: { type: Date, denyUpdate: true },
@@ -23,39 +23,115 @@ ML.createMethods(Movies, [
         name: 'searchTmdb',
         fields: [{ query: ML.fields.string }],
         run: moviesSearchTmdb
+    },
+    {
+        name: 'insertOrUpdateFromTmdb',
+        fields: [ { tmdbId: { type: Number, min: 1 } }],
+        run: moviesInsertOrUpdateFromTmdb
     }
 ]);
 
+function movieDbQuery(queryCallback, emptyValue) {
+    if (this.isSimulation) {
+        return;
+    } else {
+        if (!MovieDb) {
+            throw new Meteor.Error('moviedb-error', 'MovieDb not available');
+        } else {
+            const response = Async.runSync(queryCallback);
+            
+            if (response.error) {
+                throw new Meteor.Error('moviedb-error', response.error);
+            } else if (response.result) {
+                return response.result;
+            } else {
+                return;
+            }
+        }
+    }
+}
 function moviesSearchTmdb({query}) {
     if (!this.userId) {
         throw new Meteor.Error('unauthorized', 'Must be logged in to search a movie');
     }
+    const result = movieDbQuery.call(this, runMovieSearch);
     
-    if (this.isSimulation) {
-        return [];
-    } else {
-        const response = Async.runSync(runMovieSearch);
-        
-        if (response.error) {
-            throw new Meteor.Error('moviedb-error', response.error);
-        } else if (response.result) {
-            // only return first 6 results
-            return response.result.results.slice(0, 6);
-        } else {
-            return [];
-        }
+    if (result && result.results) {
+        // only return first 6 results
+        return result.results.slice(0, 6);
     }
+    return [];
     
     function runMovieSearch(done) {
-        if (MovieDb) {
-            return MovieDb.searchMovie({query}, onSearchResults);
-        } else {
-            done('MovieDb not available', null);
-            return;
-        }
+        return MovieDb.searchMovie({query}, done);
+    }
+}
+function moviesInsertOrUpdateFromTmdb({ tmdbId }) {
+    if (!this.userId) {
+        throw new Meteor.Error('unauthorized', 'Must be logged in to find movie info');
+    }
+    tmdbId = tmdbId.toString();
+    const tmdbMovie = movieDbQuery.call(this, runMovieInfo);
+    
+    if (tmdbMovie) {
+        return insertOrUpdate(tmdbMovie);
+    } else {
+        return false;
+    }
+    
+    function runMovieInfo(done) {
+        return MovieDb.movieInfo({
+            id: tmdbId,
+            append_to_response: 'videos'
+        }, done);
+    }
+    function getMovieData(tmdb) {
+        const videos = tmdb.videos ? tmdb.videos.results : [];
+        const trailer = _.chain(videos)
+            .where({
+                type: 'Trailer',
+                site: 'YouTube'
+            })
+            .first()
+            .value();
         
-        function onSearchResults(error, results) {
-            done(error, results);
+        return {
+            title: tmdb.title,
+            originalTitle: tmdb.original_title,
+            
+            tmdbId: tmdb.id.toString(),
+            imdbId: tmdb.imdb_id,
+            
+            released: new Date(tmdb.release_date),
+            summary: tmdb.overview,
+            genres: _.pluck(tmdb.genres, 'name'),
+            runtime: tmdb.runtime,
+            
+            tmdbPosterUrl: tmdb.poster_path,
+            trailerYouTubeId: trailer ? trailer.key : ''
+        };
+    }
+    function insertOrUpdate(tmdbMovie) {
+        const movie = Movies.findOne({tmdbId});
+        let data = getMovieData(tmdbMovie);
+        
+        if (movie) {
+            // update
+            data = _.extend(data, {
+                modifiedAt: new Date()
+            });
+            const result = Movies.update(movie._id, { $set: data });
+            
+            if (result) {
+                return movie._id;
+            }
+        } else {
+            // insert
+            data = _.extend(data, {
+                createdAt: new Date(),
+                modifiedAt: new Date()
+            });
+            return Movies.insert(data);
         }
     }
 }

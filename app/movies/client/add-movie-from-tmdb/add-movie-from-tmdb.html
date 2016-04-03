@@ -1,13 +1,24 @@
 <div class="add-movie-from-tmdb">
-    <input type="text"
-        ng-model="addMovieFromTmdbCtrl.query"
-        placeholder="Search movie"
-        uib-typeahead="movie as movie.title for movie in addMovieFromTmdbCtrl.search($viewValue)"
-        typeahead-loading="addMovieFromTmdbCtrl.isLoading"
-        typeahead-no-results="addMovieFromTmdbCtrl.noResults"
-        typeahead-template-url="app/movies/client/add-movie-from-tmdb/tmdb-movie.html"
-        typeahead-wait-ms="500"
-        class="form-control">
+    <form class="form-inline">
+        <div class="form-group">
+            <input type="text"
+            ng-model="addMovieFromTmdbCtrl.result"
+            placeholder="{{ 'movies.searchLabel' | mlI18n }}"
+            uib-typeahead="movie as movie.title for movie in addMovieFromTmdbCtrl.search($viewValue)"
+            typeahead-loading="addMovieFromTmdbCtrl.isLoading"
+            typeahead-no-results="addMovieFromTmdbCtrl.noResults"
+            typeahead-template-url="app/movies/client/add-movie-from-tmdb/tmdb-movie.html"
+            typeahead-wait-ms="500"
+            typeahead-on-select="addMovieFromTmdbCtrl.add($item, $model, $label)"
+            class="form-control">
+        </div>
+        <button type="button" class="btn btn-success"
+        ng-disabled="!addMovieFromTmdbCtrl.canSubmit()"
+        ng-click="addMovieFromTmdbCtrl.add()">
+            <i class="icon i-loading" ng-show="addMovieFromTmdbCtrl.isSubmitting"></i>
+            <span ml-i18n="movies.add"></span>
+        </button>
+    </form>
     <div ng-show="addMovieFromTmdbCtrl.isLoading" class="alert alert-success" role="alert">
         <i class="icon i-loading"></i>
         <span ml-i18n="loading"></span>
@@ -20,8 +31,14 @@
         <i class="icon i-warning"></i>
         <span ml-i18n="movies.searchFailed" ml-i18n-params="addMovieFromTmdbCtrl.errorMessage"></span>
     </div>
-    <div ng-show="addMovieFromTmdbCtrl.error.addFailed" class="alert alert-error" role="alert">
+    <div ng-show="addMovieFromTmdbCtrl.error.addFailed" class="alert alert-danger" role="alert">
         <i class="icon i-error"></i>
         <span ml-i18n="movies.addFailed" ml-i18n-params="addMovieFromTmdbCtrl.errorMessage"></span>
     </div>
+    <uib-alert type="success"
+    ng-show="addMovieFromTmdbCtrl.addSuccess"
+    close="addMovieFromTmdbCtrl.dismissAddSuccess()">
+        <i class="icon i-success"></i>
+        <span ml-i18n="movies.addSuccess"></span>
+    </uib-alert>
 </div>
