@@ -75,7 +75,7 @@ function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, logger) {
                 ctrl.errorMessage = getErrorMessage(err);
             } else {
                 ctrl.addSuccess = true;
-                $timeout(dismissAddSuccess, 2500);
+                $timeout(dismissAddSuccess, 4000);
             }
             ctrl.isSubmitting = false;
             $scope.$apply();
