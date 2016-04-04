@@ -20,22 +20,25 @@
         <i class="icon i-loading text-success"
            ng-show="addMovieFromTmdbCtrl.isSubmitting || addMovieFromTmdbCtrl.isLoading"></i>
     </form>
-    <div ng-show="addMovieFromTmdbCtrl.noResults && !addMovieFromTmdbCtrl.error" class="alert alert-info" role="alert">
-        <i class="icon i-info"></i>
-        <span ml-i18n="movies.noResults"></span>
+    <div class="alerts">
+        <div ng-show="addMovieFromTmdbCtrl.noResults && !addMovieFromTmdbCtrl.error" class="alert alert-info animate-hide" role="alert">
+            <i class="icon i-info"></i>
+            <span ml-i18n="movies.noResults"></span>
+        </div>
+        <div ng-show="addMovieFromTmdbCtrl.error.searchFailed" class="alert alert-warning animate-hide" role="alert">
+            <i class="icon i-warning"></i>
+            <span ml-i18n="movies.searchFailed" ml-i18n-params="addMovieFromTmdbCtrl.errorMessage"></span>
+        </div>
+        <div ng-show="addMovieFromTmdbCtrl.error.addFailed" class="alert alert-danger animate-hide" role="alert">
+            <i class="icon i-error"></i>
+            <span ml-i18n="movies.addFailed" ml-i18n-params="addMovieFromTmdbCtrl.errorMessage"></span>
+        </div>
+        <uib-alert type="success"
+        class="animate-hide"
+        ng-show="addMovieFromTmdbCtrl.addSuccess"
+        close="addMovieFromTmdbCtrl.dismissAddSuccess()">
+            <i class="icon i-success"></i>
+            <span ml-i18n="movies.addSuccess"></span>
+        </uib-alert>
     </div>
-    <div ng-show="addMovieFromTmdbCtrl.error.searchFailed" class="alert alert-warning" role="alert">
-        <i class="icon i-warning"></i>
-        <span ml-i18n="movies.searchFailed" ml-i18n-params="addMovieFromTmdbCtrl.errorMessage"></span>
-    </div>
-    <div ng-show="addMovieFromTmdbCtrl.error.addFailed" class="alert alert-danger" role="alert">
-        <i class="icon i-error"></i>
-        <span ml-i18n="movies.addFailed" ml-i18n-params="addMovieFromTmdbCtrl.errorMessage"></span>
-    </div>
-    <uib-alert type="success"
-    ng-show="addMovieFromTmdbCtrl.addSuccess"
-    close="addMovieFromTmdbCtrl.dismissAddSuccess()">
-        <i class="icon i-success"></i>
-        <span ml-i18n="movies.addSuccess"></span>
-    </uib-alert>
 </div>
