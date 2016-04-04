@@ -2,7 +2,8 @@ Meteor.startup(accountsStartup);
 
 function accountsStartup() {
     Accounts.config({
-        forbidClientAccountCreation: getForbidClientAccountCreation()
+        forbidClientAccountCreation: getForbidClientAccountCreation(),
+        loginExpirationInDays: 90
     });
     return;
     
