@@ -4,14 +4,16 @@
             <span ng-bind="listDetailsCtrl.list.name"></span>
             <small ng-show="listDetailsCtrl.list.isPublic"
                    ml-i18n="lists.labels.isPublic"></small>
-            <button type="button" class="btn btn-primary"
-                    ng-click="listDetailsCtrl.editList()">
-                <span class="icon i-edit"></span>
-            </button>
-            <button type="button" class="btn btn-danger"
-                    ng-click="listDetailsCtrl.deleteList()">
-                <span class="icon i-delete"></span>
-            </button>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default"
+                        ng-click="listDetailsCtrl.editList()">
+                    <span class="icon i-edit"></span>
+                </button>
+                <button type="button" class="btn btn-default"
+                        ng-click="listDetailsCtrl.deleteList()">
+                    <span class="icon i-delete"></span>
+                </button>
+            </div>
         </h1>
     </div>
     <ml-add-movie-from-tmdb></ml-add-movie-from-tmdb>

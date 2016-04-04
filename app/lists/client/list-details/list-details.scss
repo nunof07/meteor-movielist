@@ -1,0 +1,13 @@
+.list-details {
+    .page-header {
+        .btn {
+            border: 0;
+            border-radius: 4px;
+            
+            &:last-child:not(:first-child),
+            &:first-child:not(:last-child):not(.dropdown-toggle) {
+                border-radius: 4px;
+            }
+        }
+    }
+}
