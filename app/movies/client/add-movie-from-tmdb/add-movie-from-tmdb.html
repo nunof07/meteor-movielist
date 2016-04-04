@@ -15,14 +15,11 @@
         <button type="button" class="btn btn-success"
         ng-disabled="!addMovieFromTmdbCtrl.canSubmit()"
         ng-click="addMovieFromTmdbCtrl.add()">
-            <i class="icon i-loading" ng-show="addMovieFromTmdbCtrl.isSubmitting"></i>
             <span ml-i18n="movies.add"></span>
         </button>
+        <i class="icon i-loading text-success"
+           ng-show="addMovieFromTmdbCtrl.isSubmitting || addMovieFromTmdbCtrl.isLoading"></i>
     </form>
-    <div ng-show="addMovieFromTmdbCtrl.isLoading" class="alert alert-success" role="alert">
-        <i class="icon i-loading"></i>
-        <span ml-i18n="loading"></span>
-    </div>
     <div ng-show="addMovieFromTmdbCtrl.noResults && !addMovieFromTmdbCtrl.error" class="alert alert-info" role="alert">
         <i class="icon i-info"></i>
         <span ml-i18n="movies.noResults"></span>
