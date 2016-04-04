@@ -11,13 +11,19 @@ function listDetailsDirective() {
     };
 }
 
-function ListDetailsController($scope, $stateParams, $reactive, $state, titleService, modalService) {
+function ListDetailsController($scope, $stateParams, $reactive, $state,
+titleService, modalService, logger, errorService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('listDetails.user', getListId);
     
+    ctrl.error = false;
+    ctrl.errorMessage = false;
+    
     ctrl.editList = editList;
     ctrl.deleteList = deleteList;
+    ctrl.onMovieAdded = onMovieAdded;
+    ctrl.dismissError = dismissError;
     
     ctrl.autorun(list);
     return;
@@ -47,5 +53,25 @@ function ListDetailsController($scope, $stateParams, $reactive, $state, titleSer
                 $state.go('home');
             }
         });
+    }
+    function onMovieAdded(movieId) {
+        ctrl.error = false;
+        ctrl.errorMessage = false;
+        const data = {
+            listId: $stateParams.listId,
+            movieId
+        };
+        ListsMovies.methods.insert.call(data, insertResult);
+        return;
+        
+        function insertResult(error, result) {
+            if (error) {
+                ctrl.error = {addFailed: true};
+                ctrl.errorMessage = errorService.getErrorMessage(error);
+            }
+        }
+    }
+    function dismissError() {
+        ctrl.error = false;
     }
 }

@@ -5,13 +5,17 @@ angular
 function addMovieFromTmdbDirective() {
     return {
         restrict: 'E',
+        scope: {
+            onAdded: '=',
+        },
+        bindToController: true,
         templateUrl: 'app/movies/client/add-movie-from-tmdb/add-movie-from-tmdb.html',
         controllerAs: 'addMovieFromTmdbCtrl',
         controller: AddMovieFromTmdbController
     };
 }
 
-function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, logger) {
+function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, logger, errorService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     
@@ -30,13 +34,6 @@ function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, logger) {
     ctrl.canSubmit = canSubmit;
     return;
     
-    function getErrorMessage(err) {
-        if (angular.isObject(err) && err.reason) {
-            return err.reason;
-        } else {
-            return '' + err;
-        }
-    }
     function search(query) {
         const defer = $q.defer();
         ctrl.error = false;
@@ -48,7 +45,7 @@ function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, logger) {
             if (err) {
                 logger.error('Error searching TMDb', err);
                 ctrl.error = {searchFailed: true};
-                ctrl.errorMessage = getErrorMessage(err);
+                ctrl.errorMessage = errorService.getErrorMessage(err);
                 defer.reject(err);
             } else {
                 defer.resolve(res);
@@ -72,10 +69,14 @@ function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, logger) {
             if (err) {
                 logger.error('Error adding movie from TMDb', err);
                 ctrl.error = {addFailed: true};
-                ctrl.errorMessage = getErrorMessage(err);
+                ctrl.errorMessage = errorService.getErrorMessage(err);
             } else {
                 ctrl.addSuccess = true;
                 $timeout(dismissAddSuccess, 4000);
+                
+                if (angular.isFunction(ctrl.onAdded)) {
+                    ctrl.onAdded(res);
+                }
             }
             ctrl.isSubmitting = false;
             $scope.$apply();

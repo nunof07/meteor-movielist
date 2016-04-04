@@ -21,6 +21,9 @@ function i18nListsStartup() {
             },
             actions: {
                 new: 'New list'
+            },
+            movies: {
+                addFailed: 'Failed to add movie to list. {$1}'
             }
         }
     });

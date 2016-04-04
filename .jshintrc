@@ -71,6 +71,7 @@
         "ML": true,
         "Lists": true,
         "Movies": true,
-        "MovieDb": true
+        "MovieDb": true,
+        "ListsMovies": true
     }
 }

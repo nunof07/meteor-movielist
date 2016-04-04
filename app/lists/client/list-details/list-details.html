@@ -16,5 +16,12 @@
             </div>
         </h1>
     </div>
-    <ml-add-movie-from-tmdb></ml-add-movie-from-tmdb>
+    <ml-add-movie-from-tmdb on-added="listDetailsCtrl.onMovieAdded"></ml-add-movie-from-tmdb>
+    <uib-alert type="danger"
+    class="animate-hide"
+    ng-show="listDetailsCtrl.error"
+    close="listDetailsCtrl.dismissError()">
+        <i class="icon i-error"></i>
+        <span ml-i18n="lists.movies.addFailed" ml-i18n-params="listDetailsCtrl.errorMessage"></span>
+    </uib-alert>
 </div>
