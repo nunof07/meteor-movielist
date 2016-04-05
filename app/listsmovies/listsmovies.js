@@ -18,10 +18,22 @@ function listsMoviesInsert({listId, movieId}) {
         throw new Meteor.Error('unauthorized', 'User not authorized to update list');
     }
     
-    return ListsMovies.insert({
+    // check if we already have movie in list
+    const listMovie = ListsMovies.findOne({
         listId,
-        movieId,
-        createdAt: new Date(),
-        modifiedAt: new Date(),
+        movieId
+    }, {
+        fields: { _id: 1 }
     });
+    
+    if (listMovie) {
+        return listMovie._id;
+    } else {
+        return ListsMovies.insert({
+            listId,
+            movieId,
+            createdAt: new Date(),
+            modifiedAt: new Date(),
+        });
+    }
 }

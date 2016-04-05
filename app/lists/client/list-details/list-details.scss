@@ -1,3 +1,5 @@
+@import "{}/app/lib/client/styles/_components.scss";
+
 .list-details {
     .page-header {
         .btn {
@@ -9,5 +11,11 @@
                 border-radius: 4px;
             }
         }
+    }
+    .alert {
+        margin-top: $margin;
+    }
+    .listsmovies-list {
+        margin-top: $margin;
     }
 }

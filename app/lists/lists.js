@@ -5,7 +5,7 @@ Lists = ML.createCollection('Lists', {
     isDeleted: { type: Boolean, optional: true },
     createdAt: { type: Date, denyUpdate: true },
     modifiedAt: { type: Date },
-}, ['name', 'isPublic', 'ownerId']);
+}, ['name', 'isPublic', 'ownerId', 'isDeleted']);
 
 Lists.helpers({
     isEditableBy: listIsEditableBy
@@ -34,11 +34,13 @@ ML.createMethods(Lists, [
 function listIsEditableBy(userId) {
     userId = userId || Meteor.userId();
     
-    if (userId) {
+    if (!userId || this.isDeleted) {
+        return false;
+    } else if (this.isPublic) {
+        return true;
+    } else {
         return this.ownerId === userId;
     }
-    
-    return false;
 }
 function listsInsert({name, isPublic}) {
     if (!this.userId) {

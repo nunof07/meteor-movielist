@@ -1,5 +1,5 @@
 Meteor.publish('lists.user', publishUserLists);
-Meteor.publish('listDetails.user', publisUserListDetails);
+Meteor.publish('listDetails.user', publishUserListDetails);
 
 function getUserListsSelector(userId) {
     const publicListSelector = { isPublic: true };
@@ -36,7 +36,7 @@ function publishUserLists() {
         }
     }
 }
-function publisUserListDetails({ listId }) {
+function publishUserListDetails({ listId }) {
     validate();
     this.autorun(autorun);
     return;
