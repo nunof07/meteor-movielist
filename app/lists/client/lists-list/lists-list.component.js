@@ -22,6 +22,6 @@ function ListsListController($scope, $reactive) {
     return;
     
     function lists() {
-        return Lists.find();
+        return Lists.find({}, { sort: { name: 1 }});
     }
 }
