@@ -10,7 +10,7 @@
         <tbody>
             <tr ng-repeat="movie in listsMoviesListCtrl.movies">
                 <td>
-                    <span ng-bind="movie.title"></span>
+                    <a ui-sref="movieDetails({ movieId: movie._id })" ng-bind="movie.title"></a>
                 </td>
                 <td class="text-right">
                     <a href ng-click="listsMoviesListCtrl.deleteMovie(movie)">

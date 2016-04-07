@@ -13,7 +13,7 @@ function routesRun($rootScope, $state, $location, titleService) {
         titleService.setTitle(title);
     }
     function onStateChangeError(event, toState, toParams, fromState, fromParams, error) {
-        if (error === 'AUTH_ERROR') {
+        if (error === 'AUTH_ERROR' || error === 'AUTH_REQUIRED') {
             $state.go('home');
         }
     }

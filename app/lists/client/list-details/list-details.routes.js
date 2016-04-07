@@ -1,8 +1,8 @@
 angular
     .module('movielist')
-    .config(listsDetailsRoutes);
+    .config(listDetailsRoutes);
 
-function listsDetailsRoutes($stateProvider) {
+function listDetailsRoutes($stateProvider) {
     $stateProvider
         .state('listDetails', {
             url: '/lists/:listId',
