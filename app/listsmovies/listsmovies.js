@@ -10,6 +10,10 @@ ML.createMethods(ListsMovies, [
         name: 'insert',
         fields: ['listId', 'movieId'],
         run: listsMoviesInsert
+    }, {
+        name: 'delete',
+        fields: ['listId', 'movieId'],
+        run: listsMoviesDelete
     }
 ]);
 
@@ -36,4 +40,14 @@ function listsMoviesInsert({listId, movieId}) {
             modifiedAt: new Date(),
         });
     }
+}
+function listsMoviesDelete({listId, movieId}) {
+    if (!Lists.methods.hasAccess.call({ listId })) {
+        throw new Meteor.Error('unauthorized', 'User not authorized to update list');
+    }
+    
+    return ListsMovies.remove({
+        listId,
+        movieId
+    });
 }

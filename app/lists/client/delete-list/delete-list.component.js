@@ -36,7 +36,7 @@ function DeleteListController($scope, $reactive, $timeout, logger) {
             ctrl.isSubmitting = false;
             
             if (err) {
-                logger.error('Error delete list', err);
+                logger.error('Error deleting list', err);
                 ctrl.error = {deleteFailed: true};
             } else {
                 $scope.$close(true);

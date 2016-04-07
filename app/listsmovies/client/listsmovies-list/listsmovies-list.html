@@ -1,9 +1,22 @@
 <div class="listsmovies-list">
+    <uib-alert type="danger"
+    class="animate-hide"
+    ng-show="listsMoviesListCtrl.error"
+    close="listsMoviesListCtrl.dismissError()">
+        <i class="icon i-error"></i>
+        <span ml-i18n="listsMovies.deleteMovieFailed" ml-i18n-params="listsMoviesListCtrl.errorMessage"></span>
+    </uib-alert>
     <table class="table">
         <tbody>
             <tr ng-repeat="movie in listsMoviesListCtrl.movies">
                 <td>
                     <span ng-bind="movie.title"></span>
+                </td>
+                <td class="text-right">
+                    <a href ng-click="listsMoviesListCtrl.deleteMovie(movie)">
+                        <i class="icon i-delete" ng-hide="movie.isDeleting"></i>
+                        <i class="icon i-loading" ng-show="movie.isDeleting"></i>
+                    </a>
                 </td>
             </tr>
         </tbody>

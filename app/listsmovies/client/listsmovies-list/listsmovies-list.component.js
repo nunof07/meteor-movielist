@@ -15,10 +15,17 @@ function listsMoviesListDirective() {
     };
 }
 
-function ListsMoviesListController($scope, $reactive) {
+function ListsMoviesListController($scope, $reactive, $timeout, logger, errorService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('listsmovies.movies', getListId);
+    
+    ctrl.error = false;
+    ctrl.errorMessage = false;
+    ctrl.isSubmitting = false;
+    
+    ctrl.deleteMovie = deleteMovie;
+    ctrl.dismissError = dismissError;
     
     ctrl.helpers({
         movies
@@ -36,5 +43,33 @@ function ListsMoviesListController($scope, $reactive) {
         } else {
             return [{ }];
         }
+    }
+    function deleteMovie(movie) {
+        if (!movie.isDeleting) {
+            movie.isDeleting = true;
+            ctrl.error = false;
+            ctrl.errorMessage = false;
+            ctrl.isSubmitting = true;
+            const data = {
+                listId: ctrl.list._id,
+                movieId: movie._id
+            };
+            ListsMovies.methods.delete.call(data, deleteResult);
+        }
+        return;
+        
+        function deleteResult(err, res) {
+            movie.isDeleting = false;
+            ctrl.isSubmitting = false;
+            
+            if (err) {
+                logger.error('Error deleting movie', err);
+                ctrl.error = {deleteFailed: true};
+                ctrl.errorMessage = errorService.getErrorMessage(err);
+            }
+        }
+    }
+    function dismissError() {
+        ctrl.error = false;
     }
 }
