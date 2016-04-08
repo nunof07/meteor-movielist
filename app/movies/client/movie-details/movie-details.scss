@@ -1,5 +1,21 @@
+@import "{}/app/lib/client/styles/_breakpoints.scss";
+@import "{}/app/lib/client/styles/_components.scss";
+
 .movie-details {
+    .page-header {
+        .list-inline {
+            margin-bottom: 0;
+        }
+    }
+    .logos {
+        @media (min-width: $screen-sm-min) {
+            text-align: right;
+        }
+    }
     .logo {
         height: 16px;
+    }
+    .summary {
+        margin-top: $margin;
     }
 }

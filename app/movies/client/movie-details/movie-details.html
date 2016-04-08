@@ -8,26 +8,42 @@
                 (<span ng-bind="movieDetailsCtrl.movie.released | mlYear"></span>)
             </small>
         </h1>
-        <ul class="list-inline text-muted">
-            <li>
-                <span ng-bind="movieDetailsCtrl.movie.runtime | mlRuntime"></span>
-            </li>
-            <li>
-                <span ng-bind="movieDetailsCtrl.movie.genres | mlGenres"></span>
-            </li>
-        </ul>
+        <div class="row">
+            <div class="col-sm-8">
+                <ul class="list-inline text-muted">
+                    <li>
+                        <span ng-bind="movieDetailsCtrl.movie.runtime | mlRuntime"></span>
+                    </li>
+                    <li>
+                        <span ng-bind="movieDetailsCtrl.movie.genres | mlGenres"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-4 logos">
+                <ul class="list-inline">
+                    <li>
+                        <a ng-href="http://www.imdb.com/title/{{movieDetailsCtrl.movie.imdbId}}/">
+                            <img src="/images/imdb_small.png" alt="IMDb" class="logo">
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-href="https://www.themoviedb.org/movie/{{movieDetailsCtrl.movie.tmdbId}}/">
+                            <img src="/images/tmdb_v5_small.png" alt="TMDb" class="logo">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <ul class="list-inline">
-        <li>
-            <a ng-href="http://www.imdb.com/title/{{movieDetailsCtrl.movie.imdbId}}/">
-                <img src="/images/imdb_small.png" alt="IMDb" class="logo">
-            </a>
-        </li>
-        <li>
-            <a ng-href="https://www.themoviedb.org/movie/{{movieDetailsCtrl.movie.tmdbId}}/">
-                <img src="/images/tmdb_v5_small.png" alt="IMDb" class="logo">
-            </a>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-md-3">
+            <img ng-if="movieDetailsCtrl.movie.tmdbPosterUrl"
+            class="img-responsive"
+            ng-src="http://image.tmdb.org/t/p/w500/{{movieDetailsCtrl.movie.tmdbPosterUrl}}"
+            alt="{{movieDetailsCtrl.movie.title}}">
+        </div>
+        <div class="col-md-9">
+        </div>
+    </div>
     <div class="summary" ng-bind="movieDetailsCtrl.movie.summary"></div>
 </div>
