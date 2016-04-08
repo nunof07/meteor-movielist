@@ -1,0 +1,14 @@
+<div class="btn-group add-movie-to-list" uib-dropdown>
+    <button type="button" class="btn btn-primary btn-xs" uib-dropdown-toggle
+    ng-disabled="addMovieToListCtrl.isSubmitting">
+        <span ml-i18n="listsMovies.addToList"></span> <span class="caret"></span>
+    </button>
+    <ul class="uib-dropdown-menu" role="menu">
+        <li role="menuitem" ng-repeat="list in addMovieToListCtrl.lists">
+            <a href
+            ng-click="addMovieToListCtrl.addToList(list)"
+            ng-bind="list.name"></a>
+        </li>
+    </ul>
+    <i class="icon i-loading" ng-show="addMovieToListCtrl.isSubmitting"></i>
+</div>

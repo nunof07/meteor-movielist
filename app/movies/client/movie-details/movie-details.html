@@ -38,7 +38,7 @@
     <div class="row">
         <div class="col-sm-3">
             <img ng-if="movieDetailsCtrl.movie.tmdbPosterUrl"
-            class="img-responsive"
+            class="img-responsive poster"
             ng-src="http://image.tmdb.org/t/p/w500/{{movieDetailsCtrl.movie.tmdbPosterUrl}}"
             alt="{{movieDetailsCtrl.movie.title}}">
         </div>
@@ -50,4 +50,5 @@
         </div>
     </div>
     <div class="summary" ng-bind="movieDetailsCtrl.movie.summary"></div>
+    <ml-movie-lists ml-movie="movieDetailsCtrl.movie"></ml-movie-lists>
 </div>

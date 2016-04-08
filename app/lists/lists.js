@@ -11,6 +11,8 @@ Lists.helpers({
     isEditableBy: listIsEditableBy
 });
 
+Lists.getUserListsSelector = getUserListsSelector;
+
 ML.createMethods(Lists, [
     {
         name: 'insert',
@@ -88,4 +90,25 @@ function listsDelete({ listId }) {
         isDeleted: true,
         modifiedAt: new Date(),
     } });
+}
+function getUserListsSelector(userId) {
+    const publicListSelector = { isPublic: true };
+    const isOwnerSelector = {
+        $and: [
+            { ownerId: userId },
+            { ownerId: { $exists: true } }
+        ]
+    };
+    const notDeletedSelector = { isDeleted: { $ne: true } };
+    const selector = {
+        $and: [
+            { $or: [
+                publicListSelector,
+                isOwnerSelector
+            ] },
+            notDeletedSelector
+        ]
+    };
+    
+    return selector;
 }

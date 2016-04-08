@@ -1,0 +1,35 @@
+<div class="movie-lists">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 ml-i18n="listsMovies.lists"></h3>
+            <ml-add-movie-to-list ml-movie="movieListsCtrl.movie"
+            ml-error="movieListsCtrl.error" ml-error-message="movieListsCtrl.errorMessage"></ml-add-movie-to-list>
+        </div>
+        <div class="panel-body animate-hide" ng-show="movieListsCtrl.error">
+            <uib-alert type="danger" class="animate-hide"
+            ng-show="movieListsCtrl.error" close="movieListsCtrl.dismissError()">
+                <i class="icon i-error"></i>
+                <span ml-i18n="listsMovies.deleteMovieFailed" ml-i18n-params="movieListsCtrl.errorMessage"
+                ng-show="movieListsCtrl.error.deleteFailed"></span>
+                <span ml-i18n="lists.movies.addFailed" ml-i18n-params="movieListsCtrl.errorMessage"
+                ng-show="movieListsCtrl.error.addFailed"></span>
+            </uib-alert>
+        </div>
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="list in movieListsCtrl.lists">
+                    <td>
+                        <a ui-sref="listDetails({ listId: list._id })" ng-bind="list.name"></a>
+                    </td>
+                    <td class="text-right">
+                        <button class="btn btn-default btn-xs" type="button" ng-click="movieListsCtrl.removeFromList(list)">
+                            <i class="icon i-delete" ng-hide="list.isDeleting"></i>
+                            <i class="icon i-loading" ng-show="list.isDeleting"></i>
+                            <span ml-i18n="listsMovies.removeFromList"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+@import "{}/app/lib/client/styles/_components.scss";
+
+.movie-lists {
+    .panel-heading {
+        h3 {
+            margin: 0;
+            margin-right: $margin / 2;
+            display: inline-block;
+        }
+        .add-movie-to-list {
+            vertical-align: bottom;
+        }
+    }
+    .panel-body {
+        padding: 0;
+        
+        .alert {
+            margin: 0;
+            border: 0;
+            border-radius: 0;
+        }
+    }
+}
