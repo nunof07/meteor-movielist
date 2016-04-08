@@ -8,6 +8,9 @@
         }
     }
     .logos {
+        @media (max-width: $screen-xs-max) {
+            padding-top: $margin / 2;
+        }
         @media (min-width: $screen-sm-min) {
             text-align: right;
         }
@@ -17,5 +20,23 @@
     }
     .summary {
         margin-top: $margin;
+    }
+    .poster {
+        @media (max-width: $screen-xs-max) {
+            display: none;
+        }
+    }
+}
+.embed-responsive-custom {
+    padding-bottom: 56.25%;
+    
+    @media (min-width: $screen-sm-min) {
+        padding-bottom: percentage(236.25 / 532.5);
+    }
+    @media (min-width: $screen-md-min) {
+        padding-bottom: percentage(318.75 / 697.5);
+    }
+    @media (min-width: $screen-lg-min) {
+        padding-bottom: percentage(393.75 / 847.5);
     }
 }

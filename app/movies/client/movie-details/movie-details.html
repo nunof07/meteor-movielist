@@ -36,13 +36,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-sm-3">
             <img ng-if="movieDetailsCtrl.movie.tmdbPosterUrl"
             class="img-responsive"
             ng-src="http://image.tmdb.org/t/p/w500/{{movieDetailsCtrl.movie.tmdbPosterUrl}}"
             alt="{{movieDetailsCtrl.movie.title}}">
         </div>
-        <div class="col-md-9">
+        <div class="col-sm-9">
+            <div class="embed-responsive embed-responsive-custom"
+            ng-if="movieDetailsCtrl.youTubeUrl">
+                <iframe class="embed-responsive-item" ng-src="{{movieDetailsCtrl.youTubeUrl}}"></iframe>
+            </div>
         </div>
     </div>
     <div class="summary" ng-bind="movieDetailsCtrl.movie.summary"></div>
