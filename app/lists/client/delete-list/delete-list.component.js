@@ -11,7 +11,7 @@ function deleteListDirective() {
     };
 }
 
-function DeleteListController($scope, $reactive, $timeout, logger) {
+function DeleteListController($scope, $reactive, logger) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     

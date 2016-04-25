@@ -106,6 +106,7 @@ srp@1.0.4
 stylus@2.511.1
 templating@1.1.5
 templating-tools@1.0.0
+tmeasday:publish-counts@0.7.3
 tracker@1.0.9
 twbs:bootstrap@3.3.6
 ui@1.0.8

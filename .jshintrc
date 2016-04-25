@@ -67,12 +67,14 @@
         "SimpleSchema": false,
         "ValidatedMethod": false,
         "Async": false,
+        "Counts": false,
         
         "ML": true,
         "Lists": true,
         "Movies": true,
         "MovieDb": true,
         "ListsMovies": true,
-        "MovieLists" : true
+        "MovieLists" : true,
+        "Scores": true
     }
 }

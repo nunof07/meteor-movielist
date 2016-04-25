@@ -1,0 +1,16 @@
+<div class="vote">
+    <ul>
+        <li><button type="button" ng-click="voteCtrl.vote(1)">1</button></li>
+        <li><button type="button" ng-click="voteCtrl.vote(2)">2</button></li>
+        <li><button type="button" ng-click="voteCtrl.vote(3)">3</button></li>
+        <li><button type="button" ng-click="voteCtrl.vote(4)">4</button></li>
+        <li><button type="button" ng-click="voteCtrl.vote(5)">5</button></li>
+    </ul>
+    <uib-alert type="danger"
+    class="animate-hide"
+    ng-show="voteCtrl.error"
+    close="voteCtrl.dismissError()">
+        <i class="icon i-error"></i>
+        <span ml-i18n="scores.saveFailed" ml-i18n-params="voteCtrl.errorMessage"></span>
+    </uib-alert>
+</div>

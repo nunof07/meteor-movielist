@@ -15,7 +15,7 @@ function listsMoviesListDirective() {
     };
 }
 
-function ListsMoviesListController($scope, $reactive, $timeout, logger, errorService) {
+function ListsMoviesListController($scope, $reactive, logger, errorService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('listsmovies.movies', getListId);
