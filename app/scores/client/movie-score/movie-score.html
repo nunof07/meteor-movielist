@@ -1,7 +1,18 @@
 <div class="movie-score">
-    <ul>
-        <li>Total score: <span ng-bind="movieScoreCtrl.total"></span></li>
-        <li>Total votes: <span ng-bind="movieScoreCtrl.count"></span></li>
-        <li>Average score: <span ng-bind="movieScoreCtrl.average"></span></li>
-    </ul>
+    <fieldset class="star-score" disabled>
+        <input
+        ng-repeat-start="i in [10, 9, 8, 7, 6, 5, 4, 3, 2]"
+        type="radio"
+        name="rating"
+        id="rating{{ i }}"
+        ng-value="i"
+        ng-model="movieScoreCtrl.starScore" />
+        
+        <label
+        ng-repeat-end
+        for="rating{{ i }}"
+        ng-class="{half: i % 2 !== 0}"
+        title="{{ 'scores.star' + (i * 10 / 2) | mlI18n }}"></label>
+    </fieldset>
+    <span class="numeric-score" ng-bind="movieScoreCtrl.average | number:1" ng-show="movieScoreCtrl.average > 0"></span>
 </div>

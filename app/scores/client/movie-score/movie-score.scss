@@ -1,0 +1,61 @@
+$star-color-full: #337ab7;
+$star-color-empty: #ddd;
+$star-padding: 2px;
+$star-height: 20px;
+
+// from http://codepen.io/mrk1989/pen/mLeHJ
+.star-score {
+    display: inline-block;
+    vertical-align: top;
+    border: 0;
+    font-weight: bold;
+    line-height: $star-height;
+    color: $star-color-empty;
+    
+    // Hide radio
+    & > input {
+        display: none;
+    }
+    & > label {
+        // order correctly by floating highest to the right
+        float: right;
+        margin-bottom: 0;
+        
+        &:before {
+            display: inline-block;
+            padding-left: $star-padding;
+            padding-right: $star-padding;
+            margin: 0;
+            //cursor: pointer;
+            font-family: FontAwesome;
+            content: "\f005 "; // full star
+        }
+        // &:last-child:before {
+        //     content: "\f006 "; // empty star outline
+        // }
+    }
+    // half star trick
+    & .half:before {
+        content: "\f089 "; // half star no outline
+        position: absolute;
+        padding-right: 0;
+    }
+    // Click + hover color
+    input:checked ~ label { // color current and previous stars on checked
+    //label:hover, label:hover ~ label { // color previous stars on hover
+        color: $star-color-full;
+    }
+    // hover highlights
+    // input:checked + label:hover, input:checked ~ label:hover, // highlight current and previous stars
+    // input:checked ~ label:hover ~ label, // highlight previous selected stars for new rating
+    // label:hover ~ input:checked ~ label { // highlight previous selected stars
+    //     color: #A6E72D;
+    // } 
+}
+.numeric-score {
+    font-weight: bold;
+    color: $star-color-full;
+    display: inline-block;
+    vertical-align: top;
+    line-height: $star-height;
+}

@@ -20,6 +20,11 @@ function MovieScoreController($scope, $reactive) {
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('movieScore.all', getMovieId);
     
+    ctrl.total = 0;
+    ctrl.count = 0;
+    ctrl.average = 0;
+    ctrl.starScore = 0;
+    
     ctrl.autorun(updateCounts);
     return;
     
@@ -29,6 +34,7 @@ function MovieScoreController($scope, $reactive) {
         
         if (ctrl.count) {
             ctrl.average = ctrl.total / ctrl.count;
+            ctrl.starScore = Math.round(2 * ctrl.average);
         }
     }
     function getMovieId() {
