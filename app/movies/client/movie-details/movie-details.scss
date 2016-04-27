@@ -33,13 +33,13 @@
 .embed-responsive-custom {
     padding-bottom: 56.25%;
     
-    @media (min-width: $screen-sm-min) {
+    @include media-sm-min {
         padding-bottom: percentage(236.25 / 532.5);
     }
-    @media (min-width: $screen-md-min) {
+    @include media-md-min {
         padding-bottom: percentage(318.75 / 697.5);
     }
-    @media (min-width: $screen-lg-min) {
+    @include media-lg-min {
         padding-bottom: percentage(393.75 / 847.5);
     }
 }
