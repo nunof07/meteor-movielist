@@ -13,7 +13,11 @@ function movieDetailsRoutes($stateProvider) {
         });
     return;
     
-    function user($auth) {
-        return $auth.requireUser();
+    function user($q) {
+        if (!Meteor.userId()) {
+            return $q.reject('AUTH_REQUIRED');
+        } else {
+            return $q.resolve(Meteor.user());
+        }
     }
 }
