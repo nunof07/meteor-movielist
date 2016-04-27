@@ -1,0 +1,60 @@
+@import "{}/app/lib/client/styles/_colors.scss";
+
+$star-color-full: $brand-primary;
+$star-color-empty: $gray-light;
+$star-padding: 2px;
+$star-height: 20px;
+
+.star-score {
+    display: inline-block;
+    
+    .numeric-score {
+        font-weight: bold;
+        color: $star-color-full;
+        display: inline-block;
+        vertical-align: top;
+        line-height: $star-height;
+    }
+}
+// from http://codepen.io/mrk1989/pen/mLeHJ
+.star-options {
+    display: inline-block;
+    vertical-align: top;
+    border: 0;
+    font-weight: bold;
+    line-height: $star-height;
+    color: $star-color-empty;
+    
+    // Hide radio
+    & > input {
+        display: none;
+    }
+    & > label {
+        // order correctly by floating highest to the right
+        float: right;
+        margin-bottom: 0;
+        
+        &:before {
+            display: inline-block;
+            padding-left: $star-padding;
+            padding-right: $star-padding;
+            margin: 0;
+            cursor: pointer;
+            font-family: FontAwesome;
+            content: "\f005 "; // full star
+        }
+        // &:last-child:before {
+        //     content: "\f006 "; // empty star outline
+        // }
+    }
+    // half star trick
+    & .half:before {
+        content: "\f089 "; // half star no outline
+        position: absolute;
+        padding-right: 0;
+    }
+    // color current and previous stars on checked
+    input:checked ~ label {
+        color: $star-color-full;
+    }
+}

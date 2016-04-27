@@ -1,11 +1,23 @@
-<div class="vote">
-    <ul>
-        <li><button type="button" ng-click="voteCtrl.vote(1)">1</button></li>
-        <li><button type="button" ng-click="voteCtrl.vote(2)">2</button></li>
-        <li><button type="button" ng-click="voteCtrl.vote(3)">3</button></li>
-        <li><button type="button" ng-click="voteCtrl.vote(4)">4</button></li>
-        <li><button type="button" ng-click="voteCtrl.vote(5)">5</button></li>
-    </ul>
+<div class="vote well well-sm">
+    <div class="star-score">
+        <fieldset class="star-options">
+            <input ng-repeat-start="i in [10, 8, 6, 4, 2]"
+            type="radio"
+            name="vote_rating_{{ voteCtrl.movie._id }}"
+            id="rating{{ i }}"
+            ng-value="i"
+            ng-model="voteCtrl.starScore" />
+            
+            <label ng-repeat-end
+            for="rating{{ i }}"
+            title="{{ 'scores.star' + (i * 10 / 2) | mlI18n }}"
+            ng-click="voteCtrl.vote(i / 2)"></label>
+        </fieldset>
+        <span class="numeric-score"
+        ng-bind="voteCtrl.score"
+        ng-show="voteCtrl.score > 0"></span>
+    </div>
+    
     <uib-alert type="danger"
     class="animate-hide"
     ng-show="voteCtrl.error"
