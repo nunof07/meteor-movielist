@@ -8,32 +8,8 @@
                 (<span ng-bind="movieDetailsCtrl.movie.released | mlYear"></span>)
             </small>
         </h1>
-        <div class="row">
-            <div class="col-sm-8">
-                <ul class="list-inline text-muted">
-                    <li>
-                        <span ng-bind="movieDetailsCtrl.movie.runtime | mlRuntime"></span>
-                    </li>
-                    <li>
-                        <span ng-bind="movieDetailsCtrl.movie.genres | mlGenres"></span>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-4 logos">
-                <ul class="list-inline">
-                    <li>
-                        <a ng-href="http://www.imdb.com/title/{{movieDetailsCtrl.movie.imdbId}}/">
-                            <img src="/images/imdb_small.png" alt="IMDb" class="logo">
-                        </a>
-                    </li>
-                    <li>
-                        <a ng-href="https://www.themoviedb.org/movie/{{movieDetailsCtrl.movie.tmdbId}}/">
-                            <img src="/images/tmdb_v5_small.png" alt="TMDb" class="logo">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <ml-vote ml-movie="movieDetailsCtrl.movie"></ml-vote>
+        <ml-movie-score ml-movie="movieDetailsCtrl.movie"></ml-movie-score>
     </div>
     <div class="row">
         <div class="col-sm-3">
@@ -49,8 +25,24 @@
             </div>
         </div>
     </div>
-    <div class="summary" ng-bind="movieDetailsCtrl.movie.summary"></div>
+    <div class="row row-margin">
+        <div class="col-sm-3">
+            <ul class="list-unstyled text-muted list-movie-meta">
+                <li>
+                    <span ng-bind="movieDetailsCtrl.movie.runtime | mlRuntime"></span>
+                </li>
+                <li>
+                    <span ng-bind="movieDetailsCtrl.movie.genres | mlGenres"></span>
+                </li>
+                <li>
+                    <a ng-href="http://www.imdb.com/title/{{movieDetailsCtrl.movie.imdbId}}/">IMDb</a>,
+                    <a ng-href="https://www.themoviedb.org/movie/{{movieDetailsCtrl.movie.tmdbId}}/">TMDb</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <div class="summary" ng-bind="movieDetailsCtrl.movie.summary"></div>
+        </div>
+    </div>
     <ml-movie-lists ml-movie="movieDetailsCtrl.movie"></ml-movie-lists>
-    <ml-movie-score ml-movie="movieDetailsCtrl.movie"></ml-movie-score>
-    <ml-vote ml-movie="movieDetailsCtrl.movie"></ml-vote>
 </div>

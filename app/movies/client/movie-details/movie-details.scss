@@ -8,22 +8,43 @@
         }
     }
     .logos {
-        @media (max-width: $screen-xs-max) {
+        @include media-xs-max {
             padding-top: $margin / 2;
         }
-        @media (min-width: $screen-sm-min) {
+        @include media-sm-min {
             text-align: right;
         }
     }
     .logo {
         height: 16px;
     }
-    .summary {
-        margin-top: $margin;
-    }
     .poster {
-        @media (max-width: $screen-xs-max) {
+        @include media-xs-max {
             display: none;
+        }
+    }
+    .list-movie-meta {
+        margin-bottom: 0;
+        padding-left: 0;
+        list-style: none;
+        
+        li {
+            margin-bottom: $margin-sm;
+            
+            @include media-sm-min {
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+        @include media-xs-max {
+            margin-left: -$margin-xs;
+            
+            li {
+                display: inline-block;
+                padding-right: $margin-xs;
+                padding-left: $margin-xs;
+            }
         }
     }
     .movie-lists {

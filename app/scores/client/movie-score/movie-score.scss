@@ -3,11 +3,14 @@
 
 .movie-score {
     display: inline-block;
+    font-size: 18px;
+    vertical-align: middle;
     
     @include star-score-colors($gray-light, $brand-primary);
     
     .star-score {
         display: inline-block;
+        line-height: 20px;
     }
     .star-options > label:before {
         cursor: default;
