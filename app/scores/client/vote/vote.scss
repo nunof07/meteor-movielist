@@ -4,5 +4,15 @@
 .vote {
     display: inline-block;
     
-    @include star-score-colors($gray-light, $brand-success, lighten($brand-success, 15%));
+    @include star-score-colors($gray-light, $brand-success, darken($brand-success, 15%));
+    
+    .star-score {
+        min-width: 100px;
+        padding-left: 5px;
+    }
+}
+.vote-todo-label {
+    text-transform: uppercase;
+    font-size: 75%;
+    vertical-align: text-bottom;
 }

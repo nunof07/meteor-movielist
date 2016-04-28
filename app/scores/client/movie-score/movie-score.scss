@@ -6,6 +6,9 @@
     
     @include star-score-colors($gray-light, $brand-primary);
     
+    .star-score {
+        display: inline-block;
+    }
     .star-options > label:before {
         cursor: default;
     }

@@ -15,13 +15,14 @@ function voteDirective() {
     };
 }
 
-function VoteController($scope, $reactive, logger, errorService) {
+function VoteController($scope, $reactive, $timeout, logger, errorService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('movieScore.user', getMovieId);
     
     ctrl.error = false;
     ctrl.errorMessage = false;
+    ctrl.isSubmitting = false;
     ctrl.score = 0;
     ctrl.starScore = 0;
     
@@ -65,6 +66,7 @@ function VoteController($scope, $reactive, logger, errorService) {
         if (ctrl.movie && score >= 1 && score <= 5) {
             ctrl.error = false;
             ctrl.errorMessage = false;
+            ctrl.isSubmitting = true;
             const data = {
                 movieId: ctrl.movie._id,
                 score
@@ -78,7 +80,9 @@ function VoteController($scope, $reactive, logger, errorService) {
                 logger.error('Error saving vote', error);
                 ctrl.error = {saveFailed: true};
                 ctrl.errorMessage = errorService.getErrorMessage(error);
+                $timeout(dismissError, 20000);
             }
+            ctrl.isSubmitting = false;
         }
     }
     function dismissError() {

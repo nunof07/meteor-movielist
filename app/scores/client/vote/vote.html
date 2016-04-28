@@ -1,5 +1,22 @@
-<div class="vote well well-sm">
-    <div class="star-score">
+<div class="vote" uib-dropdown>
+    <button type="button" class="btn btn-success"
+    uib-dropdown-toggle
+    uib-popover-template="'app/scores/client/vote/error.html'"
+    popover-is-open="voteCtrl.error"
+    popover-trigger="none"
+    popover-placement="bottom"
+    popover-append-to-body="true">
+        <span ng-hide="voteCtrl.score" class="vote-todo">
+            <span class="icon i-star-hollow" ng-hide="voteCtrl.isSubmitting"></span>
+            <span class="icon i-loading" ng-show="voteCtrl.isSubmitting"></span>
+            <span ml-i18n="scores.vote" class="vote-todo-label"></span>
+        </span>
+        <span ng-show="voteCtrl.score" class="vote-completed">
+            <span class="icon i-star"></span>
+            <span class="numeric-score" ng-bind="voteCtrl.score"></span>
+        </span>
+    </button>
+    <div class="star-score uib-dropdown-menu">
         <fieldset class="star-options">
             <input ng-repeat-start="i in [10, 8, 6, 4, 2]"
             type="radio"
@@ -13,16 +30,5 @@
             title="{{ 'scores.star' + (i * 10 / 2) | mlI18n }}"
             ng-click="voteCtrl.vote(i / 2)"></label>
         </fieldset>
-        <span class="numeric-score"
-        ng-bind="voteCtrl.score"
-        ng-show="voteCtrl.score > 0"></span>
     </div>
-    
-    <uib-alert type="danger"
-    class="animate-hide"
-    ng-show="voteCtrl.error"
-    close="voteCtrl.dismissError()">
-        <i class="icon i-error"></i>
-        <span ml-i18n="scores.saveFailed" ml-i18n-params="voteCtrl.errorMessage"></span>
-    </uib-alert>
 </div>

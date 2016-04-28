@@ -1,4 +1,5 @@
 @import "{}/app/lib/client/styles/_colors.scss";
+@import "{}/app/scores/client/styles/_mixins.scss";
 
 $star-color-full: $brand-primary;
 $star-color-empty: $gray-light;
@@ -6,8 +7,6 @@ $star-padding: 2px;
 $star-height: 20px;
 
 .star-score {
-    display: inline-block;
-    
     .numeric-score {
         font-weight: bold;
         color: $star-color-full;
@@ -41,20 +40,38 @@ $star-height: 20px;
             margin: 0;
             cursor: pointer;
             font-family: FontAwesome;
-            content: "\f005 "; // full star
+            @include star(); // full star
         }
         // &:last-child:before {
-        //     content: "\f006 "; // empty star outline
+        //     @include star-hollow(); // empty star outline
         // }
     }
     // half star trick
     & .half:before {
-        content: "\f089 "; // half star no outline
+        @include star-half(); // half star no outline
         position: absolute;
         padding-right: 0;
     }
     // color current and previous stars on checked
     input:checked ~ label {
         color: $star-color-full;
+    }
+}
+.i-star {
+    // fa-star
+    &:before {
+        @include star();
+    }
+}
+.i-star-half {
+    // fa-star-half
+    &:before {
+        @include star-half();
+    }
+}
+.i-star-hollow {
+    // fa-star-o
+    &:before {
+        @include star-hollow();
     }
 }
