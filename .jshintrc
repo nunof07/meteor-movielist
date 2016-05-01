@@ -75,6 +75,7 @@
         "MovieDb": true,
         "ListsMovies": true,
         "MovieLists" : true,
-        "Scores": true
+        "Scores": true,
+        "MovieScores": true
     }
 }

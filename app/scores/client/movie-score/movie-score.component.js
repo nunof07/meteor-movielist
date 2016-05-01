@@ -6,7 +6,7 @@ function movieScoreDirective() {
     return {
         restrict: 'E',
         scope: {
-            movie: '=mlMovie',
+            scores: '=mlScores',
         },
         bindToController: true,
         templateUrl: 'app/scores/client/movie-score/movie-score.html',
@@ -18,32 +18,17 @@ function movieScoreDirective() {
 function MovieScoreController($scope, $reactive) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
-    ctrl.subscribe('movieScore.all', getMovieId);
     
-    ctrl.total = 0;
-    ctrl.count = 0;
-    ctrl.average = 0;
-    ctrl.starScore = 0;
-    
-    ctrl.autorun(updateCounts);
+    ctrl.autorun(starScore);
     return;
     
-    function updateCounts() {
-        ctrl.total = Counts.get('MovieScore.total');
-        ctrl.count = Counts.get('MovieScore.count');
+    function starScore() {
+        const scores = ctrl.getReactively('scores');
         
-        if (ctrl.count) {
-            ctrl.average = ctrl.total / ctrl.count;
-            ctrl.starScore = Math.round(2 * ctrl.average);
-        }
-    }
-    function getMovieId() {
-        const movie = ctrl.getReactively('movie');
-        
-        if (movie) {
-            return [{ movieId: movie._id }];
+        if (scores && scores.average) {
+            ctrl.starScore = Math.round(2 * scores.average);
         } else {
-            return [{ }];
+            ctrl.starScore = 0;
         }
     }
 }

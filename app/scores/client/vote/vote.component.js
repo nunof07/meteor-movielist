@@ -7,6 +7,7 @@ function voteDirective() {
         restrict: 'E',
         scope: {
             movie: '=mlMovie',
+            score: '=mlScore'
         },
         bindToController: true,
         templateUrl: 'app/scores/client/vote/vote.html',
@@ -23,13 +24,12 @@ function VoteController($scope, $reactive, $timeout, logger, errorService) {
     ctrl.error = false;
     ctrl.errorMessage = false;
     ctrl.isSubmitting = false;
-    ctrl.score = 0;
     ctrl.starScore = 0;
     
     ctrl.vote = vote;
     ctrl.dismissError = dismissError;
     
-    ctrl.autorun(scoreAutorun);
+    ctrl.autorun(starScore);
     return;
     
     function getMovieId() {
@@ -41,24 +41,12 @@ function VoteController($scope, $reactive, $timeout, logger, errorService) {
             return [{ }];
         }
     }
-    function scoreAutorun() {
-        const movie = ctrl.getReactively('movie');
-        let updated = false;
+    function starScore() {
+        const score = ctrl.getReactively('score');
         
-        if (movie && Meteor.userId()) {
-            const score = Scores.findOne({
-                userId: Meteor.userId(),
-                movieId: ctrl.movie._id});
-                
-            if (score) {
-                ctrl.score = score.score;
-                ctrl.starScore = 2 * ctrl.score;
-                updated = true;
-            }
-        }
-        
-        if (!updated) {
-            ctrl.score = 0;
+        if (score) {
+            ctrl.starScore = 2 * score.score;
+        } else {
             ctrl.starScore = 0;
         }
     }
@@ -80,7 +68,7 @@ function VoteController($scope, $reactive, $timeout, logger, errorService) {
                 logger.error('Error saving vote', error);
                 ctrl.error = {saveFailed: true};
                 ctrl.errorMessage = errorService.getErrorMessage(error);
-                $timeout(dismissError, 20000);
+                $timeout(dismissError, 5000);
             }
             ctrl.isSubmitting = false;
         }

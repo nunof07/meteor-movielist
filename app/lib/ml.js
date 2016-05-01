@@ -1,6 +1,7 @@
 ML = {};
 ML.createCollection = createCollection;
 ML.createMethods = createMethods;
+ML.createDenormalizers = createDenormalizers;
 ML.fields = {
     id: { type: String, regEx: SimpleSchema.RegEx.Id },
     string: { type: String }
@@ -13,6 +14,8 @@ function createCollection(name, fields, publicFields) {
     createSchema(collection, fields);
     createPublicFields(collection, publicFields);
     collection.methods = {};
+    collection.denormalizers = {};
+    collection.insertOrUpdate = insertOrUpdate;
     
     return collection;
     
@@ -45,6 +48,47 @@ function createCollection(name, fields, publicFields) {
         
         return collection.publicFields;
     }
+    function insertOrUpdate(findSelector, insertData, updateData) {
+        const existing = this.findOne(findSelector);
+        let returnId;
+        
+        if (existing) {
+            // update existing
+            this.update(findSelector, { $set: updateData });
+            returnId = existing._id;
+        } else {
+            // create new one
+            returnId = this.insert(insertData);
+        }
+        
+        return returnId;
+    }
+}
+function getSchema(collection, fieldNames) {
+    const fields = getValidatorFields(collection, fieldNames);
+    return new SimpleSchema(fields);
+    
+    function getValidatorFields(collection, fieldNames) {
+        const result = {};
+        
+        for (let i = 0; i < fieldNames.length; i++) {
+            const fieldName = fieldNames[i];
+            
+            if (_.isString(fieldName)) {
+                const field = collection.fields[fieldName];
+                result[fieldName] = field;
+            } else {
+                for (const property in fieldName) {
+                    if (fieldName.hasOwnProperty(property)) {
+                        result[property] = fieldName[property];
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return result;
+    }
 }
 function createMethods(collection, declarations) {
     for (let i = 0; i < declarations.length; i++) {
@@ -69,30 +113,7 @@ function createMethod(collection, name, fieldNames, callback) {
         return callback.apply(this, arguments);
     }
     function getValidator(collection, fieldNames) {
-        const fields = getValidatorFields(collection, fieldNames);
-        return new SimpleSchema(fields).validator();
-        
-        function getValidatorFields(collection, fieldNames) {
-            const result = {};
-            
-            for (let i = 0; i < fieldNames.length; i++) {
-                const fieldName = fieldNames[i];
-                
-                if (_.isString(fieldName)) {
-                    const field = collection.fields[fieldName];
-                    result[fieldName] = field;
-                } else {
-                    for (const property in fieldName) {
-                        if (fieldName.hasOwnProperty(property)) {
-                            result[property] = fieldName[property];
-                            break;
-                        }
-                    }
-                }
-            }
-            
-            return result;
-        }
+        return getSchema(collection, fieldNames).validator();
     }
 }
 function rateLimitMethods(collection, numRequests, timeInterval) {
@@ -123,5 +144,25 @@ function rateLimitMethods(collection, numRequests, timeInterval) {
     }
     function limitByConnectionId() {
         return true;
+    }
+}
+function createDenormalizers(collection, declarations) {
+    for (let i = 0; i < declarations.length; i++) {
+        createDenormalizer(collection,
+            declarations[i].name,
+            declarations[i].fields,
+            declarations[i].run);
+    }
+    
+    return collection;
+}
+function createDenormalizer(collection, name, fieldNames, callback) {
+    const schema = getSchema(collection, fieldNames);
+    collection.denormalizers[name] = denormalizer;
+    return collection.denormalizers[name];
+    
+    function denormalizer() {
+        schema.validate(arguments[0]);
+        return callback.apply(this, arguments);
     }
 }

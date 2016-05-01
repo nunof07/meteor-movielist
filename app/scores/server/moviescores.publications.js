@@ -1,6 +1,6 @@
-Meteor.publish('movieDetails.user', publishUserMovieDetails);
+Meteor.publish('movieScores.movie', publishMovieScoresMovie);
 
-function publishUserMovieDetails({ movieId }) {
+function publishMovieScoresMovie({ movieId }) {
     validate();
     this.autorun(autorun);
     return;
@@ -14,7 +14,7 @@ function publishUserMovieDetails({ movieId }) {
         if (!this.userId) {
             return this.ready();
         } else {
-            return Movies.find({ _id: movieId }, Movies.publicFields);
+            return MovieScores.find({ movieId }, MovieScores.publicFields);
         }
     }
 }

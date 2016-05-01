@@ -15,8 +15,12 @@ function MovieDetailsController($scope, $stateParams, $reactive, $sce, titleServ
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('movieDetails.user', getMovieId);
+    ctrl.subscribe('movieScores.movie', getMovieId);
+    ctrl.subscribe('movieScore.user', getMovieId);
     
     ctrl.autorun(movie);
+    ctrl.autorun(scores);
+    ctrl.autorun(userScore);
     return;
     
     function movie() {
@@ -41,6 +45,18 @@ function MovieDetailsController($scope, $stateParams, $reactive, $sce, titleServ
                 const youTubeUrl = 'https://www.youtube.com/embed/' + ctrl.movie.trailerYouTubeId;
                 return $sce.trustAsResourceUrl(youTubeUrl);
             }
+        }
+    }
+    function scores() {
+        ctrl.scores = MovieScores.findOne({ movieId: $stateParams.movieId });
+    }
+    function userScore() {
+        if (Meteor.userId()) {
+            ctrl.userScore = Scores.findOne({
+                userId: Meteor.userId(),
+                movieId: $stateParams.movieId});
+        } else {
+            ctrl.userScore = null;
         }
     }
     function getMovieId() {

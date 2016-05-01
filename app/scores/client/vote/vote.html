@@ -12,9 +12,9 @@
             <span class="icon i-loading" ng-show="voteCtrl.isSubmitting"></span>
             <span ml-i18n="scores.vote" class="vote-todo-label"></span>
         </span>
-        <span ng-show="voteCtrl.score" class="vote-completed">
+        <span ng-show="voteCtrl.score.score" class="vote-completed">
             <span class="icon i-star"></span>
-            <span class="numeric-score" ng-bind="voteCtrl.score"></span>
+            <span class="numeric-score" ng-bind="voteCtrl.score.score"></span>
         </span>
     </button>
     <div class="star-score uib-dropdown-menu">

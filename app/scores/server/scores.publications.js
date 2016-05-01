@@ -12,7 +12,7 @@ function publishMovieScore({ movieId }) {
             movieId: ML.fields.id
         }).validate({ movieId });
     }
-    function autorun(compution) {
+    function autorun(computation) {
         if (!this.userId) {
             return this.ready();
         } else {
@@ -41,7 +41,7 @@ function publishUserMovieScore({ movieId }) {
             movieId: ML.fields.id
         }).validate({ movieId });
     }
-    function autorun(compution) {
+    function autorun(computation) {
         if (!this.userId) {
             return this.ready();
         } else {
@@ -58,7 +58,7 @@ function publishUserMovieScores() {
     this.autorun(autorun);
     return;
     
-    function autorun(compution) {
+    function autorun(computation) {
         if (!this.userId) {
             return this.ready();
         } else {

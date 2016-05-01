@@ -5,7 +5,7 @@ function publishUserLists() {
     this.autorun(autorun);
     return;
     
-    function autorun(compution) {
+    function autorun(computation) {
         if (!this.userId) {
             return this.ready();
         } else {
@@ -25,7 +25,7 @@ function publishUserListDetails({ listId }) {
             listId: ML.fields.id
         }).validate({ listId });
     }
-    function autorun(compution) {
+    function autorun(computation) {
         if (!this.userId) {
             return this.ready();
         } else {

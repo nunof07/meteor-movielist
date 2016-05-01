@@ -14,6 +14,14 @@ ML.createMethods(Scores, [
     }
 ]);
 
+ML.createDenormalizers(Scores, [
+    {
+        name: 'afterMovieScoresChange',
+        fields: ['movieId'],
+        run: afterMovieScoresChange
+    }
+]);
+
 function scoresVote({movieId, score}) {
     // user check
     if (!this.userId) {
@@ -27,28 +35,49 @@ function scoresVote({movieId, score}) {
         throw new Meteor.Error('not-found', 'Movie not found');
     }
     
-    // find existing vote
-    const existing = Scores.findOne({
+    // insert or update
+    const findSelector = {
         userId: this.userId,
         movieId
-    });
+    };
+    const insertData = {
+        userId: this.userId,
+        movieId,
+        score,
+        createdAt: new Date(),
+        modifiedAt: new Date()
+    };
+    const updateData = {
+        score,
+        modifiedAt: new Date()
+    };
+    const returnId = Scores.insertOrUpdate(findSelector, insertData, updateData);
+    Scores.denormalizers.afterMovieScoresChange({ movieId });
     
-    if (existing) {
-        // update existing vote
-        Scores.update(existing._id, { $set: {
-            score,
-            modifiedAt: new Date()
-        } });
-        
-        return existing._id;
-    } else {
-        // not voted yet, create new one
-        return Scores.insert({
-            userId: this.userId,
-            movieId,
-            score,
-            createdAt: new Date(),
-            modifiedAt: new Date()
-        });
+    return returnId;
+}
+function afterMovieScoresChange({ movieId }) {
+    const scores = Scores.find({ movieId }).fetch();
+    const count = scores.length;
+    const total = _.reduce(scores, addScore, 0);
+    const average = (count > 0 ? total / count : undefined);
+    const insertData = {
+        movieId,
+        count,
+        total,
+        average,
+        createdAt: new Date(),
+        modifiedAt: new Date()
+    };
+    const updateData = {
+        count,
+        total,
+        average,
+        modifiedAt: new Date()
+    };
+    return MovieScores.insertOrUpdate({ movieId }, insertData, updateData);
+    
+    function addScore(memo, score) {
+        return memo + score.score;
     }
 }
