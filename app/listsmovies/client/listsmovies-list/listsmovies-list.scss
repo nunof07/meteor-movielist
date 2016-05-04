@@ -1,0 +1,7 @@
+@import "{}/app/lib/client/styles/_buttons.scss";
+
+.listsmovies-list {
+    .vote > .btn {
+        @include btn-xs();
+    }
+}

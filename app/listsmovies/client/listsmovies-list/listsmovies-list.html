@@ -12,6 +12,12 @@
                 <td>
                     <a ui-sref="movieDetails({ movieId: movie._id })" ng-bind="movie.title"></a>
                 </td>
+                <td class="text-muted hidden-xs" ng-bind="movie.runtime | mlRuntime"></td>
+                <td class="text-muted hidden-xs hidden-sm" ng-bind="movie.genres | mlGenres"></td>
+                <td>
+                    <ml-vote ml-movie="movie" ml-score="listsMoviesListCtrl.userScores[movie._id]"></ml-vote>
+                    <ml-movie-score ml-scores="listsMoviesListCtrl.moviesScores[movie._id]"></ml-movie-score>
+                </td>
                 <td class="text-right">
                     <a href ng-click="listsMoviesListCtrl.deleteMovie(movie)">
                         <i class="icon i-delete" ng-hide="movie.isDeleting"></i>

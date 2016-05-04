@@ -19,7 +19,6 @@ function voteDirective() {
 function VoteController($scope, $reactive, $timeout, logger, errorService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
-    ctrl.subscribe('movieScore.user', getMovieId);
     
     ctrl.error = false;
     ctrl.errorMessage = false;
@@ -32,15 +31,6 @@ function VoteController($scope, $reactive, $timeout, logger, errorService) {
     ctrl.autorun(starScore);
     return;
     
-    function getMovieId() {
-        const movie = ctrl.getReactively('movie');
-        
-        if (movie) {
-            return [{ movieId: movie._id }];
-        } else {
-            return [{ }];
-        }
-    }
     function starScore() {
         const score = ctrl.getReactively('score');
         

@@ -28,12 +28,8 @@
     <div class="row row-margin">
         <div class="col-sm-3">
             <ul class="list-unstyled text-muted list-movie-meta">
-                <li>
-                    <span ng-bind="movieDetailsCtrl.movie.runtime | mlRuntime"></span>
-                </li>
-                <li>
-                    <span ng-bind="movieDetailsCtrl.movie.genres | mlGenres"></span>
-                </li>
+                <li ng-bind="movieDetailsCtrl.movie.runtime | mlRuntime"></li>
+                <li ng-bind="movieDetailsCtrl.movie.genres | mlGenres"></li>
                 <li>
                     <a ng-href="http://www.imdb.com/title/{{movieDetailsCtrl.movie.imdbId}}/">IMDb</a>,
                     <a ng-href="https://www.themoviedb.org/movie/{{movieDetailsCtrl.movie.tmdbId}}/">TMDb</a>

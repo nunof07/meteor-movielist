@@ -7,7 +7,13 @@ function publishListMovies({ listId }) {
         find: findList,
         children: [{
             find: findListMovies,
-            children: [{ find: findMovie }]
+            children: [{
+                find: findMovie,
+                children: [
+                    { find: findMovieScores },
+                    { find: findUserScore }
+                ]
+            }]
         }]
     };
     
@@ -49,6 +55,17 @@ function publishListMovies({ listId }) {
             limit: 1,
             fields: Movies.publicFields
         });
+    }
+    function findMovieScores(movie) {
+        return MovieScores.find({ movieId: movie._id }, MovieScores.publicFields);
+    }
+    function findUserScore(movie) {
+        const selector = {
+            userId: this.userId,
+            movieId: movie._id
+        };
+        
+        return Scores.find(selector, Scores.publicFields);
     }
 }
 function publishMovieLists({ movieId }) {
