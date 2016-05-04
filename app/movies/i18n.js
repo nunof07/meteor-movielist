@@ -6,7 +6,7 @@ function i18nMoviesStartup() {
             noResults: 'No results found',
             searchFailed: 'Error searching for movie. {$1}',
             addFailed: 'Error adding movie. {$1}',
-            searchLabel: 'Search movie',
+            searchLabel: 'Search movie...',
             add: 'Add movie',
             addSuccess: 'Movie added'
         }
