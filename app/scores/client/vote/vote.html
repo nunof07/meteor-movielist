@@ -1,5 +1,6 @@
 <div class="vote" uib-dropdown>
-    <button type="button" class="btn btn-success"
+    <button type="button" class="btn"
+    ng-class="{ 'btn-warning': !voteCtrl.score, 'btn-primary': voteCtrl.score.score }"
     uib-dropdown-toggle
     dropdown-append-to-body
     uib-popover-template="'app/scores/client/vote/error.html'"
@@ -10,7 +11,7 @@
         <span ng-hide="voteCtrl.score" class="vote-todo">
             <span class="icon i-star-hollow" ng-hide="voteCtrl.isSubmitting"></span>
             <span class="icon i-loading" ng-show="voteCtrl.isSubmitting"></span>
-            <span ml-i18n="scores.vote" class="vote-todo-label"></span>
+            <span class="icon i-angle-down"></span>
         </span>
         <span ng-show="voteCtrl.score.score" class="vote-completed">
             <span class="icon i-star"></span>

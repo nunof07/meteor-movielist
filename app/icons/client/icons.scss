@@ -64,3 +64,15 @@
         content: "\f057";
     }
 }
+.i-caret-down {
+    // fa-caret-down
+    &:before {
+        content: "\f0d7";
+    }
+}
+.i-angle-down {
+    // fa-angle-down
+    &:before {
+        content: "\f107";
+    }
+}

@@ -4,7 +4,7 @@
 .vote {
     display: inline-block;
     
-    @include star-score-colors($gray-light, $brand-success, darken($brand-success, 15%));
+    @include star-score-colors($gray-light, $brand-warning, darken($brand-warning, 15%));
     
     .star-score {
         min-width: 100px;
