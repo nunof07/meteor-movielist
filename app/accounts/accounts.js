@@ -1,4 +1,5 @@
 Meteor.startup(accountsStartup);
+Meteor.users.deny({ update: usersDenyUpdate });
 
 function accountsStartup() {
     Accounts.config({
@@ -16,4 +17,7 @@ function accountsStartup() {
             return false;
         }
     }
+}
+function usersDenyUpdate() {
+    return true;
 }
