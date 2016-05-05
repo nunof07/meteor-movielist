@@ -13,7 +13,8 @@ function i18nScoresStartup() {
             star40: '4 stars',
             star45: '4 1/2 stars',
             star50: '5 stars',
-            vote: 'Vote'
+            vote: 'Vote',
+            label: 'Scores'
         }
     });
 }

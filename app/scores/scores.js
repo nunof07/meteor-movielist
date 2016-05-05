@@ -4,7 +4,7 @@ Scores = ML.createCollection('Scores', {
     score: { type: Number, min: 1, max: 5 },
     createdAt: { type: Date, denyUpdate: true },
     modifiedAt: { type: Date },
-}, ['userId', 'movieId', 'score']);
+}, ['userId', 'movieId', 'score', 'modifiedAt']);
 
 ML.createMethods(Scores, [
     {

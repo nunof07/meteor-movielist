@@ -1,0 +1,19 @@
+<div class="movie-scores-list">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 ml-i18n="scores.label"></h3>
+        </div>
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="score in movieScoresListCtrl.scores">
+                    <td>
+                        <img ng-src="{{ movieScoresListCtrl.users[score.userId] | mlGravatar }}">
+                    </td>
+                    <td>
+                        Score: <span ng-bind="score.score"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

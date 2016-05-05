@@ -34,7 +34,6 @@ function AddMovieToListController($scope, $reactive, logger, errorService) {
         return Lists.find({}, { sort: { name: 1 }});
     }
     function addToList(list) {
-        console.log('addToList', list, ctrl.movie);
         if (!ctrl.isSubmitting) {
             ctrl.isSubmitting = true;
             const data = {

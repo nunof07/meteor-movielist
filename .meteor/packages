@@ -41,3 +41,5 @@ meteorhacks:npm
 npm-container
 reywood:publish-composite
 tmeasday:publish-counts
+jparker:gravatar
+idorecall:email-normalize

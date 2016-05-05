@@ -68,6 +68,8 @@
         "ValidatedMethod": false,
         "Async": false,
         "Counts": false,
+        "Gravatar": false,
+        "Email": false,
         
         "ML": true,
         "Lists": true,

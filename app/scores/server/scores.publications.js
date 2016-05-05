@@ -1,34 +1,37 @@
-Meteor.publish('movieScore.all', publishMovieScore);
+Meteor.publishComposite('movieScore.all', publishMovieScore);
 Meteor.publish('movieScore.user', publishUserMovieScore);
 Meteor.publish('movieScores.user', publishUserMovieScores);
 
 function publishMovieScore({ movieId }) {
     validate();
-    this.autorun(autorun);
-    return;
+    return {
+        find: findScores,
+        children: [{
+            find: findUsers
+        }]
+    };
     
     function validate() {
          new SimpleSchema({
             movieId: ML.fields.id
         }).validate({ movieId });
     }
-    function autorun(computation) {
+    function findScores() {
         if (!this.userId) {
-            return this.ready();
+            return;
         } else {
-            const selector = { movieId };
-            
-            // count votes
-            Counts.publish(this, 'MovieScore.count',
-                Scores.find(selector));
-            
-            // total score
-            Counts.publish(this, 'MovieScore.total',
-                Scores.find(selector, { fields: { score: 1 } }),
-                { countFromField: 'score' });
-                
-            return Scores.find(selector, Scores.publicFields);
+            return Scores.find({ movieId }, Scores.publicFields);
         }
+    }
+    function findUsers(score) {
+        return Meteor.users.find({
+            _id: score.userId
+        }, {
+            limit: 1,
+            fields: {
+                gravatarHash: 1
+            }
+        });
     }
 }
 function publishUserMovieScore({ movieId }) {
