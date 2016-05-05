@@ -2,8 +2,10 @@
     <div class="page-header">
         <h1>
             <span ng-bind="listDetailsCtrl.list.name"></span>
-            <small ng-show="listDetailsCtrl.list.isPublic"
-                   ml-i18n="lists.labels.isPublic"></small>
+            <span class="badge" ng-show="listDetailsCtrl.list.isPublic">
+                <span class="icon i-public"></span>
+                <span ml-i18n="lists.labels.isPublic"></span>
+            </span>
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-default"
                         ng-click="listDetailsCtrl.editList()">
