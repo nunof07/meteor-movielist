@@ -82,3 +82,9 @@
         content: "\f0c0";
     }
 }
+.i-notavailable {
+    &:before {
+        // fa-ban
+        content: '\f05e';
+    }
+}
