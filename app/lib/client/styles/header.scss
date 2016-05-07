@@ -1,0 +1,20 @@
+@import "{}/app/lib/client/styles/_components.scss";
+
+.loggedin {
+    // accomodate avatar
+    .navbar-brand {
+        height: 60px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    // hide email in login dropdown
+    #login-dropdown-list a {
+        font-size: 0;
+        color: transparent;
+        
+        .caret {
+            color: #777;
+            margin-left: $margin-xs;
+        }
+    }
+}

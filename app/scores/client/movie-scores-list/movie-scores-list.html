@@ -6,7 +6,7 @@
         <div class="panel-body">
             <ul class="list-unstyled">
                 <li ng-repeat="score in movieScoresListCtrl.scores">
-                    <img ng-src="{{ movieScoresListCtrl.users[score.userId] | mlGravatar }}" class="gravatar">
+                    <img ng-src="{{ movieScoresListCtrl.users[score.userId] | mlAvatar }}" class="gravatar">
                     <ml-movie-score ml-score="score.score"></ml-movie-score>
                 </li>
             </ul>

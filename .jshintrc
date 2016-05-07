@@ -78,6 +78,7 @@
         "ListsMovies": true,
         "MovieLists" : true,
         "Scores": true,
-        "MovieScores": true
+        "MovieScores": true,
+        "MLAccounts": true
     }
 }

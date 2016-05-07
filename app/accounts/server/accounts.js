@@ -1,6 +1,7 @@
 Meteor.startup(setupAccountsEmails);
 Meteor.startup(updateGravatarHashes);
 Accounts.onCreateUser(onCreateUser);
+Accounts.onLogin(updateUserDisplayPicture);
 
 function setupAccountsEmails() {
     Accounts.emailTemplates.siteName = i18n('siteName');
@@ -25,4 +26,16 @@ function updateGravatarHashes() {
             $set: { gravatarHash: getGravatarHash(user) } 
         });
     }
+}
+function updateUserDisplayPicture() {
+    const user = Meteor.user();
+    const picture = MLAccounts.getAvatarUrl({
+        user,
+        size: 50
+    });
+    Meteor.users.update(user._id, {
+        $set: {
+            'profile.display_picture': picture
+        }
+    });
 }
