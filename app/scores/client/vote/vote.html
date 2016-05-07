@@ -23,12 +23,12 @@
             <input ng-repeat-start="i in [10, 8, 6, 4, 2]"
             type="radio"
             name="vote_rating_{{ voteCtrl.movie._id }}"
-            id="rating{{ i }}"
+            id="rating_{{ voteCtrl.movie._id }}_{{ i }}"
             ng-value="i"
             ng-model="voteCtrl.starScore" />
             
             <label ng-repeat-end
-            for="rating{{ i }}"
+            for="rating_{{ voteCtrl.movie._id }}_{{ i }}"
             title="{{ 'scores.star' + (i * 10 / 2) | mlI18n }}"
             ng-click="voteCtrl.vote(i / 2)"></label>
         </fieldset>

@@ -6,7 +6,7 @@ function movieScoreDirective() {
     return {
         restrict: 'E',
         scope: {
-            scores: '=mlScores',
+            score: '=mlScore',
         },
         bindToController: true,
         templateUrl: 'app/scores/client/movie-score/movie-score.html',
@@ -23,12 +23,7 @@ function MovieScoreController($scope, $reactive) {
     return;
     
     function starScore() {
-        const scores = ctrl.getReactively('scores');
-        
-        if (scores && scores.average) {
-            ctrl.starScore = Math.round(2 * scores.average);
-        } else {
-            ctrl.starScore = 0;
-        }
+        const score = ctrl.getReactively('score') || 0;
+        ctrl.starScore = Math.round(2 * score);
     }
 }

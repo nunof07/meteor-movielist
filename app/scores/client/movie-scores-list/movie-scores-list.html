@@ -3,17 +3,13 @@
         <div class="panel-heading">
             <h3 ml-i18n="scores.label"></h3>
         </div>
-        <table class="table">
-            <tbody>
-                <tr ng-repeat="score in movieScoresListCtrl.scores">
-                    <td>
-                        <img ng-src="{{ movieScoresListCtrl.users[score.userId] | mlGravatar }}">
-                    </td>
-                    <td>
-                        Score: <span ng-bind="score.score"></span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                <li ng-repeat="score in movieScoresListCtrl.scores">
+                    <img ng-src="{{ movieScoresListCtrl.users[score.userId] | mlGravatar }}" class="gravatar">
+                    <ml-movie-score ml-score="score.score"></ml-movie-score>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

@@ -1,3 +1,5 @@
+@import "{}/app/lib/client/styles/_components.scss";
+
 .movie-scores-list {
     .panel-heading {
         h3 {
@@ -5,6 +7,22 @@
         }
     }
     .panel-body {
-        padding: 0;
+        > ul {
+            margin-bottom: 0;
+            
+            li {
+                margin-bottom: $padding-small-vertical;
+                
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    .movie-score {
+        font-size: 14px;
+    }
+    .gravatar {
+        border-radius: 50%;
     }
 }

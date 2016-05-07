@@ -4,19 +4,16 @@
             <input
             ng-repeat-start="i in [10, 9, 8, 7, 6, 5, 4, 3, 2]"
             type="radio"
-            name="movie_rating_{{ movieScoreCtrl.scores._id }}"
-            id="rating{{ i }}"
             ng-value="i"
             ng-model="movieScoreCtrl.starScore" />
             
             <label
             ng-repeat-end
-            for="rating{{ i }}"
             ng-class="{half: i % 2 !== 0}"
             title="{{ 'scores.star' + (i * 10 / 2) | mlI18n }}"></label>
         </fieldset>
         <span class="numeric-score"
-        ng-bind="movieScoreCtrl.scores.average | number:1"
-        ng-show="movieScoreCtrl.scores.average > 0"></span>
+        ng-bind="movieScoreCtrl.score | number:1"
+        ng-show="movieScoreCtrl.score"></span>
     </div>
 </div>

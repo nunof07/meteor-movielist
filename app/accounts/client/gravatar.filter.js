@@ -13,6 +13,7 @@ function gravatarFilter() {
         }
         const options = {
             secure: true,
+            size: 25,
             d: 'mm',
             rating: 'pg'
         };
