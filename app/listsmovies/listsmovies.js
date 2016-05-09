@@ -17,6 +17,14 @@ ML.createMethods(ListsMovies, [
     }
 ]);
 
+ML.createDenormalizers(ListsMovies, [
+    {
+        name: 'afterListsMoviesCountChange',
+        fields: ['listId'],
+        run: afterListsMoviesCountChange
+    }
+]);
+
 function listsMoviesInsert({listId, movieId}) {
     if (!Lists.methods.hasAccess.call({ listId })) {
         throw new Meteor.Error('unauthorized', 'User not authorized to update list');
@@ -33,12 +41,18 @@ function listsMoviesInsert({listId, movieId}) {
     if (listMovie) {
         return listMovie._id;
     } else {
-        return ListsMovies.insert({
+        const result = ListsMovies.insert({
             listId,
             movieId,
             createdAt: new Date(),
             modifiedAt: new Date(),
         });
+        
+        if (result) {
+            ListsMovies.denormalizers.afterListsMoviesCountChange({ listId });
+        }
+        
+        return result;
     }
 }
 function listsMoviesDelete({listId, movieId}) {
@@ -46,8 +60,25 @@ function listsMoviesDelete({listId, movieId}) {
         throw new Meteor.Error('unauthorized', 'User not authorized to update list');
     }
     
-    return ListsMovies.remove({
+    const result = ListsMovies.remove({
         listId,
         movieId
     });
+    
+    if (result) {
+        ListsMovies.denormalizers.afterListsMoviesCountChange({ listId });
+    }
+    
+    return result;
+}
+function afterListsMoviesCountChange({ listId }) {
+    if (!Lists.methods.hasAccess.call({ listId })) {
+        throw new Meteor.Error('unauthorized', 'User not authorized to update list');
+    }
+    const listsMovies = ListsMovies.find({ listId }).fetch();
+    const movieCount = listsMovies.length;
+    
+    return Lists.update(listId, { $set: {
+        movieCount
+    }});
 }

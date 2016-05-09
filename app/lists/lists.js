@@ -3,6 +3,7 @@ Lists = ML.createCollection('Lists', {
     isPublic: { type: Boolean },
     ownerId: { type: String, regEx: SimpleSchema.RegEx.Id, denyUpdate: true },
     isDeleted: { type: Boolean, optional: true },
+    movieCount: { type: Number, min: 0, optional: true },
     createdAt: { type: Date, denyUpdate: true },
     modifiedAt: { type: Date },
 }, ['name', 'isPublic', 'ownerId', 'isDeleted']);

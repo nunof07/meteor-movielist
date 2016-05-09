@@ -2,7 +2,7 @@
     <div class="page-header">
         <h1>
             <span ng-bind="listDetailsCtrl.list.name"></span>
-            <span class="badge" ng-show="listDetailsCtrl.list.isPublic">
+            <span class="badge badge-reverse badge-public" ng-show="listDetailsCtrl.list.isPublic">
                 <span class="icon i-public"></span>
                 <span ml-i18n="lists.labels.isPublic"></span>
             </span>
@@ -27,4 +27,6 @@
         <span ml-i18n="lists.movies.addFailed" ml-i18n-params="listDetailsCtrl.errorMessage"></span>
     </uib-alert>
     <ml-listsmovies-list ml-list="listDetailsCtrl.list"></ml-listsmovies-list>
+    <p class="movie-count" ng-show="listDetailsCtrl.list.movieCount"
+    ml-i18n="lists.movies.count" ml-i18n-params="listDetailsCtrl.list.movieCount"></p>
 </div>

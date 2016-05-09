@@ -3,11 +3,12 @@
         <a ng-repeat="list in listsListCtrl.lists"
            ui-sref="listDetails({ listId: list._id })"
            class="list-group-item">
-            <span ng-show="list.isPublic" class="badge">
+            <span ng-show="list.movieCount" class="badge" ng-bind="list.movieCount"></span>
+            <span ng-bind="list.name"></span>
+            <span ng-show="list.isPublic" class="badge badge-reverse badge-public">
                 <span class="icon i-public"></span>
                 <span ml-i18n="lists.labels.isPublic"></span>
             </span>
-            <span ng-bind="list.name"></span>
         </a>
     </div>
 </div>

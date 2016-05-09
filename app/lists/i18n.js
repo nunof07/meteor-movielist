@@ -23,7 +23,8 @@ function i18nListsStartup() {
                 new: 'New list'
             },
             movies: {
-                addFailed: 'Failed to add movie to list. {$1}'
+                addFailed: 'Failed to add movie to list. {$1}',
+                count: '{$1} movies in list'
             }
         }
     });
