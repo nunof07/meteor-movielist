@@ -6,9 +6,33 @@
         <i class="icon i-error"></i>
         <span ml-i18n="listsMovies.deleteMovieFailed" ml-i18n-params="listsMoviesListCtrl.errorMessage"></span>
     </uib-alert>
-    <table class="table">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <ml-sort-button ml-label="'listsMovies.labels.title' | mlI18n"
+                    ml-value="'title'"
+                    ml-expression="listsMoviesListCtrl.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                </th>
+                <th>
+                    <ml-sort-button ml-label="'listsMovies.labels.runtime' | mlI18n"
+                    ml-value="'runtime'"
+                    ml-expression="listsMoviesListCtrl.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                </th>
+                <th>
+                    <ml-sort-button ml-label="'listsMovies.labels.genres' | mlI18n"
+                    ml-value="'genres'"
+                    ml-expression="listsMoviesListCtrl.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
         <tbody>
-            <tr ng-repeat="movie in listsMoviesListCtrl.movies">
+            <tr ng-repeat="movie in listsMoviesListCtrl.movies | orderBy:listsMoviesListCtrl.sort.expression:listsMoviesListCtrl.sort.isReverse">
                 <td class="movie-title">
                     <a ui-sref="movieDetails({ movieId: movie._id })" ng-bind="movie.title"></a>
                 </td>

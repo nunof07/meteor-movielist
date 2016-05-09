@@ -25,6 +25,10 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
     ctrl.error = false;
     ctrl.errorMessage = false;
     ctrl.isSubmitting = false;
+    ctrl.sort = {
+        expression: 'title',
+        isReverse: false
+    };
     
     ctrl.deleteMovie = deleteMovie;
     ctrl.dismissError = dismissError;
