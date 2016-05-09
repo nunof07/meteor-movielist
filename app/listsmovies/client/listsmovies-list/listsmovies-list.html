@@ -9,7 +9,7 @@
     <table class="table">
         <tbody>
             <tr ng-repeat="movie in listsMoviesListCtrl.movies">
-                <td>
+                <td class="movie-title">
                     <a ui-sref="movieDetails({ movieId: movie._id })" ng-bind="movie.title"></a>
                 </td>
                 <td class="text-muted hidden-xs" ng-bind="movie.runtime | mlRuntime"></td>
