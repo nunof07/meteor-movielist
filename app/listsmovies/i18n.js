@@ -13,6 +13,9 @@ function i18nListsMoviesStartup() {
                 genres: 'Genres',
                 userScore: 'My score',
                 movieScore: 'Movie score'
+            },
+            filters: {
+                title: 'Title...'
             }
         }
     });

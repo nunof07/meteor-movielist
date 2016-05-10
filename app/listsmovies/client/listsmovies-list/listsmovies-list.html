@@ -41,9 +41,20 @@
                 </th>
                 <th></th>
             </tr>
+            <tr>
+                <td>
+                    <input type="text" class="form-control" placeholder="{{ 'listsMovies.filters.title' | mlI18n }}"
+                    ng-model="listsMoviesListCtrl.filter.title">
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="movie in listsMoviesListCtrl.movies | orderBy:listsMoviesListCtrl.sort.expression:listsMoviesListCtrl.sort.isReverse">
+            <tr ng-repeat="movie in listsMoviesListCtrl.movies | orderBy:listsMoviesListCtrl.sort.expression:listsMoviesListCtrl.sort.isReverse | filter:listsMoviesListCtrl.filter">
                 <td class="movie-title">
                     <a ui-sref="movieDetails({ movieId: movie._id })" ng-bind="movie.title"></a>
                 </td>
