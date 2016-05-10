@@ -32,6 +32,8 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
     
     ctrl.deleteMovie = deleteMovie;
     ctrl.dismissError = dismissError;
+    ctrl.getUserScore = getUserScore;
+    ctrl.getMovieScore = getMovieScore;
     
     ctrl.helpers({
         movies
@@ -103,5 +105,19 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
     }
     function dismissError() {
         ctrl.error = false;
+    }
+    function getUserScore(movie) {
+        if (ctrl.userScores && ctrl.userScores.hasOwnProperty(movie._id)) {
+            return ctrl.userScores[movie._id].score;
+        } else {
+            return 0;
+        }
+    }
+    function getMovieScore(movie) {
+        if (ctrl.moviesScores && ctrl.moviesScores.hasOwnProperty(movie._id)) {
+            return ctrl.moviesScores[movie._id].average;
+        } else {
+            return 0;
+        }
     }
 }

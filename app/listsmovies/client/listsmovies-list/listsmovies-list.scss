@@ -4,4 +4,12 @@
     .vote > .btn {
         @include btn-xs();
     }
+    table thead {
+        a,
+        a:hover,
+        a:active,
+        a:focus {
+            text-decoration: none;
+        }
+    }
 }

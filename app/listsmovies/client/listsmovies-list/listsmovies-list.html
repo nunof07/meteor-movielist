@@ -27,7 +27,18 @@
                     ml-expression="listsMoviesListCtrl.sort.expression"
                     ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
                 </th>
-                <th></th>
+                <th>
+                    <ml-sort-button ml-label="'listsMovies.labels.userScore' | mlI18n"
+                    ml-value="listsMoviesListCtrl.getUserScore"
+                    ml-expression="listsMoviesListCtrl.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                </th>
+                <th>
+                    <ml-sort-button ml-label="'listsMovies.labels.movieScore' | mlI18n"
+                    ml-value="listsMoviesListCtrl.getMovieScore"
+                    ml-expression="listsMoviesListCtrl.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -38,7 +49,7 @@
                 </td>
                 <td class="text-muted hidden-xs" ng-bind="movie.runtime | mlRuntime"></td>
                 <td class="text-muted hidden-xs hidden-sm" ng-bind="movie.genres | mlGenres"></td>
-                <td>
+                <td colspan="2">
                     <ml-vote ml-movie="movie" ml-score="listsMoviesListCtrl.userScores[movie._id]"></ml-vote>
                     <ml-movie-score ml-score="listsMoviesListCtrl.moviesScores[movie._id].average"></ml-movie-score>
                 </td>
