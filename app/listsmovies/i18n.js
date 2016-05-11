@@ -15,7 +15,8 @@ function i18nListsMoviesStartup() {
                 movieScore: 'Movie score'
             },
             filters: {
-                title: 'Title...'
+                title: 'Title...',
+                genres: 'Genres...'
             }
         }
     });

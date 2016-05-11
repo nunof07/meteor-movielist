@@ -12,6 +12,7 @@ angular-templates@1.0.0
 angular:angular@1.4.8
 angular:angular-animate@1.4.8
 angular:angular-messages@1.4.8
+angular:angular-sanitize@1.4.8
 angularui:angular-ui-router@0.2.15
 anti:i18n@0.4.3
 autoupdate@1.2.4
@@ -30,6 +31,7 @@ callback-hook@1.0.4
 carlosbaraza:accounts-ui-bootstrap-3-angular@0.1.0
 check@1.1.0
 coffeescript@1.0.11
+cosmos:browserify@0.10.0
 dburles:collection-helpers@1.0.4
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2

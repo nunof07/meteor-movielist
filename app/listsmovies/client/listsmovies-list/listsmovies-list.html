@@ -9,62 +9,78 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>
+                <th class="cell-title">
                     <ml-sort-button ml-label="'listsMovies.labels.title' | mlI18n"
                     ml-value="'title'"
                     ml-expression="listsMoviesListCtrl.sort.expression"
                     ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
                 </th>
-                <th>
+                <th class="cell-runtime text-muted hidden-xs">
                     <ml-sort-button ml-label="'listsMovies.labels.runtime' | mlI18n"
                     ml-value="'runtime'"
                     ml-expression="listsMoviesListCtrl.sort.expression"
                     ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
                 </th>
-                <th>
+                <th class="cell-genres text-muted hidden-xs hidden-sm">
                     <ml-sort-button ml-label="'listsMovies.labels.genres' | mlI18n"
                     ml-value="'genres'"
                     ml-expression="listsMoviesListCtrl.sort.expression"
                     ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
                 </th>
-                <th>
+                <th class="cell-user-score">
                     <ml-sort-button ml-label="'listsMovies.labels.userScore' | mlI18n"
                     ml-value="listsMoviesListCtrl.getUserScore"
                     ml-expression="listsMoviesListCtrl.sort.expression"
                     ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
                 </th>
-                <th>
+                <th class="cell-movie-score">
                     <ml-sort-button ml-label="'listsMovies.labels.movieScore' | mlI18n"
                     ml-value="listsMoviesListCtrl.getMovieScore"
                     ml-expression="listsMoviesListCtrl.sort.expression"
                     ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
                 </th>
-                <th></th>
+                <th class="cell-delete"></th>
             </tr>
             <tr>
-                <td>
+                <td class="cell-title">
                     <input type="text" class="form-control" placeholder="{{ 'listsMovies.filters.title' | mlI18n }}"
                     ng-model="listsMoviesListCtrl.filter.title">
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td class="cell-runtime text-muted hidden-xs"></td>
+                <td class="cell-genres text-muted hidden-xs hidden-sm">
+                    <div class="input-group">
+                        <ui-select ng-model="listsMoviesListCtrl.filter.genres" multiple allow-clear>
+                            <ui-select-match placeholder="{{ 'listsMovies.filters.genres' | mlI18n }}">
+                                <span ng-bind="$item"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="genre in (listsMoviesListCtrl.genres | filter:$select.search)">
+                                <span ng-bind="genre"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span class="input-group-btn">
+                            <button type="button" ng-click="listsMoviesListCtrl.clearGenresFilter()" class="btn btn-default">
+                                <span class="icon i-delete"></span>
+                            </button>
+                        </span>
+                    </div>
+                </td>
+                <td class="cell-user-score"></td>
+                <td class="cell-movie-score"></td>
+                <td class="cell-delete"></td>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="movie in listsMoviesListCtrl.movies | orderBy:listsMoviesListCtrl.sort.expression:listsMoviesListCtrl.sort.isReverse | filter:listsMoviesListCtrl.filter">
-                <td class="movie-title">
+            <tr ng-repeat="movie in listsMoviesListCtrl.movies | orderBy:listsMoviesListCtrl.sort.expression:listsMoviesListCtrl.sort.isReverse | filter:listsMoviesListCtrl.isMovieVisible">
+                <td class="cell-title">
                     <a ui-sref="movieDetails({ movieId: movie._id })" ng-bind="movie.title"></a>
                 </td>
-                <td class="text-muted hidden-xs" ng-bind="movie.runtime | mlRuntime"></td>
-                <td class="text-muted hidden-xs hidden-sm" ng-bind="movie.genres | mlGenres"></td>
-                <td colspan="2">
+                <td class="cell-runtime text-muted hidden-xs" ng-bind="movie.runtime | mlRuntime"></td>
+                <td class="cell-genres text-muted hidden-xs hidden-sm" ng-bind="movie.genres | mlGenres"></td>
+                <td colspan="2" class="cell-score">
                     <ml-vote ml-movie="movie" ml-score="listsMoviesListCtrl.userScores[movie._id]"></ml-vote>
                     <ml-movie-score ml-score="listsMoviesListCtrl.moviesScores[movie._id].average"></ml-movie-score>
                 </td>
-                <td class="text-right">
+                <td class="cell-delete text-right">
                     <a href ng-click="listsMoviesListCtrl.deleteMovie(movie)">
                         <i class="icon i-delete" ng-hide="movie.isDeleting"></i>
                         <i class="icon i-loading" ng-show="movie.isDeleting"></i>

@@ -29,11 +29,15 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
         expression: 'title',
         isReverse: false
     };
+    ctrl.filter = {};
+    ctrl.genres = [];
     
     ctrl.deleteMovie = deleteMovie;
     ctrl.dismissError = dismissError;
     ctrl.getUserScore = getUserScore;
     ctrl.getMovieScore = getMovieScore;
+    ctrl.clearGenresFilter = clearGenresFilter;
+    ctrl.isMovieVisible = isMovieVisible;
     
     ctrl.helpers({
         movies
@@ -67,7 +71,26 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
         }
     }
     function movies() {
-        return Movies.find({}, { sort: { title: 1 }});
+        const movies = Movies.find({}, { sort: { title: 1 }});
+        ctrl.genres = [];
+        angular.forEach(movies, updateGenres);
+        
+        return movies;
+        
+        function updateGenres(movie) {
+            angular.forEach(movie.genres, updateGenre);
+            ctrl.genres = ctrl.genres.sort();
+            return;
+            
+            function updateGenre(genre) {
+                for (let i = 0; i < ctrl.genres.length; i++) {
+                    if (ctrl.genres[i] === genre) {
+                        return;
+                    }
+                }
+                ctrl.genres.push(genre);
+            }
+        }
     }
     function getListId() {
         const list = ctrl.getReactively('list');
@@ -118,6 +141,51 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
             return ctrl.moviesScores[movie._id].average;
         } else {
             return 0;
+        }
+    }
+    function clearGenresFilter() {
+        ctrl.filter.genres = [];
+    }
+    function isMovieVisible(movie, index, movies) {
+        if (ctrl.filter) {
+            if (ctrl.filter.title && ctrl.filter.title.trim()) {
+                if (!movieTitleContains(movie, ctrl.filter.title.trim())) {
+                    return false;
+                }
+            }
+            
+            if (ctrl.filter.genres && ctrl.filter.genres.length) {
+                if (!movieHasGenres(movie, ctrl.filter.genres)) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+        
+        function movieTitleContains(movie, title) {
+            const movieTitle = movie.title.toLowerCase();
+            const compareTitle = title.toLowerCase();
+            
+            return (movieTitle.indexOf(compareTitle) > -1);
+        }
+        function movieHasGenres(movie, genres) {
+            for (let i = 0; i < genres.length; i++) {
+                let movieHasGenre = false;
+                
+                for (let j = 0; j < movie.genres.length; j++) {
+                    if (movie.genres[j] === genres[i]) {
+                        movieHasGenre = true;
+                        break;
+                    }
+                }
+                
+                if (!movieHasGenre) {
+                    return false;
+                }
+            }
+            
+            return true;
         }
     }
 }

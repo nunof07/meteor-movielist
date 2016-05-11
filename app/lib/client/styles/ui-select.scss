@@ -1,0 +1,16 @@
+@import "{}/app/lib/client/styles/_forms.scss";
+@import "{}/app/lib/client/styles/_components.scss";
+@import "{}/app/lib/client/styles/_utilities.scss";
+
+.ui-select-multiple.ui-select-bootstrap.form-control {
+    height: $input-height-base;
+    max-height: $input-height-base;
+    overflow-x: hidden;
+    overflow-y: auto;
+    
+    .ui-select-search {
+        @include placeholder {
+            padding: $padding-base-vertical $padding-base-horizontal;
+        }
+    }
+}

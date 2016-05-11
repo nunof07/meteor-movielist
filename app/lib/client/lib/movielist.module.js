@@ -7,5 +7,7 @@ angular
         'ngAnimate',
         'ngMessages',
         'nemLogging',
-        'accounts.ui'
+        'accounts.ui',
+        'ui.select',
+        'ngSanitize'
     ]);
