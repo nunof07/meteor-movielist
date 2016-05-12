@@ -9,7 +9,7 @@ function scoreDropdownSliderDirective() {
             score: '=mlScore'
         },
         bindToController: true,
-        templateUrl: 'app/scores/score-dropdown-slider/score-dropdown-slider/score-dropdown-slider.html',
+        templateUrl: 'app/scores/client/score-dropdown-slider/score-dropdown-slider.html',
         controllerAs: 'scoreDropdownSliderCtrl',
         controller: ScoreDropdownSliderController
     };

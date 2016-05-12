@@ -33,6 +33,10 @@ function ListsMoviesListController($scope, $reactive, $timeout, logger, errorSer
         userScore: {
             min: 0,
             max: 5
+        },
+        movieScore: {
+            min: 0,
+            max: 5
         }
     };
     ctrl.genres = [];
@@ -168,6 +172,10 @@ function ListsMoviesListController($scope, $reactive, $timeout, logger, errorSer
             if (!userScoreWithin(ctrl.userScores[movie._id], ctrl.filter.userScore)) {
                 return false;
             }
+            
+            if (!movieScoreWithin(ctrl.moviesScores[movie._id], ctrl.filter.movieScore)) {
+                return false;
+            }
         }
         
         return true;
@@ -198,6 +206,11 @@ function ListsMoviesListController($scope, $reactive, $timeout, logger, errorSer
         }
         function userScoreWithin(userScore, filter) {
             const score = (userScore && userScore.score ? userScore.score : 0);
+            
+            return score >= filter.min && score <= filter.max;
+        }
+        function movieScoreWithin(movieScore, filter) {
+            const score = (movieScore && movieScore.average ? movieScore.average : 0);
             
             return score >= filter.min && score <= filter.max;
         }
