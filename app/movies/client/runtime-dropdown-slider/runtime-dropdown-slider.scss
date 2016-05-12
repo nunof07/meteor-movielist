@@ -1,0 +1,12 @@
+@import "{}/app/lib/client/styles/_components.scss";
+
+.runtime-dropdown-slider {
+    .uib-dropdown-menu {
+        padding-left: $padding-xs-horizontal;
+        padding-right: $padding-xs-horizontal;
+        width: 200px;
+    }
+    rzslider {
+        font-size: 85%;
+    }
+}

@@ -1,0 +1,13 @@
+<div class="runtime-dropdown-slider" uib-dropdown auto-close="outsideClick"
+on-toggle="runtimeDropdownSliderCtrl.refreshSlider()">
+    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+        <span class="icon i-clock"></span>
+        <span ng-bind="runtimeDropdownSliderCtrl.runtime.min"></span>-<span ng-bind="runtimeDropdownSliderCtrl.runtime.max"></span>
+        <span class="icon i-caret-down"></span>
+    </button>
+    <div class="uib-dropdown-menu">
+        <rzslider rz-slider-model="runtimeDropdownSliderCtrl.runtime.min"
+            rz-slider-high="runtimeDropdownSliderCtrl.runtime.max"
+            rz-slider-options="runtimeDropdownSliderCtrl.options"></rzslider>
+    </div>
+</div>
