@@ -1,20 +1,35 @@
 @import "{}/app/lib/client/styles/_components.scss";
+@import "{}/app/lib/client/styles/_breakpoints.scss";
 
+header.container {
+    @include media-xs-max {
+        padding: 0;
+    }
+}
 .loggedin {
     // accomodate avatar
     .navbar-brand {
-        height: 60px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        @include media-sm-min {
+            height: 60px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
     }
-    // hide email in login dropdown
-    #login-dropdown-list a {
-        font-size: 0;
-        color: transparent;
-        
-        .caret {
-            color: #777;
-            margin-left: $margin-xs;
+    #login-dropdown-list {
+        // hide email in login dropdown
+        a {
+            font-size: 0;
+            color: transparent;
+            
+            .caret {
+                color: #777;
+                margin-left: $margin-xs;
+            }
+        }
+        .dropdown-menu {
+            @include media-xs-max {
+                min-width: 0;
+            }
         }
     }
 }
