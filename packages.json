@@ -1,4 +1,5 @@
 {
   "moviedb": "0.2.3",
-  "ui-select": "0.16.1"
+  "ui-select": "0.16.1",
+  "angularjs-slider": "2.13.0"
 }

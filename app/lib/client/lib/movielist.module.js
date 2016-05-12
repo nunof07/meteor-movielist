@@ -6,8 +6,9 @@ angular
         'ui.bootstrap',
         'ngAnimate',
         'ngMessages',
+        'ngSanitize',
         'nemLogging',
         'accounts.ui',
         'ui.select',
-        'ngSanitize'
+        'rzModule'
     ]);

@@ -27,4 +27,11 @@ Package.onUse(function(api) {
       isAsset: true
     });
   }
+  
+  // include files
+  api.addFiles('.npm/package/node_modules/ui-select/dist/select.min.js', 'client');
+  api.addFiles('.npm/package/node_modules/ui-select/dist/select.min.css', 'client');
+  
+  api.addFiles('.npm/package/node_modules/angularjs-slider/dist/rzslider.min.js', 'client');
+  api.addFiles('.npm/package/node_modules/angularjs-slider/dist/rzslider.min.css', 'client');
 });

@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "angular": {
+      "version": "1.5.5"
+    },
+    "angularjs-slider": {
+      "version": "2.13.0"
+    },
     "moviedb": {
       "version": "0.2.3",
       "dependencies": {
