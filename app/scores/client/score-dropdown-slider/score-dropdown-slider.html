@@ -1,0 +1,23 @@
+<div class="score-dropdown-slider" uib-dropdown auto-close="outsideClick"
+on-toggle="scoreDropdownSliderCtrl.refreshSlider()">
+    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+        <span class="icon i-star"></span>
+        <span ng-bind="scoreDropdownSliderCtrl.score.min"></span>-<span ng-bind="scoreDropdownSliderCtrl.score.max"></span>
+        <span class="icon i-caret-down"></span>
+    </button>
+    <div class="uib-dropdown-menu">
+        <div class="score-slider">
+            <rzslider rz-slider-model="scoreDropdownSliderCtrl.score.min"
+                rz-slider-high="scoreDropdownSliderCtrl.score.max"
+                rz-slider-options="scoreDropdownSliderCtrl.options"></rzslider>
+        </div>
+        <div class="scores">
+            <ml-movie-score ml-score="5"></ml-movie-score>
+            <ml-movie-score ml-score="4"></ml-movie-score>
+            <ml-movie-score ml-score="3"></ml-movie-score>
+            <ml-movie-score ml-score="2"></ml-movie-score>
+            <ml-movie-score ml-score="1"></ml-movie-score>
+            <ml-movie-score ml-score="0"></ml-movie-score>
+        </div>
+    </div>
+</div>

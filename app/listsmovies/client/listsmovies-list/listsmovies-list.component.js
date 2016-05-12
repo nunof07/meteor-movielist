@@ -36,14 +36,6 @@ function ListsMoviesListController($scope, $reactive, $timeout, logger, errorSer
         }
     };
     ctrl.genres = [];
-    ctrl.userScoreSlider = {
-        floor: 0,
-        ceil: 5,
-        showTicks: true,
-        hideLimitLabels: true,
-        hidePointerLabels: true,
-        vertical: true
-    };
     
     ctrl.deleteMovie = deleteMovie;
     ctrl.dismissError = dismissError;
@@ -51,7 +43,6 @@ function ListsMoviesListController($scope, $reactive, $timeout, logger, errorSer
     ctrl.getMovieScore = getMovieScore;
     ctrl.clearGenresFilter = clearGenresFilter;
     ctrl.isMovieVisible = isMovieVisible;
-    ctrl.refreshSliders = refreshSliders;
     
     ctrl.helpers({
         movies
@@ -209,14 +200,6 @@ function ListsMoviesListController($scope, $reactive, $timeout, logger, errorSer
             const score = (userScore && userScore.score ? userScore.score : 0);
             
             return score >= filter.min && score <= filter.max;
-        }
-    }
-    function refreshSliders() {
-        $timeout(refresh);
-        return;
-        
-        function refresh() {
-            $scope.$broadcast('rzSliderForceRender');
         }
     }
 }

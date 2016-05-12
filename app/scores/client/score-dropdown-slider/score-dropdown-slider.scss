@@ -1,0 +1,19 @@
+.score-dropdown-slider {
+    .uib-dropdown-menu {
+        padding-left: $padding-xs-horizontal;
+        padding-right: $padding-xs-horizontal;
+        min-width: 180px;
+    }
+    .movie-score {
+        display: block;
+        margin-top: $padding-small-vertical;
+        margin-bottom: $padding-small-vertical;
+    }
+    .score-slider {
+        height: (20px + $padding-small-vertical) * 6 + 2 * $padding-small-vertical;
+        float: left;
+    }
+    .scores {
+        margin-left: 50px;
+    }
+}
