@@ -1,5 +1,6 @@
 @import "{}/app/lib/client/styles/_buttons.scss";
 @import "{}/app/lib/client/styles/_breakpoints.scss";
+@import "{}/app/lib/client/styles/_components.scss";
 
 .listsmovies-list {
     .vote > .btn {
@@ -20,6 +21,25 @@
                     max-width: 420px;
                 }
             }
+        }
+        div.uib-dropdown-menu {
+            padding-left: $padding-xs-horizontal;
+            padding-right: $padding-xs-horizontal;
+        }
+        .movie-score {
+            display: block;
+            margin-top: $padding-small-vertical;
+            margin-bottom: $padding-small-vertical;
+        }
+        .score-slider {
+            height: (20px + $padding-small-vertical) * 6 + 2 * $padding-small-vertical;
+            float: left;
+        }
+        .scores {
+            margin-left: 50px;
+        }
+        .cell-user-score .uib-dropdown-menu {
+            min-width: 180px;
         }
     }
 }

@@ -64,7 +64,30 @@
                         </span>
                     </div>
                 </td>
-                <td class="cell-user-score"></td>
+                <td class="cell-user-score">
+                     <div uib-dropdown  on-toggle="listsMoviesListCtrl.refreshSliders()" auto-close="outsideClick">
+                        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                            <span class="icon i-star"></span>
+                            <span ng-bind="listsMoviesListCtrl.filter.userScore.min"></span>-<span ng-bind="listsMoviesListCtrl.filter.userScore.max"></span>
+                            <span class="icon i-caret-down"></span>
+                        </button>
+                        <div class="uib-dropdown-menu">
+                            <div class="score-slider">
+                                <rzslider rz-slider-model="listsMoviesListCtrl.filter.userScore.min"
+                                    rz-slider-high="listsMoviesListCtrl.filter.userScore.max"
+                                    rz-slider-options="listsMoviesListCtrl.userScoreSlider"></rzslider>
+                            </div>
+                            <div class="scores">
+                                <ml-movie-score ml-score="5"></ml-movie-score>
+                                <ml-movie-score ml-score="4"></ml-movie-score>
+                                <ml-movie-score ml-score="3"></ml-movie-score>
+                                <ml-movie-score ml-score="2"></ml-movie-score>
+                                <ml-movie-score ml-score="1"></ml-movie-score>
+                                <ml-movie-score ml-score="0"></ml-movie-score>
+                            </div>
+                        </div>
+                    </div>
+                </td>
                 <td class="cell-movie-score"></td>
                 <td class="cell-delete"></td>
             </tr>

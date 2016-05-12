@@ -1,5 +1,6 @@
 @import "{}/app/lib/client/styles/_colors.scss";
 @import "{}/app/scores/client/styles/_mixins.scss";
+@import "{}/app/lib/client/styles/_components.scss";
 
 .vote {
     display: inline-block;
@@ -8,7 +9,7 @@
     
     .star-score {
         min-width: 100px;
-        padding-left: 5px;
+        padding-left: $padding-xs-horizontal;
     }
 }
 .vote-todo-label {

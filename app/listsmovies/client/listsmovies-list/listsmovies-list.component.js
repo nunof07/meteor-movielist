@@ -15,7 +15,7 @@ function listsMoviesListDirective() {
     };
 }
 
-function ListsMoviesListController($scope, $reactive, logger, errorService) {
+function ListsMoviesListController($scope, $reactive, $timeout, logger, errorService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('listsmovies.movies', getListId);
@@ -29,8 +29,21 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
         expression: 'title',
         isReverse: false
     };
-    ctrl.filter = {};
+    ctrl.filter = {
+        userScore: {
+            min: 0,
+            max: 5
+        }
+    };
     ctrl.genres = [];
+    ctrl.userScoreSlider = {
+        floor: 0,
+        ceil: 5,
+        showTicks: true,
+        hideLimitLabels: true,
+        hidePointerLabels: true,
+        vertical: true
+    };
     
     ctrl.deleteMovie = deleteMovie;
     ctrl.dismissError = dismissError;
@@ -38,6 +51,7 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
     ctrl.getMovieScore = getMovieScore;
     ctrl.clearGenresFilter = clearGenresFilter;
     ctrl.isMovieVisible = isMovieVisible;
+    ctrl.refreshSliders = refreshSliders;
     
     ctrl.helpers({
         movies
@@ -159,6 +173,10 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
                     return false;
                 }
             }
+            
+            if (!userScoreWithin(ctrl.userScores[movie._id], ctrl.filter.userScore)) {
+                return false;
+            }
         }
         
         return true;
@@ -186,6 +204,19 @@ function ListsMoviesListController($scope, $reactive, logger, errorService) {
             }
             
             return true;
+        }
+        function userScoreWithin(userScore, filter) {
+            const score = (userScore && userScore.score ? userScore.score : 0);
+            
+            return score >= filter.min && score <= filter.max;
+        }
+    }
+    function refreshSliders() {
+        $timeout(refresh);
+        return;
+        
+        function refresh() {
+            $scope.$broadcast('rzSliderForceRender');
         }
     }
 }
