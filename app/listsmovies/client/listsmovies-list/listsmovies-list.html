@@ -1,94 +1,87 @@
 <div class="listsmovies-list">
-    <uib-alert type="danger"
-    class="animate-hide"
-    ng-show="listsMoviesListCtrl.error"
-    close="listsMoviesListCtrl.dismissError()">
-        <i class="icon i-error"></i>
-        <span ml-i18n="listsMovies.deleteMovieFailed" ml-i18n-params="listsMoviesListCtrl.errorMessage"></span>
-    </uib-alert>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th class="cell-title">
                     <ml-sort-button ml-label="'listsMovies.labels.title' | mlI18n"
                     ml-value="'title'"
-                    ml-expression="listsMoviesListCtrl.sort.expression"
-                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                    ml-expression="listsMoviesListCtrl.view.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.view.sort.isReverse"></ml-sort-button>
                 </th>
                 <th class="cell-runtime text-muted hidden-xs">
                     <ml-sort-button ml-label="'listsMovies.labels.runtime' | mlI18n"
                     ml-value="'runtime'"
-                    ml-expression="listsMoviesListCtrl.sort.expression"
-                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                    ml-expression="listsMoviesListCtrl.view.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.view.sort.isReverse"></ml-sort-button>
                 </th>
                 <th class="cell-genres text-muted hidden-xs hidden-sm">
                     <ml-sort-button ml-label="'listsMovies.labels.genres' | mlI18n"
                     ml-value="'genres'"
-                    ml-expression="listsMoviesListCtrl.sort.expression"
-                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                    ml-expression="listsMoviesListCtrl.view.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.view.sort.isReverse"></ml-sort-button>
                 </th>
                 <th class="cell-user-score">
                     <ml-sort-button ml-label="'listsMovies.labels.userScore' | mlI18n"
-                    ml-value="listsMoviesListCtrl.getUserScore"
-                    ml-expression="listsMoviesListCtrl.sort.expression"
-                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                    ml-value="listsMoviesListCtrl.view.getUserScore"
+                    ml-expression="listsMoviesListCtrl.view.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.view.sort.isReverse"></ml-sort-button>
                 </th>
                 <th class="cell-movie-score">
                     <ml-sort-button ml-label="'listsMovies.labels.movieScore' | mlI18n"
-                    ml-value="listsMoviesListCtrl.getMovieScore"
-                    ml-expression="listsMoviesListCtrl.sort.expression"
-                    ml-is-reverse="listsMoviesListCtrl.sort.isReverse"></ml-sort-button>
+                    ml-value="listsMoviesListCtrl.view.getMovieScore"
+                    ml-expression="listsMoviesListCtrl.view.sort.expression"
+                    ml-is-reverse="listsMoviesListCtrl.view.sort.isReverse"></ml-sort-button>
                 </th>
                 <th class="cell-delete"></th>
             </tr>
             <tr>
                 <td class="cell-title">
                     <input type="text" class="form-control" placeholder="{{ 'listsMovies.filters.title' | mlI18n }}"
-                    ng-model="listsMoviesListCtrl.filter.title">
+                    ng-model="listsMoviesListCtrl.view.filter.title">
                 </td>
                 <td class="cell-runtime text-muted hidden-xs">
-                    <ml-runtime-dropdown-slider ml-runtime="listsMoviesListCtrl.filter.runtime"
-                    ml-range="listsMoviesListCtrl.runtimes"></ml-runtime-dropdown-slider>
+                    <ml-runtime-dropdown-slider ml-runtime="listsMoviesListCtrl.view.filter.runtime"
+                    ml-range="listsMoviesListCtrl.view.runtimes"></ml-runtime-dropdown-slider>
                 </td>
                 <td class="cell-genres text-muted hidden-xs hidden-sm">
                     <div class="input-group">
-                        <ui-select ng-model="listsMoviesListCtrl.filter.genres" multiple allow-clear>
+                        <ui-select ng-model="listsMoviesListCtrl.view.filter.genres" multiple allow-clear>
                             <ui-select-match placeholder="{{ 'listsMovies.filters.genres' | mlI18n }}">
                                 <span ng-bind="$item"></span>
                             </ui-select-match>
-                            <ui-select-choices repeat="genre in (listsMoviesListCtrl.genres | filter:$select.search)">
+                            <ui-select-choices repeat="genre in (listsMoviesListCtrl.view.genres | filter:$select.search)">
                                 <span ng-bind="genre"></span>
                             </ui-select-choices>
                         </ui-select>
                         <span class="input-group-btn">
-                            <button type="button" ng-click="listsMoviesListCtrl.clearGenresFilter()" class="btn btn-default">
+                            <button type="button" ng-click="listsMoviesListCtrl.view.clearGenresFilter()" class="btn btn-default">
                                 <span class="icon i-delete"></span>
                             </button>
                         </span>
                     </div>
                 </td>
                 <td class="cell-user-score">
-                    <ml-score-dropdown-slider ml-score="listsMoviesListCtrl.filter.userScore"></ml-score-dropdown-slider>
+                    <ml-score-dropdown-slider ml-score="listsMoviesListCtrl.view.filter.userScore"></ml-score-dropdown-slider>
                 </td>
                 <td class="cell-movie-score">
-                    <ml-score-dropdown-slider ml-score="listsMoviesListCtrl.filter.movieScore"></ml-score-dropdown-slider>
+                    <ml-score-dropdown-slider ml-score="listsMoviesListCtrl.view.filter.movieScore"></ml-score-dropdown-slider>
                 </td>
                 <td class="cell-delete"></td>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="movie in listsMoviesListCtrl.movies | orderBy:listsMoviesListCtrl.sort.expression:listsMoviesListCtrl.sort.isReverse | filter:listsMoviesListCtrl.isMovieVisible">
+            <tr ng-repeat="movie in listsMoviesListCtrl.view.movies | orderBy:listsMoviesListCtrl.view.sort.expression:listsMoviesListCtrl.view.sort.isReverse | filter:listsMoviesListCtrl.view.isMovieVisible">
                 <td class="cell-title">
                     <a ui-sref="movieDetails({ movieId: movie._id })" ng-bind="movie.title"></a>
                 </td>
                 <td class="cell-runtime text-muted hidden-xs" ng-bind="movie.runtime | mlRuntime"></td>
                 <td class="cell-genres text-muted hidden-xs hidden-sm" ng-bind="movie.genres | mlGenres"></td>
                 <td colspan="2" class="cell-score">
-                    <ml-vote ml-movie="movie" ml-score="listsMoviesListCtrl.userScores[movie._id]"></ml-vote>
-                    <ml-movie-score ml-score="listsMoviesListCtrl.moviesScores[movie._id].average"></ml-movie-score>
+                    <ml-vote ml-movie="movie" ml-score="listsMoviesListCtrl.view.userScores[movie._id]"></ml-vote>
+                    <ml-movie-score ml-score="listsMoviesListCtrl.view.moviesScores[movie._id].average"></ml-movie-score>
                 </td>
                 <td class="cell-delete text-right">
-                    <a href ng-click="listsMoviesListCtrl.deleteMovie(movie)">
+                    <a href ng-click="listsMoviesListCtrl.view.deleteMovie(movie)">
                         <i class="icon i-delete" ng-hide="movie.isDeleting"></i>
                         <i class="icon i-loading" ng-show="movie.isDeleting"></i>
                     </a>

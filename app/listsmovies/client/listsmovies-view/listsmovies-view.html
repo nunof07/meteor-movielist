@@ -1,0 +1,31 @@
+<div class="listsmovies-view">
+    <uib-alert type="danger"
+    class="animate-hide"
+    ng-show="listsMoviesViewCtrl.error"
+    close="listsMoviesViewCtrl.dismissError()">
+        <i class="icon i-error"></i>
+        <span ml-i18n="listsMovies.deleteMovieFailed" ml-i18n-params="listsMoviesViewCtrl.errorMessage"></span>
+    </uib-alert>
+    <div class="listsmovies-view-selector text-right">
+        <ul class="list-inline">
+            <li>
+                <button class="btn btn-default" ng-click="listsMoviesViewCtrl.switchView('list')">
+                    <span class="icon i-listview"></span>
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-default" ng-click="listsMoviesViewCtrl.switchView('grid')">
+                    <span class="icon i-gridview"></span>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="listsmovies-view-selected">
+        <div class="listsmovies-view-child animate-show" ng-show="listsMoviesViewCtrl.selected === 'grid'">
+            <ml-listsmovies-grid ml-view="listsMoviesViewCtrl.view"></ml-listsmovies-grid>
+        </div>
+        <div class="listsmovies-view-child animate-show" ng-show="listsMoviesViewCtrl.selected !== 'grid'">
+            <ml-listsmovies-list ml-view="listsMoviesViewCtrl.view"></ml-listsmovies-list>
+        </div>
+    </div>
+</div>

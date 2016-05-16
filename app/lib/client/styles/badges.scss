@@ -1,4 +1,6 @@
+@import "{}/app/lib/client/styles/_colors.scss";
+
 .badge-reverse {
-    color: #777;
+    color: $gray-light;
     background-color: transparent;
 }

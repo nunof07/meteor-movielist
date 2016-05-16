@@ -100,3 +100,15 @@
         content: '\f017';
     }
 }
+.i-listview {
+    &:before {
+        // fa-th-list
+        content: '\f00b';
+    }
+}
+.i-gridview {
+    &:before {
+        // fa-th-large
+        content: '\f009';
+    }
+}

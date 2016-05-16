@@ -1,7 +1,11 @@
-.animate-hide {
+.animate-hide,
+.animate-show {
     transition: opacity linear 0.5s;
     
     &.ng-hide {
         opacity: 0;
+    }
+    &.ng-hide-add {
+        display: none;
     }
 }
