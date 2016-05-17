@@ -112,3 +112,45 @@
         content: '\f00a';
     }
 }
+.i-sort-alpha-asc {
+    &:before {
+        // fa-sort-alpha-asc
+        content: '\f15d';
+    }
+}
+.i-sort-alpha-desc {
+    &:before {
+        // fa-sort-alpha-desc
+        content: '\f15e';
+    }
+}
+.i-sort-amount-asc {
+    &:before {
+        // fa-sort-amount-asc
+        content: '\f160';
+    }
+}
+.i-sort-amount-desc {
+    &:before {
+        // fa-sort-amount-desc
+        content: '\f161';
+    }
+}
+.i-sort-asc {
+    &:before {
+        // fa-sort-asc
+        content: '\f0de';
+    }
+}
+.i-sort-desc {
+    &:before {
+        // fa-sort-desc
+        content: '\f0dd';
+    }
+}
+.i-sort {
+    &:before {
+        // fa-sort
+        content: '\f0dc';
+    }
+}

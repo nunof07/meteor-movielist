@@ -1,0 +1,7 @@
+@import "{}/app/lib/client/styles/_imports.scss";
+
+.sort-button {
+    .i-sort {
+        color: lighten($gray-light, 25%);
+    }
+}

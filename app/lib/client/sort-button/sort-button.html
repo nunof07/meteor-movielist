@@ -1,5 +1,6 @@
-<a href ng-click="sortButtonCtrl.sort()">
+<a href ng-click="sortButtonCtrl.sort()" class="sort-button">
     <span ng-bind="sortButtonCtrl.label"></span>
     <span ng-show="sortButtonCtrl.expression === sortButtonCtrl.value"
-    class="icon" ng-class="{ 'i-caret-down': sortButtonCtrl.isReverse, 'i-caret-up': !sortButtonCtrl.isReverse }"></span>
+    class="icon" ng-class="sortButtonCtrl.iconClass"></span>
+    <span class="icon i-sort" ng-hide="sortButtonCtrl.expression === sortButtonCtrl.value"></span>
 </a>
