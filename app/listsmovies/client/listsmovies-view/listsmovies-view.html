@@ -7,18 +7,14 @@
         <span ml-i18n="listsMovies.deleteMovieFailed" ml-i18n-params="listsMoviesViewCtrl.errorMessage"></span>
     </uib-alert>
     <div class="listsmovies-view-selector text-right">
-        <ul class="list-inline">
-            <li>
-                <button class="btn btn-default" ng-click="listsMoviesViewCtrl.switchView('list')">
-                    <span class="icon i-listview"></span>
-                </button>
-            </li>
-            <li>
-                <button class="btn btn-default" ng-click="listsMoviesViewCtrl.switchView('grid')">
-                    <span class="icon i-gridview"></span>
-                </button>
-            </li>
-        </ul>
+        <div class="btn-group">
+            <label class="btn btn-default" ng-model="listsMoviesViewCtrl.selected" uib-btn-radio="'list'">
+                <span class="icon i-listview"></span>
+            </label>
+            <label class="btn btn-default" ng-model="listsMoviesViewCtrl.selected" uib-btn-radio="'grid'">
+                <span class="icon i-gridview"></span>
+            </label>
+        </div>
     </div>
     <div class="listsmovies-view-selected">
         <div class="listsmovies-view-child animate-show" ng-show="listsMoviesViewCtrl.selected === 'grid'">

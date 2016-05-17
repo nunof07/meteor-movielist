@@ -57,7 +57,6 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
     ctrl.getMovieScore = getMovieScore;
     ctrl.clearGenresFilter = clearGenresFilter;
     ctrl.isMovieVisible = isMovieVisible;
-    ctrl.switchView = switchView;
     
     ctrl.helpers({
         movies
@@ -280,8 +279,5 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
         function movieRuntimeWithin(movie, filter) {
             return movie.runtime >= filter.min && movie.runtime <= filter.max;
         }
-    }
-    function switchView(view) {
-        ctrl.selected = view;
     }
 }
