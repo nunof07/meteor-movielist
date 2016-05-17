@@ -16,7 +16,7 @@ Movies = ML.createCollection('Movies', {
     createdAt: { type: Date, denyUpdate: true },
     modifiedAt: { type: Date },
 }, ['title', 'originalTitle', 'tmdbId', 'imdbId', 'released',
-    'summary', 'genres', 'runtime', 'posterUrl', 'trailerYouTubeId']);
+    'summary', 'genres', 'runtime', 'tmdbPosterUrl', 'trailerYouTubeId']);
 
 ML.createMethods(Movies, [
     {

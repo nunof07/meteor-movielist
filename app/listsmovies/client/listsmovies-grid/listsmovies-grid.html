@@ -1,3 +1,20 @@
 <div class="listsmovies-grid">
-    Grid view
+    <div class="row">
+        <div class="col-md-3 col-sm-4 col-xs-6 col-movie"
+        ng-repeat="movie in listsMoviesGridCtrl.view.movies | orderBy:listsMoviesGridCtrl.view.sort.expression:listsMoviesListCtrl.view.sort.isReverse | filter:listsMoviesGridCtrl.view.isMovieVisible">
+            <a ui-sref="movieDetails({ movieId: movie._id })" class="poster-link">
+                <img class="img-responsive poster"
+                    ng-src="http://image.tmdb.org/t/p/w500/{{movie.tmdbPosterUrl}}"
+                    alt="{{movie.title}}">
+                <div class="movie-info">
+                    <div class="movie-info-outer">
+                        <div class="movie-info-inner">
+                            <h4 class="movie-title" ng-bind="movie.title"></h4>
+                            <ml-movie-score ml-score="listsMoviesGridCtrl.view.moviesScores[movie._id].average"></ml-movie-score>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>

@@ -1,8 +1,4 @@
-@import "{}/app/lib/client/styles/_breakpoints.scss";
-@import "{}/app/lib/client/styles/_components.scss";
-@import "{}/app/lib/client/styles/_buttons.scss";
-@import "{}/app/lib/client/styles/_typography.scss";
-@import "{}/app/lib/client/styles/_colors.scss";
+@import "{}/app/lib/client/styles/_imports.scss";
 
 .movie-details {
     .page-header {

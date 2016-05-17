@@ -1,6 +1,4 @@
-@import "{}/app/lib/client/styles/_forms.scss";
-@import "{}/app/lib/client/styles/_components.scss";
-@import "{}/app/lib/client/styles/_utilities.scss";
+@import "{}/app/lib/client/styles/_imports.scss";
 
 .ui-select-multiple.ui-select-bootstrap.form-control {
     height: $input-height-base;

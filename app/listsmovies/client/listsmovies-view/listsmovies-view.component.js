@@ -21,7 +21,7 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
     ctrl.subscribe('listsmovies.movies', getListId);
     
     ctrl.view = ctrl;
-    ctrl.selected = 'list';
+    ctrl.selected = 'grid';
     ctrl.userScores = [];
     ctrl.moviesScores = [];
     ctrl.error = false;

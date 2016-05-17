@@ -1,2 +1,41 @@
+@import "{}/app/lib/client/styles/_imports.scss";
+@import "{}/app/scores/client/styles/_mixins.scss";
+
 .listsmovies-grid {
+    .col-movie {
+        margin-top: $margin;
+    }
+    .poster-link {
+        display: block;
+        
+        &:hover {
+            .movie-info {
+                opacity: 1;
+            }
+        }
+        .movie-info {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: $grid-padding-left;
+            right: $grid-padding-right;
+            opacity: 0;
+            transition: opacity linear 0.2s;
+            background-color: rgba($brand-primary, 0.85);
+            color: $text-inverted;
+        }
+        .movie-info-outer {
+            display: table;
+            width: 100%;
+            height: 100%;
+        }
+        .movie-info-inner {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .movie-score {
+            @include star-score-colors(lighten($gray-light, 15%), $text-inverted);
+        }
+    }
 }
