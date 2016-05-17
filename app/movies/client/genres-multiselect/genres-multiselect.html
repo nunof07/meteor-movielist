@@ -1,0 +1,15 @@
+<div class="input-group genres-multiselect">
+    <ui-select ng-model="genresMultiselectCtrl.filter" multiple allow-clear>
+        <ui-select-match placeholder="{{ 'listsMovies.filters.genres' | mlI18n }}">
+            <span ng-bind="$item"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="genre in (genresMultiselectCtrl.genres | filter:$select.search)">
+            <span ng-bind="genre"></span>
+        </ui-select-choices>
+    </ui-select>
+    <span class="input-group-btn">
+        <button type="button" ng-click="genresMultiselectCtrl.clear()" class="btn btn-default">
+            <span class="icon i-delete"></span>
+        </button>
+    </span>
+</div>

@@ -49,21 +49,8 @@
                     ml-range="listsMoviesListCtrl.view.runtimes"></ml-runtime-dropdown-slider>
                 </td>
                 <td class="cell-genres text-muted hidden-xs hidden-sm">
-                    <div class="input-group">
-                        <ui-select ng-model="listsMoviesListCtrl.view.filter.genres" multiple allow-clear>
-                            <ui-select-match placeholder="{{ 'listsMovies.filters.genres' | mlI18n }}">
-                                <span ng-bind="$item"></span>
-                            </ui-select-match>
-                            <ui-select-choices repeat="genre in (listsMoviesListCtrl.view.genres | filter:$select.search)">
-                                <span ng-bind="genre"></span>
-                            </ui-select-choices>
-                        </ui-select>
-                        <span class="input-group-btn">
-                            <button type="button" ng-click="listsMoviesListCtrl.view.clearGenresFilter()" class="btn btn-default">
-                                <span class="icon i-delete"></span>
-                            </button>
-                        </span>
-                    </div>
+                    <ml-genres-multiselect ml-filter="listsMoviesListCtrl.view.filter.genres"
+                    ml-genres="listsMoviesListCtrl.view.genres"></ml-genres-multiselect>
                 </td>
                 <td class="cell-user-score">
                     <ml-score-dropdown-slider ml-score="listsMoviesListCtrl.view.filter.userScore"></ml-score-dropdown-slider>

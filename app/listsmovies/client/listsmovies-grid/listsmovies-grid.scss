@@ -38,4 +38,13 @@
             @include star-score-colors(lighten($gray-light, 15%), $text-inverted);
         }
     }
+    .movie-filters-dropdown {
+        .genres-multiselect {
+            max-width: 380px;
+            
+            @include media-lg-min {
+                max-width: 420px;
+            }
+        }
+    }
 }

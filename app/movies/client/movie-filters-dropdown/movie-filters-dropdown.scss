@@ -1,0 +1,12 @@
+@import "{}/app/lib/client/styles/_imports.scss";
+
+.movie-filters-dropdown {
+    .uib-dropdown-menu {
+        padding: 0.5 * $padding;
+    }
+    .filter-input-runtime {
+        label {
+            margin-bottom: 0;
+        }
+    }
+}

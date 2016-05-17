@@ -1,0 +1,35 @@
+<div class="movie-filters-dropdown" uib-dropdown auto-close="outsideClick"
+on-toggle="movieFiltersDropdownCtrl.refreshSliders()">
+    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+        <span class="icon i-filter"></span>
+        <span class="icon i-caret-down"></span>
+    </button>
+    <div class="uib-dropdown-menu">
+        <form>
+            <div class="form-group filter-input-title">
+                <label ml-i18n="listsMovies.labels.title"></label>
+                <input type="text" class="form-control"
+                placeholder="{{ 'listsMovies.filters.title' | mlI18n }}"
+                ng-model="movieFiltersDropdownCtrl.filter.title">
+            </div>
+            <div class="form-group filter-input-runtime">
+                <label ml-i18n="listsMovies.labels.runtime"></label>
+                <ml-runtime-slider ml-runtime="movieFiltersDropdownCtrl.filter.runtime"
+                ml-range="movieFiltersDropdownCtrl.runtimes"></ml-runtime-slider>
+            </div>
+            <div class="form-group filter-input-genres">
+                <label ml-i18n="listsMovies.labels.genres"></label>
+                <ml-genres-multiselect ml-filter="movieFiltersDropdownCtrl.filter.genres"
+                ml-genres="movieFiltersDropdownCtrl.genres"></ml-genres-multiselect>
+            </div>
+            <div class="form-group filter-input-userScore">
+                <label ml-i18n="listsMovies.labels.userScore"></label>
+                <ml-score-dropdown-slider ml-score="movieFiltersDropdownCtrl.filter.userScore"></ml-score-dropdown-slider>
+            </div>
+            <div class="form-group filter-input-movieScore">
+                <label ml-i18n="listsMovies.labels.movieScore"></label>
+                <ml-score-dropdown-slider ml-score="movieFiltersDropdownCtrl.filter.movieScore"></ml-score-dropdown-slider>
+            </div>
+        </form>
+    </div>
+</div>

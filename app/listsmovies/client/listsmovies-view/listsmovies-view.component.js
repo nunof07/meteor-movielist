@@ -43,7 +43,8 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
         runtime: {
             min: 0,
             max: 0
-        }
+        },
+        genres: []
     };
     ctrl.genres = [];
     ctrl.runtimes = {
@@ -55,7 +56,6 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
     ctrl.dismissError = dismissError;
     ctrl.getUserScore = getUserScore;
     ctrl.getMovieScore = getMovieScore;
-    ctrl.clearGenresFilter = clearGenresFilter;
     ctrl.isMovieVisible = isMovieVisible;
     
     ctrl.helpers({
@@ -195,9 +195,6 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
         } else {
             return 0;
         }
-    }
-    function clearGenresFilter() {
-        ctrl.filter.genres = [];
     }
     function isMovieVisible(movie, index, movies) {
         if (ctrl.filter) {
