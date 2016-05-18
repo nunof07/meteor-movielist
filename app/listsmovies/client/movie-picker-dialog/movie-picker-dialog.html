@@ -1,0 +1,37 @@
+<div class="movie-picker-dialog">
+    <div class="modal-header">
+        <h2 ml-i18n="listsMovies.pickerDialog.title"></h2>
+    </div>
+    <div class="modal-body">
+        <uib-alert type="danger"
+        class="animate-hide"
+        ng-show="moviePickerDialogCtrl.error"
+        close="moviePickerDialogCtrl.dismissError()">
+            <i class="icon i-error"></i>
+            <span ml-i18n="listsMovies.pickerDialog.error" ml-i18n-params="moviePickerDialogCtrl.errorMessage"></span>
+        </uib-alert>
+        
+        <div class="alert alert-info" role="alert"
+        ng-hide="moviePickerDialogCtrl.pick.movie || moviePickerDialogCtrl.error"
+        ml-i18n="listsMovies.pickerDialog.noMovieFound"></div>
+        
+        <ml-movie-card ml-movie="moviePickerDialogCtrl.pick.movie"
+        ml-user-score="moviePickerDialogCtrl.pick.userScore"
+        ml-movie-score="moviePickerDialogCtrl.pick.movieScore.average"
+        ng-show="moviePickerDialogCtrl.pick.movie"></ml-movie-card>
+    </div>
+    <div class="modal-footer">
+        <fieldset ng-disabled="moviePickerDialogCtrl.isLoading">
+            <button class="btn btn-primary" type="button"
+                    ng-click="moviePickerDialogCtrl.next()">
+                <i ng-show="moviePickerDialogCtrl.isLoading" class="icon i-loading"></i>
+                <span ml-i18n="listsMovies.pickerDialog.next"></span>
+            </button>
+            <button class="btn btn-link btn-soft" type="button"
+                    formnovalidate
+                    ng-click="moviePickerDialogCtrl.close()"
+                    ml-i18n="forms.close">
+            </button>
+        </fieldset>
+    </div>
+</div>

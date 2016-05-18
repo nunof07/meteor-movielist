@@ -15,7 +15,7 @@ function listsMoviesViewDirective() {
     };
 }
 
-function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorService) {
+function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorService, MoviePicker, modalService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('listsmovies.movies', getListId);
@@ -57,6 +57,7 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
     ctrl.getUserScore = getUserScore;
     ctrl.getMovieScore = getMovieScore;
     ctrl.isMovieVisible = isMovieVisible;
+    ctrl.pickMovie = pickMovie;
     
     ctrl.helpers({
         movies
@@ -182,19 +183,29 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
     function dismissError() {
         ctrl.error = false;
     }
-    function getUserScore(movie) {
+    function getUserScoreObject(movie) {
         if (ctrl.userScores && ctrl.userScores.hasOwnProperty(movie._id)) {
-            return ctrl.userScores[movie._id].score;
+            return ctrl.userScores[movie._id];
         } else {
-            return 0;
+            return null;
         }
     }
-    function getMovieScore(movie) {
+    function getMovieScoreObject(movie) {
         if (ctrl.moviesScores && ctrl.moviesScores.hasOwnProperty(movie._id)) {
-            return ctrl.moviesScores[movie._id].average;
+            return ctrl.moviesScores[movie._id];
         } else {
-            return 0;
+            return null;
         }
+    }
+    function getUserScore(movie) {
+        const userScore = getUserScoreObject(movie);
+        
+        return (userScore ? userScore.score : 0);
+    }
+    function getMovieScore(movie) {
+        const movieScore = getMovieScoreObject(movie);
+        
+        return (movieScore ? movieScore.average : 0);
     }
     function isMovieVisible(movie, index, movies) {
         if (ctrl.filter) {
@@ -275,6 +286,29 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
         }
         function movieRuntimeWithin(movie, filter) {
             return movie.runtime >= filter.min && movie.runtime <= filter.max;
+        }
+    }
+    function pickMovie() {
+        const movies = getMovies();
+        const picker = new MoviePicker(movies, getUserScoreObject, getMovieScoreObject);
+        
+        modalService.open('<ml-movie-picker-dialog></ml-movie-picker-dialog>',
+            $scope,
+            { picker });
+        return;
+        
+        function getMovies() {
+            const movies = Movies.find();
+            const visible = [];
+            angular.forEach(movies, processMovie);
+            
+            return visible;
+            
+            function processMovie(movie) {
+                if (isMovieVisible(movie)) {
+                    visible.push(movie);
+                }
+            }
         }
     }
 }

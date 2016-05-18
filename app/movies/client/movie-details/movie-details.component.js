@@ -11,7 +11,7 @@ function movieDetailsDirective() {
     };
 }
 
-function MovieDetailsController($scope, $stateParams, $reactive, $sce, titleService) {
+function MovieDetailsController($scope, $stateParams, $reactive, titleService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('movieDetails.user', getMovieId);
@@ -26,7 +26,6 @@ function MovieDetailsController($scope, $stateParams, $reactive, $sce, titleServ
     function movie() {
         ctrl.movie = Movies.findOne({ _id: $stateParams.movieId });
         ctrl.hasOriginalTitle = hasOriginalTitle();
-        ctrl.youTubeUrl = getYouTubeUrl();
         
         if (ctrl.movie) {
             titleService.setTitle(ctrl.movie.title);
@@ -37,14 +36,6 @@ function MovieDetailsController($scope, $stateParams, $reactive, $sce, titleServ
             return ctrl.movie &&
             ctrl.movie.originalTitle &&
             ctrl.movie.originalTitle !== ctrl.movie.title;
-        }
-        function getYouTubeUrl() {
-            if (!ctrl.movie || !ctrl.movie.trailerYouTubeId) {
-                return '';
-            } else {
-                const youTubeUrl = 'https://www.youtube.com/embed/' + ctrl.movie.trailerYouTubeId;
-                return $sce.trustAsResourceUrl(youTubeUrl);
-            }
         }
     }
     function scores() {

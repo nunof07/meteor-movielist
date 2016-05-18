@@ -11,7 +11,7 @@
         <ml-vote ml-movie="movieDetailsCtrl.movie" ml-score="movieDetailsCtrl.userScore"></ml-vote>
         <ml-movie-score ml-score="movieDetailsCtrl.scores.average"></ml-movie-score>
     </div>
-    <div class="row" ng-class="{ 'hidden-xs': !movieDetailsCtrl.youTubeUrl }">
+    <div class="row" ng-class="{ 'hidden-xs': !movieDetailsCtrl.movie.trailerYouTubeId }">
         <div class="col-sm-3" ng-if="movieDetailsCtrl.movie.tmdbPosterUrl">
             <img class="img-responsive poster"
             ng-src="http://image.tmdb.org/t/p/w500/{{movieDetailsCtrl.movie.tmdbPosterUrl}}"
@@ -20,9 +20,9 @@
         <div ng-class="{ 'col-sm-9': movieDetailsCtrl.movie.tmdbPosterUrl, 'col-sm-12': !movieDetailsCtrl.movie.tmdbPosterUrl, 'hidden-xs': !movieDetailsCtrl.youTubeUrl }">
             <div class="embed-responsive embed-responsive-custom">
                 <iframe class="embed-responsive-item"
-                ng-src="{{movieDetailsCtrl.youTubeUrl}}" 
-                ng-if="movieDetailsCtrl.youTubeUrl"></iframe>
-                <span class="trailer-none" ng-if="!movieDetailsCtrl.youTubeUrl">
+                ng-src="{{movieDetailsCtrl.movie.trailerYouTubeId | mlYouTubeUrl:true}}" 
+                ng-if="movieDetailsCtrl.movie.trailerYouTubeId"></iframe>
+                <span class="trailer-none" ng-if="!movieDetailsCtrl.movie.trailerYouTubeId">
                     <span class="icon i-notavailable"></span>
                 </span>
             </div>

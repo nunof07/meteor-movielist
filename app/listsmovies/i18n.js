@@ -7,6 +7,7 @@ function i18nListsMoviesStartup() {
             lists: 'Lists',
             addToList: 'Add movie to list',
             removeFromList: 'Remove from list',
+            pickMovie: 'Pick me a movie',
             labels: {
                 title: 'Title',
                 runtime: 'Runtime',
@@ -17,6 +18,12 @@ function i18nListsMoviesStartup() {
             filters: {
                 title: 'Title...',
                 genres: 'Genres...'
+            },
+            pickerDialog: {
+                title: 'You should watch next...',
+                next: 'Next',
+                noMovieFound: 'No movie could be found.',
+                error: 'Unable to pick a movie. {$1}'
             }
         }
     });

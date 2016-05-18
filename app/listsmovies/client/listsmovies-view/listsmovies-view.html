@@ -6,6 +6,10 @@
         <i class="icon i-error"></i>
         <span ml-i18n="listsMovies.deleteMovieFailed" ml-i18n-params="listsMoviesViewCtrl.errorMessage"></span>
     </uib-alert>
+    <button class="btn btn-primary"
+    ng-click="listsMoviesViewCtrl.pickMovie()"
+    ml-i18n="listsMovies.pickMovie">
+    </button>
     <div class="listsmovies-view-selector text-right">
         <div class="btn-group">
             <label class="btn btn-default" ng-model="listsMoviesViewCtrl.selected" uib-btn-radio="'list'">

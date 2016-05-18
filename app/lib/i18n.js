@@ -8,7 +8,8 @@ function i18nStartup() {
         forms: {
             save: 'Save',
             cancel: 'Cancel',
-            delete: 'Delete'
+            delete: 'Delete',
+            close: 'Close'
         },
         loading: 'Loading...'
     });
