@@ -4,7 +4,9 @@
     .uib-dropdown-menu {
         padding: 0.5 * $padding;
     }
-    .filter-input-runtime {
+    .filter-input-runtime,
+    .filter-input-userScore,
+    .filter-input-movieScore {
         label {
             margin-bottom: 0;
         }

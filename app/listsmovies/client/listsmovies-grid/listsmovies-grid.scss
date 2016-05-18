@@ -40,10 +40,10 @@
     }
     .movie-filters-dropdown {
         .genres-multiselect {
-            max-width: 380px;
+            max-width: 300px;
             
             @include media-lg-min {
-                max-width: 420px;
+                max-width: 340px;
             }
         }
     }
