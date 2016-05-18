@@ -8,6 +8,6 @@ function titleService() {
     
     function setTitle(title) {
         const defaultTitle = i18n('siteName');
-        document.title = defaultTitle + (title ? ' | ' + title : '');
+        document.title = (title ? title + ' | ' : '') + defaultTitle;
     }
 }
