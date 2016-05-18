@@ -13,7 +13,7 @@ function i18nListsStartup() {
             },
             delete: {
                 title: 'Delete {$1}',
-                message: 'Are you sure you want to delete this list?',
+                message: 'Are you sure you want to delete this list? This cannot be undone.',
                 deleteFailed: 'An error occured while deleting the list. Please try again.'
             },
             labels: {
