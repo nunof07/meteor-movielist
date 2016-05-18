@@ -26,6 +26,7 @@ function MovieScoresListController($scope, $stateParams, $reactive) {
         scores
     });
     
+    ctrl.autorun(scoresCount);
     ctrl.autorun(users);
     return;
     
@@ -40,6 +41,9 @@ function MovieScoresListController($scope, $stateParams, $reactive) {
     }
     function scores() {
         return Scores.find({}, { sort: { modifiedAt: 1 }});
+    }
+    function scoresCount() {
+        ctrl.scoresCount = Counts.get('movieScore.all.count');
     }
     function users() {
         ctrl.users = [];

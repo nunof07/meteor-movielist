@@ -20,6 +20,8 @@ function publishMovieScore({ movieId }) {
         if (!this.userId) {
             return;
         } else {
+            Counts.publish(this, 'movieScore.all.count', Scores.find({ movieId }));
+            
             return Scores.find({ movieId }, Scores.publicFields);
         }
     }
