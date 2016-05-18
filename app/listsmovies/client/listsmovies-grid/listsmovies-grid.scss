@@ -38,7 +38,23 @@
             @include star-score-colors(lighten($gray-light, 15%), $text-inverted);
         }
     }
+    > .btn-toolbar {
+        margin-top: -34px; // same height of buttons, so that they stand on same line as view buttons
+    }
+    .movie-sort-dropdown {
+        .uib-dropdown-menu {
+            width: 165px;
+        }
+    }
     .movie-filters-dropdown {
+        .uib-dropdown-menu {
+            @include media-sm-min {
+                width: 300px;
+            }
+            @include media-lg-min {
+                width: 340px;
+            }
+        }
         .genres-multiselect {
             max-width: 300px;
             

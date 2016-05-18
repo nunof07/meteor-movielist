@@ -1,0 +1,35 @@
+<div class="movie-sort-dropdown btn-group" uib-dropdown auto-close="outsideClick">
+    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+        <span class="icon i-sort"></span>
+        <span class="icon i-caret-down"></span>
+    </button>
+    <div class="uib-dropdown-menu">
+        <div class="btn-group-vertical" role="group">
+            <label class="btn btn-default" ng-model="movieSortDropdownCtrl.sort.expression"
+            uib-btn-radio="'title'" ml-i18n="listsMovies.labels.title"></label>
+            
+            <label class="btn btn-default" ng-model="movieSortDropdownCtrl.sort.expression"
+            uib-btn-radio="'runtime'" ml-i18n="listsMovies.labels.runtime"></label>
+            
+            <label class="btn btn-default" ng-model="movieSortDropdownCtrl.sort.expression"
+            uib-btn-radio="'genres'" ml-i18n="listsMovies.labels.genres"></label>
+            
+            <label class="btn btn-default" ng-model="movieSortDropdownCtrl.sort.expression"
+            uib-btn-radio="movieSortDropdownCtrl.userScore" ml-i18n="listsMovies.labels.userScore"></label>
+            
+            <label class="btn btn-default" ng-model="movieSortDropdownCtrl.sort.expression"
+            uib-btn-radio="movieSortDropdownCtrl.movieScore" ml-i18n="listsMovies.labels.movieScore"></label>
+        </div>
+        <div class="btn-group-vertical" role="group">
+            <label class="btn btn-default" ng-model="movieSortDropdownCtrl.sort.isReverse"
+            uib-btn-radio="false">
+                <span class="icon i-sort-asc"></span>
+            </label>
+            
+            <label class="btn btn-default" ng-model="movieSortDropdownCtrl.sort.isReverse"
+            uib-btn-radio="true">
+                <span class="icon i-sort-desc"></span>
+            </label>
+        </div>
+    </div>
+</div>

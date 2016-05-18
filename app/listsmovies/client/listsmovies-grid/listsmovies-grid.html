@@ -1,10 +1,19 @@
 <div class="listsmovies-grid">
-    <ml-movie-filters-dropdown ml-filter="listsMoviesGridCtrl.view.filter"
-    ml-genres="listsMoviesGridCtrl.view.genres"
-    ml-runtimes="listsMoviesGridCtrl.view.runtimes"></ml-movie-filters-dropdown>
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <ml-movie-filters-dropdown ml-filter="listsMoviesGridCtrl.view.filter"
+            ml-genres="listsMoviesGridCtrl.view.genres"
+            ml-runtimes="listsMoviesGridCtrl.view.runtimes"></ml-movie-filters-dropdown>
+        </div>
+        <div class="btn-group">
+            <ml-movie-sort-dropdown ml-sort="listsMoviesGridCtrl.view.sort"
+            ml-user-score="listsMoviesGridCtrl.view.getUserScore"
+            ml-movie-score="listsMoviesGridCtrl.view.getMovieScore"></ml-movie-sort-dropdown>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-3 col-sm-4 col-xs-6 col-movie"
-        ng-repeat="movie in listsMoviesGridCtrl.view.movies | orderBy:listsMoviesGridCtrl.view.sort.expression:listsMoviesListCtrl.view.sort.isReverse | filter:listsMoviesGridCtrl.view.isMovieVisible">
+        ng-repeat="movie in listsMoviesGridCtrl.view.movies | orderBy:listsMoviesGridCtrl.view.sort.expression:listsMoviesGridCtrl.view.sort.isReverse | filter:listsMoviesGridCtrl.view.isMovieVisible">
             <a ui-sref="movieDetails({ movieId: movie._id })" class="poster-link">
                 <img class="img-responsive poster"
                     ng-src="http://image.tmdb.org/t/p/w500/{{movie.tmdbPosterUrl}}"
