@@ -1,43 +1,9 @@
 <div class="movie-card">
-    <div class="page-header">
-        <h1>
-            <span ng-bind="movieCardCtrl.movie.title"></span>
-            <small ng-show="movieCardCtrl.movie.released">
-                (<span ng-bind="movieCardCtrl.movie.released | mlYear"></span>)
-            </small>
-        </h1>
-        <ml-movie-score ml-score="movieCardCtrl.movieScore"></ml-movie-score>
-    </div>
-    <div class="row" ng-class="{ 'hidden-xs': !movieCardCtrl.movie.trailerYouTubeId }">
-        <div class="col-sm-3" ng-if="movieCardCtrl.movie.tmdbPosterUrl">
-            <img class="img-responsive poster"
-            ng-src="http://image.tmdb.org/t/p/w500/{{movieCardCtrl.movie.tmdbPosterUrl}}"
-            alt="{{movieCardCtrl.movie.title}}">
-        </div>
-        <div ng-class="{ 'col-sm-9': movieCardCtrl.movie.tmdbPosterUrl, 'col-sm-12': !movieCardCtrl.movie.tmdbPosterUrl, 'hidden-xs': !movieCardCtrl.youTubeUrl }">
-            <div class="embed-responsive embed-responsive-custom">
-                <iframe class="embed-responsive-item"
-                ng-src="{{movieCardCtrl.movie.trailerYouTubeId | mlYouTubeUrl:true}}" 
-                ng-if="movieCardCtrl.movie.trailerYouTubeId"></iframe>
-                <span class="trailer-none" ng-if="!movieCardCtrl.movie.trailerYouTubeId">
-                    <span class="icon i-notavailable"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="row row-margin">
-        <div class="col-sm-3">
-            <ul class="list-unstyled text-muted list-movie-meta">
-                <li ng-bind="movieCardCtrl.movie.runtime | mlRuntime"></li>
-                <li ng-bind="movieCardCtrl.movie.genres | mlGenres"></li>
-                <li>
-                    <a ng-href="http://www.imdb.com/title/{{movieCardCtrl.movie.imdbId}}/">IMDb</a>,
-                    <a ng-href="https://www.themoviedb.org/movie/{{movieCardCtrl.movie.tmdbId}}/">TMDb</a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-sm-9">
-            <div class="summary" ng-bind="movieCardCtrl.movie.summary"></div>
-        </div>
-    </div>
+    <h2 class="movie-title">
+        <a ui-sref="movieDetails({ movieId: movieCardCtrl.movie._id })"
+        ng-bind="movieCardCtrl.movie.title"></a>
+    </h2>
+    <ml-movie-score ml-score="movieCardCtrl.movieScore"></ml-movie-score>
+    <div class="clearfix"></div>
+    <ml-movie-data ml-movie="movieCardCtrl.movie"></ml-movie-data>
 </div>

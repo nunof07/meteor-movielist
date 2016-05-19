@@ -21,7 +21,7 @@ function i18nListsMoviesStartup() {
             },
             pickerDialog: {
                 title: 'You should watch next...',
-                next: 'Next',
+                next: 'Pick another movie',
                 noMovieFound: 'No movie could be found.',
                 error: 'Unable to pick a movie. {$1}'
             }

@@ -292,7 +292,11 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
         const movies = getMovies();
         const picker = new MoviePicker(movies, getUserScoreObject, getMovieScoreObject);
         
-        modalService.open('<ml-movie-picker-dialog></ml-movie-picker-dialog>',
+        modalService.open(
+            {
+                template: '<ml-movie-picker-dialog></ml-movie-picker-dialog>',
+                size: 'lg'
+            },
             $scope,
             { picker });
         return;

@@ -1,0 +1,78 @@
+@import "{}/app/lib/client/styles/_imports.scss";
+
+.movie-data {
+    .poster {
+        @include media-xs-max {
+            display: none;
+        }
+    }
+    .trailer-none {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $gray-lighter;
+        
+        .icon {
+            display: block;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            font-size: 64px;
+            margin-top: -32px;
+            color: darken($gray-lighter, 15%);
+        }
+    }
+    .list-movie-meta {
+        margin-bottom: 0;
+        padding-left: 0;
+        list-style: none;
+        
+        li {
+            margin-bottom: $margin-sm;
+            
+            @include media-sm-min {
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+        @include media-xs-max {
+            margin-left: -$margin-xs;
+            
+            li {
+                display: inline-block;
+                padding-right: $margin-xs;
+                padding-left: $margin-xs;
+            }
+        }
+    }
+}
+.embed-responsive-custom {
+    padding-bottom: 56.25%;
+    
+    @include media-sm-min {
+        padding-bottom: percentage(236.25 / 532.5);
+    }
+    @include media-md-min {
+        padding-bottom: percentage(318.75 / 697.5);
+    }
+    @include media-lg-min {
+        padding-bottom: percentage(393.75 / 847.5);
+    }
+    
+    .modal & {
+        @include media-sm-min {
+            padding-bottom: percentage(179.25 / 418.5);
+        }
+        @include media-md-min {
+            padding-bottom: percentage(291.75 / 643.5);
+        }
+        @include media-lg-min {
+            padding-bottom: percentage(291.75 / 643.5);
+        }
+    }
+}

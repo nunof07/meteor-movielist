@@ -1,4 +1,20 @@
 @import "{}/app/lib/client/styles/_imports.scss";
 
 .movie-card {
+    @include media-sm-min {
+        .movie-title {
+            float: left;
+        }
+        .movie-score {
+            float: right;
+        }
+    }
+    .movie-title {
+        margin-top: 0;
+    }
+    .movie-score {
+        font-size: $font-size-large;
+        margin-top: 8px;
+        margin-bottom: $margin-sm;
+    }
 }

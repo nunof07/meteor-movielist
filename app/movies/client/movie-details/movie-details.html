@@ -11,38 +11,7 @@
         <ml-vote ml-movie="movieDetailsCtrl.movie" ml-score="movieDetailsCtrl.userScore"></ml-vote>
         <ml-movie-score ml-score="movieDetailsCtrl.scores.average"></ml-movie-score>
     </div>
-    <div class="row" ng-class="{ 'hidden-xs': !movieDetailsCtrl.movie.trailerYouTubeId }">
-        <div class="col-sm-3" ng-if="movieDetailsCtrl.movie.tmdbPosterUrl">
-            <img class="img-responsive poster"
-            ng-src="http://image.tmdb.org/t/p/w500/{{movieDetailsCtrl.movie.tmdbPosterUrl}}"
-            alt="{{movieDetailsCtrl.movie.title}}">
-        </div>
-        <div ng-class="{ 'col-sm-9': movieDetailsCtrl.movie.tmdbPosterUrl, 'col-sm-12': !movieDetailsCtrl.movie.tmdbPosterUrl, 'hidden-xs': !movieDetailsCtrl.youTubeUrl }">
-            <div class="embed-responsive embed-responsive-custom">
-                <iframe class="embed-responsive-item"
-                ng-src="{{movieDetailsCtrl.movie.trailerYouTubeId | mlYouTubeUrl:true}}" 
-                ng-if="movieDetailsCtrl.movie.trailerYouTubeId"></iframe>
-                <span class="trailer-none" ng-if="!movieDetailsCtrl.movie.trailerYouTubeId">
-                    <span class="icon i-notavailable"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="row row-margin">
-        <div class="col-sm-3">
-            <ul class="list-unstyled text-muted list-movie-meta">
-                <li ng-bind="movieDetailsCtrl.movie.runtime | mlRuntime"></li>
-                <li ng-bind="movieDetailsCtrl.movie.genres | mlGenres"></li>
-                <li>
-                    <a ng-href="http://www.imdb.com/title/{{movieDetailsCtrl.movie.imdbId}}/">IMDb</a>,
-                    <a ng-href="https://www.themoviedb.org/movie/{{movieDetailsCtrl.movie.tmdbId}}/">TMDb</a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-sm-9">
-            <div class="summary" ng-bind="movieDetailsCtrl.movie.summary"></div>
-        </div>
-    </div>
+    <ml-movie-data ml-movie="movieDetailsCtrl.movie"></ml-movie-data>
     <ml-movie-lists ml-movie="movieDetailsCtrl.movie"></ml-movie-lists>
     <ml-movie-scores-list ml-movie="movieDetailsCtrl.movie"></ml-movie-scores-list>
 </div>
