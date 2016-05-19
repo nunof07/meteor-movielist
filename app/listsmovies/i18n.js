@@ -7,7 +7,7 @@ function i18nListsMoviesStartup() {
             lists: 'Lists',
             addToList: 'Add movie to list',
             removeFromList: 'Remove from list',
-            pickMovie: 'Pick me a movie',
+            pickMovie: 'Pick me a movie!',
             labels: {
                 title: 'Title',
                 runtime: 'Runtime',
