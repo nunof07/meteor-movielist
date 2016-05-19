@@ -26,8 +26,13 @@ ML.createMethods(Movies, [
     },
     {
         name: 'insertOrUpdateFromTmdb',
-        fields: [ { tmdbId: { type: Number, min: 1 } }],
+        fields: [{ tmdbId: { type: Number, min: 1 } }],
         run: moviesInsertOrUpdateFromTmdb
+    },
+    {
+        name: 'isYouTubeTrailerValid',
+        fields: [{ movieId: ML.fields.id }],
+        run: moviesIsYouTubeTrailerValid
     }
 ]);
 
@@ -133,5 +138,31 @@ function moviesInsertOrUpdateFromTmdb({ tmdbId }) {
             });
             return Movies.insert(data);
         }
+    }
+}
+function moviesIsYouTubeTrailerValid({ movieId }) {
+    if (!this.userId) {
+        throw new Meteor.Error('unauthorized', 'Must be logged in to see if a movie has a valid YouTube Trailer');
+    }
+    const movie = Movies.findOne(movieId);
+    
+    if (!movie) {
+        throw new Meteor.Error('not-found', 'Movie not found');
+    }
+    
+    if (movie.trailerYouTubeId && !this.isSimulation) {
+        const url = 'http://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=' +
+            movie.trailerYouTubeId + '&format=json';
+        this.unblock();
+        
+        try {
+            const response = HTTP.get(url);
+            return true;
+        } catch (e) {
+            // Got a network error, time-out or HTTP error in the 400 or 500 range
+            return false;
+        }
+    } else {
+        return false;
     }
 }

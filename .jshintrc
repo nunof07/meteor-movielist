@@ -70,6 +70,7 @@
         "Counts": false,
         "Gravatar": false,
         "Email": false,
+        "HTTP": false,
         
         "ML": true,
         "Lists": true,
