@@ -33,7 +33,6 @@ function MovieDataController($scope, $reactive, logger) {
         return;
         
         function callResult(error, result) {
-            console.log('result', result, error);
             if (error) {
                 logger.error('Error check if YouTube Trailer is valid', error);
                 ctrl.hasTrailer = false;
