@@ -11,6 +11,7 @@ function i18nStartup() {
             delete: 'Delete',
             close: 'Close'
         },
-        loading: 'Loading...'
+        loading: 'Loading...',
+        github: 'GitHub'
     });
 }

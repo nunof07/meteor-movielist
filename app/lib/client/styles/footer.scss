@@ -1,0 +1,23 @@
+@import "{}/app/lib/client/styles/_imports.scss";
+
+$footer-nav-height: 50px;
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: $footer-nav-height;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $footer-nav-height;
+    
+    .navbar {
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+    }
+}

@@ -8,9 +8,9 @@
 </head>
 
 <body ng-app="movielist" ng-strict-di="" ng-class="{ 'loggedin': currentUser }">
-    <header class="container">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
+    <header class="header">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
                         <span class="sr-only">Toggle navigation</span>
@@ -32,6 +32,21 @@
         </nav>
     </header>
     <main class="container" ui-view=""></main>
-    <footer class="container"></footer>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <footer class="footer">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li ui-sref-active="active">
+                        <a ui-sref="about({})" ml-i18n="about.title"></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/nunof07/meteor-movielist">
+                            <span class="icon i-github"></span>
+                            <span ml-i18n="github"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </footer>
 </body>
