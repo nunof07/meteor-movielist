@@ -13,7 +13,7 @@
         <div class="col-sm-6">
             <ml-add-movie-from-tmdb on-added="listsMoviesViewCtrl.onMovieAdded"></ml-add-movie-from-tmdb>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" ng-show="listsMoviesViewCtrl.list.movieCount">
             <div class="listsmovies-view-actions text-right">
                 <div class="btn-group animate-hide" ng-show="listsMoviesViewCtrl.selected === 'grid'">
                     <ml-movie-filters-dropdown ml-filter="listsMoviesViewCtrl.filter"
@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="listsmovies-view-selected">
+    <div class="listsmovies-view-selected" ng-show="listsMoviesViewCtrl.list.movieCount">
         <div class="listsmovies-view-child animate-show" ng-show="listsMoviesViewCtrl.selected === 'grid'">
             <ml-listsmovies-grid ml-view="listsMoviesViewCtrl.view"></ml-listsmovies-grid>
         </div>
