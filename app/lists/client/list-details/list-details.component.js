@@ -17,13 +17,8 @@ titleService, modalService, logger, errorService) {
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('listDetails.user', getListId);
     
-    ctrl.error = false;
-    ctrl.errorMessage = false;
-    
     ctrl.editList = editList;
     ctrl.deleteList = deleteList;
-    ctrl.onMovieAdded = onMovieAdded;
-    ctrl.dismissError = dismissError;
     
     ctrl.autorun(list);
     return;
@@ -53,25 +48,5 @@ titleService, modalService, logger, errorService) {
                 $state.go('home');
             }
         });
-    }
-    function onMovieAdded(movieId) {
-        ctrl.error = false;
-        ctrl.errorMessage = false;
-        const data = {
-            listId: $stateParams.listId,
-            movieId
-        };
-        ListsMovies.methods.insert.call(data, insertResult);
-        return;
-        
-        function insertResult(error, result) {
-            if (error) {
-                ctrl.error = {addFailed: true};
-                ctrl.errorMessage = errorService.getErrorMessage(error);
-            }
-        }
-    }
-    function dismissError() {
-        ctrl.error = false;
     }
 }

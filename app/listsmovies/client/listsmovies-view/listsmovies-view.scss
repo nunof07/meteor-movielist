@@ -1,0 +1,41 @@
+@import "{}/app/lib/client/styles/_imports.scss";
+
+.listsmovies-view {
+    .listsmovies-view-controls {
+        .icon-label {
+            @include media-xs-max {
+                display: none;
+            }
+        }
+    }
+    .listsmovies-view-actions {
+        @include media-xs-max {
+            margin-top: $margin;
+        }
+    }
+    .movie-sort-dropdown {
+        .uib-dropdown-menu {
+            width: 165px;
+        }
+    }
+    .movie-filters-dropdown {
+        .uib-dropdown-menu {
+            @include media-sm-min {
+                width: 300px;
+            }
+            @include media-lg-min {
+                width: 340px;
+            }
+        }
+        .genres-multiselect {
+            max-width: 300px;
+            
+            @include media-lg-min {
+                max-width: 340px;
+            }
+        }
+    }
+    .listsmovies-view-selected {
+        margin-top: $margin;
+    }
+}

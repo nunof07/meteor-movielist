@@ -15,7 +15,7 @@ function listsMoviesViewDirective() {
     };
 }
 
-function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorService, MoviePicker, modalService) {
+function ListsMoviesViewController($scope, $reactive, $timeout, $stateParams, logger, errorService, MoviePicker, modalService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     ctrl.subscribe('listsmovies.movies', getListId);
@@ -58,6 +58,7 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
     ctrl.getMovieScore = getMovieScore;
     ctrl.isMovieVisible = isMovieVisible;
     ctrl.pickMovie = pickMovie;
+    ctrl.onMovieAdded = onMovieAdded;
     
     ctrl.helpers({
         movies
@@ -67,6 +68,23 @@ function ListsMoviesViewController($scope, $reactive, $timeout, logger, errorSer
     ctrl.autorun(moviesScores);
     return;
     
+    function onMovieAdded(movieId) {
+        ctrl.error = false;
+        ctrl.errorMessage = false;
+        const data = {
+            listId: $stateParams.listId,
+            movieId
+        };
+        ListsMovies.methods.insert.call(data, insertResult);
+        return;
+        
+        function insertResult(error, result) {
+            if (error) {
+                ctrl.error = {addFailed: true};
+                ctrl.errorMessage = errorService.getErrorMessage(error);
+            }
+        }
+    }
     function userScores() {
         ctrl.userScores = [];
         

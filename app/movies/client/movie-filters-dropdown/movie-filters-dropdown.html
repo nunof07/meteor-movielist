@@ -1,6 +1,8 @@
 <div class="movie-filters-dropdown btn-group" uib-dropdown auto-close="outsideClick"
 on-toggle="movieFiltersDropdownCtrl.refreshSliders()">
-    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+    <button type="button" class="btn btn-default"
+    uib-dropdown-toggle
+    uib-tooltip="{{ 'listsMovies.tooltips.filters' | mlI18n }}">
         <span class="icon i-filter"></span>
         <span class="icon i-caret-down"></span>
     </button>

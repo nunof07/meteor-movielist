@@ -4,20 +4,46 @@
     ng-show="listsMoviesViewCtrl.error"
     close="listsMoviesViewCtrl.dismissError()">
         <i class="icon i-error"></i>
-        <span ml-i18n="listsMovies.deleteMovieFailed" ml-i18n-params="listsMoviesViewCtrl.errorMessage"></span>
+        <span ng-show="listsMoviesViewCtrl.error.deleteFailed"
+        ml-i18n="listsMovies.deleteMovieFailed" ml-i18n-params="listsMoviesViewCtrl.errorMessage"></span>
+        <span ng-show="listsMoviesViewCtrl.error.addFailed"
+        ml-i18n="lists.movies.addFailed" ml-i18n-params="listDetailsCtrl.errorMessage"></span>
     </uib-alert>
-    <button class="btn btn-primary"
-    ng-click="listsMoviesViewCtrl.pickMovie()"
-    ml-i18n="listsMovies.pickMovie">
-    </button>
-    <div class="listsmovies-view-selector text-right">
-        <div class="btn-group">
-            <label class="btn btn-default" ng-model="listsMoviesViewCtrl.selected" uib-btn-radio="'list'">
-                <span class="icon i-listview"></span>
-            </label>
-            <label class="btn btn-default" ng-model="listsMoviesViewCtrl.selected" uib-btn-radio="'grid'">
-                <span class="icon i-gridview"></span>
-            </label>
+    <div class="row listsmovies-view-controls">
+        <div class="col-sm-6">
+            <ml-add-movie-from-tmdb on-added="listsMoviesViewCtrl.onMovieAdded"></ml-add-movie-from-tmdb>
+        </div>
+        <div class="col-sm-6">
+            <div class="listsmovies-view-actions text-right">
+                <div class="btn-group animate-hide" ng-show="listsMoviesViewCtrl.selected === 'grid'">
+                    <ml-movie-filters-dropdown ml-filter="listsMoviesViewCtrl.filter"
+                    ml-genres="listsMoviesViewCtrl.genres"
+                    ml-runtimes="listsMoviesViewCtrl.runtimes"></ml-movie-filters-dropdown>
+                    <ml-movie-sort-dropdown ml-sort="listsMoviesViewCtrl.sort"
+                    ml-user-score="listsMoviesViewCtrl.getUserScore"
+                    ml-movie-score="listsMoviesViewCtrl.getMovieScore"></ml-movie-sort-dropdown>
+                </div>
+                <div class="btn-group">
+                    <label class="btn btn-default" ng-model="listsMoviesViewCtrl.selected" uib-btn-radio="'list'"
+                    uib-tooltip="{{ 'listsMovies.tooltips.views.list' | mlI18n }}"
+                    tooltip-append-to-body="true">
+                        <span class="icon i-listview"></span>
+                    </label>
+                    <label class="btn btn-default" ng-model="listsMoviesViewCtrl.selected" uib-btn-radio="'grid'"
+                    uib-tooltip="{{ 'listsMovies.tooltips.views.grid' | mlI18n }}"
+                    tooltip-append-to-body="true">
+                        <span class="icon i-gridview"></span>
+                    </label>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" ng-click="listsMoviesViewCtrl.pickMovie()"
+                    uib-tooltip="{{ 'listsMovies.tooltips.picker' | mlI18n }}"
+                    tooltip-append-to-body="true">
+                        <span class="icon i-picker"></span>
+                        <span class="icon-label" ml-i18n="listsMovies.pickMovie"></span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="listsmovies-view-selected">

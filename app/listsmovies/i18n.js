@@ -24,6 +24,15 @@ function i18nListsMoviesStartup() {
                 next: 'Pick another movie',
                 noMovieFound: 'No movie could be found.',
                 error: 'Unable to pick a movie. {$1}'
+            },
+            tooltips: {
+                filters: 'Filter',
+                sort: 'Sort',
+                views: {
+                    list: 'List view',
+                    grid: 'Grid view'
+                },
+                picker: 'Help me pick a movie to watch'
             }
         }
     });
