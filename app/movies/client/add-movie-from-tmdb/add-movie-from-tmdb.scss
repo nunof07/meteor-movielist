@@ -12,3 +12,15 @@
         margin-top: $margin;
     }
 }
+.add-movie-from-tmdb-popup {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+
+    > .dropdown-menu {
+        position: static;
+        float: none;
+        display: block;
+    }
+}

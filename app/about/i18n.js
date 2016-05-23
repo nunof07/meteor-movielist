@@ -10,7 +10,7 @@ function i18nHomeStartup() {
                 'for managing movie lists. ' +
                 'It allows multiple users and private/public sharing, but it was built with self-hosting in mind.</p>',
             tmdbTitle: 'The Movie Database',
-            tmdb: '<p>The movie data comes from <a href="https://www.themoviedb.org/">TMDb</a>. ' +
+            tmdb: '<p>The movie data and images come from <a href="https://www.themoviedb.org/">TMDb</a>. ' +
                 'A special thank you to all the people who maintain TMDb.</p>' +
                 '<p>This product uses the TMDb API but is not endorsed or certified by TMDb.</p>',
             developmentTitle: 'Development',

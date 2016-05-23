@@ -12,6 +12,7 @@ function i18nStartup() {
             close: 'Close'
         },
         loading: 'Loading...',
-        github: 'GitHub'
+        github: 'GitHub',
+        tmdbTerms: 'This product uses the TMDb API but is not endorsed or certified by TMDb.'
     });
 }
