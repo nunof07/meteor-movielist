@@ -13,4 +13,7 @@ rzslider {
     .rz-pointer.rz-active:after {
         background-color: $brand-info;
     }
+    .rz-bubble {
+        color: darken($brand-primary, 10);
+    }
 }

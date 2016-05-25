@@ -7,6 +7,8 @@
     overflow-y: auto;
     
     .ui-select-search {
+        margin-top: 3px;
+        
         @include placeholder {
             padding: $padding-base-vertical $padding-base-horizontal;
         }

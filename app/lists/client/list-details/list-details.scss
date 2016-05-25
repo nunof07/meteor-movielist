@@ -2,17 +2,22 @@
 
 .list-details {
     .page-header {
-        .btn {
-            border: 0;
-            border-radius: 4px;
-            
-            &:last-child:not(:first-child),
-            &:first-child:not(:last-child):not(.dropdown-toggle) {
-                border-radius: 4px;
+        h1 {
+            > .badge {
+                vertical-align: middle;
             }
-        }
-        h1 > .badge {
-            vertical-align: middle;
+            > .btn-toolbar {
+                display: inline-block;
+                vertical-align: middle;
+                
+                .btn {
+                    padding: 7.5px 8px 6.5px;
+                    
+                    &:hover {
+                        margin: 0;
+                    }
+                }
+            }
         }
     }
     .alert {

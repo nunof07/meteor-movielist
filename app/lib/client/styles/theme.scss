@@ -1,0 +1,11 @@
+.movielist {
+    table a:not(.btn),
+    .table a:not(.btn) {
+        text-decoration: none;
+        
+        &:focus,
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
