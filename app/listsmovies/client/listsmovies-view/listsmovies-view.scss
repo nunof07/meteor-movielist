@@ -2,6 +2,15 @@
 
 .listsmovies-view {
     .listsmovies-view-controls {
+        .btn {
+            font-size: $font-size-base;
+        }
+        .add-movie-from-tmdb {
+            form .form-control {
+                font-size: floor(1.15 * $font-size-base);
+                height: 40px;
+            }
+        }
         .icon-label {
             @include media-xs-max {
                 display: none;

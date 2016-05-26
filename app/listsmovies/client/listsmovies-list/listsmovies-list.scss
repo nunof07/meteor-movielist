@@ -5,11 +5,15 @@
         @include btn-xs();
     }
     table thead {
-        a,
-        a:hover,
-        a:active,
-        a:focus {
-            text-decoration: none;
+        th:first-child {
+            border-top-left-radius: 3px;
+        }
+        th:last-child {
+            border-top-right-radius: 3px;
+        }
+        td {
+            border-bottom: 1px solid $gray-lighter;
+            border-color: $gray-lighter !important;
         }
         .cell-genres {
             .input-group {

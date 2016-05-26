@@ -1,6 +1,13 @@
 @import "{}/app/lib/client/styles/_imports.scss";
 
 .add-movie-from-tmdb {
+    .input-group {
+        .input-group-btn {
+            width: 1%;
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
     .dropdown-menu {
         a {
             h4 {

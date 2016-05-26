@@ -1,4 +1,12 @@
+@import "{}/app/lib/client/styles/_imports.scss";
+
 .movielist {
+    .page-header {
+        border: 0;
+        padding: 0;
+        margin: 0;
+        margin-bottom: $margin; 
+    }
     table a:not(.btn),
     .table a:not(.btn) {
         text-decoration: none;

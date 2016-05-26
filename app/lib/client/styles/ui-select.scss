@@ -13,4 +13,7 @@
             padding: $padding-base-vertical $padding-base-horizontal;
         }
     }
+    .ui-select-match .close {
+        color: $gray;
+    }
 }

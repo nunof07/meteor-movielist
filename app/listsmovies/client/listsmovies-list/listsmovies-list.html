@@ -1,7 +1,7 @@
 <div class="listsmovies-list">
     <table class="table table-striped">
         <thead>
-            <tr>
+            <tr class="active">
                 <th class="cell-title">
                     <ml-sort-button ml-label="'listsMovies.labels.title' | mlI18n"
                     ml-value="'title'"
@@ -39,7 +39,7 @@
                 </th>
                 <th class="cell-delete"></th>
             </tr>
-            <tr>
+            <tr class="active">
                 <td class="cell-title">
                     <input type="text" class="form-control" placeholder="{{ 'listsMovies.filters.title' | mlI18n }}"
                     ng-model="listsMoviesListCtrl.view.filter.title">
