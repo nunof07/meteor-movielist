@@ -2,6 +2,20 @@
 
 .add-movie-from-tmdb {
     .input-group {
+        .input-group-inner {
+            position: relative;
+            
+            input {
+                width: 100%;
+            }
+            .i-loading {
+                z-index: 4;
+                width: $font-size-base;
+                height: $font-size-base;
+                top: 0.5 * (38px - $font-size-base);
+                right: 0.5 * (38px - $font-size-base);
+            }
+        }
         .input-group-btn {
             width: 1%;
             display: table-cell;
@@ -12,6 +26,13 @@
         a {
             h4 {
                 display: inline-block;
+            }
+        }
+        > .active > a {
+            h4,
+            &:hover h4,
+            &:focus h4 {
+                color: $text-inverted;
             }
         }
     }

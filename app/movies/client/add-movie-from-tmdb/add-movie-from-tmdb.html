@@ -1,28 +1,36 @@
 <div class="add-movie-from-tmdb">
     <form class="form-inline">
-        <div class="input-group">
-            <input type="text"
-            ng-model="addMovieFromTmdbCtrl.result"
-            placeholder="{{ 'movies.searchLabel' | mlI18n }}"
-            uib-typeahead="movie as movie.title for movie in addMovieFromTmdbCtrl.search($viewValue)"
-            typeahead-loading="addMovieFromTmdbCtrl.isLoading"
-            typeahead-no-results="addMovieFromTmdbCtrl.noResults"
-            typeahead-template-url="app/movies/client/add-movie-from-tmdb/tmdb-movie.html"
-            typeahead-popup-template-url="app/movies/client/add-movie-from-tmdb/add-movie-from-tmdb-popup.html"
-            typeahead-wait-ms="500"
-            typeahead-on-select="addMovieFromTmdbCtrl.add($item, $model, $label)"
-            class="form-control">
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-success"
-                ng-disabled="!addMovieFromTmdbCtrl.canSubmit()"
-                ng-click="addMovieFromTmdbCtrl.add()">
-                    <span class="icon i-add"></span>
-                    <span ml-i18n="movies.add"></span>
-                </button>
-            </span>
+        <div class="form-group has-feedback">
+            <div class="input-group">
+                <div class="input-group-inner">
+                    <input type="text"
+                    ng-model="addMovieFromTmdbCtrl.result"
+                    placeholder="{{ 'movies.searchLabel' | mlI18n }}"
+                    uib-typeahead="movie as movie.title for movie in addMovieFromTmdbCtrl.search($viewValue)"
+                    typeahead-loading="addMovieFromTmdbCtrl.isLoading"
+                    typeahead-no-results="addMovieFromTmdbCtrl.noResults"
+                    typeahead-template-url="app/movies/client/add-movie-from-tmdb/tmdb-movie.html"
+                    typeahead-popup-template-url="app/movies/client/add-movie-from-tmdb/add-movie-from-tmdb-popup.html"
+                    typeahead-wait-ms="500"
+                    typeahead-on-select="addMovieFromTmdbCtrl.add($item, $model, $label)"
+                    uib-tooltip="{{ 'movies.addSuccess' | mlI18n }}"
+                    tooltip-placement="bottom"
+                    tooltip-trigger="none"
+                    tooltip-is-open="addMovieFromTmdbCtrl.addSuccess"
+                    class="form-control">
+                    <span class="icon i-loading form-control-feedback" aria-hidden="true"
+                    ng-show="addMovieFromTmdbCtrl.isSubmitting || addMovieFromTmdbCtrl.isLoading"></span>
+                </div>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-success"
+                    ng-disabled="!addMovieFromTmdbCtrl.canSubmit()"
+                    ng-click="addMovieFromTmdbCtrl.add()">
+                        <span class="icon i-add"></span>
+                        <span ml-i18n="movies.add"></span>
+                    </button>
+                </span>
+            </div>
         </div>
-        <i class="icon i-loading text-success"
-           ng-show="addMovieFromTmdbCtrl.isSubmitting || addMovieFromTmdbCtrl.isLoading"></i>
     </form>
     <div class="alerts">
         <div ng-show="addMovieFromTmdbCtrl.noResults && !addMovieFromTmdbCtrl.error" class="alert alert-info animate-hide" role="alert">
@@ -37,12 +45,5 @@
             <i class="icon i-error"></i>
             <span ml-i18n="movies.addFailed" ml-i18n-params="addMovieFromTmdbCtrl.errorMessage"></span>
         </div>
-        <uib-alert type="success"
-        class="animate-hide"
-        ng-show="addMovieFromTmdbCtrl.addSuccess"
-        close="addMovieFromTmdbCtrl.dismissAddSuccess()">
-            <i class="icon i-success"></i>
-            <span ml-i18n="movies.addSuccess"></span>
-        </uib-alert>
     </div>
 </div>
