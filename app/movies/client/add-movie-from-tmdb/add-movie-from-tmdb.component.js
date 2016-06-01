@@ -15,7 +15,7 @@ function addMovieFromTmdbDirective() {
     };
 }
 
-function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, logger, errorService) {
+function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, $sce, logger, errorService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
     
@@ -23,17 +23,36 @@ function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, logger, err
     ctrl.noResults = false;
     ctrl.error = false;
     ctrl.errorMessage = false;
-    ctrl.noResults = false;
     ctrl.result = '';
     ctrl.addSuccess = false;
     ctrl.isSubmitting = false;
+    ctrl.showTooltip = false;
+    ctrl.tooltipMessage = '';
     
     ctrl.search = search;
     ctrl.add = add;
     ctrl.dismissAddSuccess = dismissAddSuccess;
     ctrl.canSubmit = canSubmit;
+    
+    ctrl.autorun(updateTooltip);
     return;
     
+    function updateTooltip() {
+        const addSuccess = ctrl.getReactively('addSuccess');
+        const noResults = ctrl.getReactively('noResults');
+        const error = ctrl.getReactively('error');
+        ctrl.showTooltip = false;
+        
+        if (addSuccess) {
+            ctrl.showTooltip = true;
+            ctrl.tooltipMessage = $sce.trustAsHtml(i18n('movies.addSuccess'));
+        } else {
+            if (noResults && !error) {
+                ctrl.showTooltip = true;
+                ctrl.tooltipMessage = $sce.trustAsHtml(i18n('movies.noResults'));
+            }
+        }
+    }
     function search(query) {
         const defer = $q.defer();
         ctrl.error = false;

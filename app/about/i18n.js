@@ -20,7 +20,11 @@ function i18nHomeStartup() {
                 '<a href="https://www.meteor.com/">Meteor</a>), ' +
                 '<a href="http://getbootstrap.com/">Bootstrap</a>, ' +
                 '<a href="http://fontawesome.io/">FontAwesome</a> ' +
-                'and many other community packages. Thanks to everyone who contributes to these.</p>',
+                'and many other community packages.</p>' +
+                '<p>The design is based on the ' +
+                '<a href="https://bootswatch.com/lumen/">Lumen</a> theme from ' +
+                '<a href="https://bootswatch.com/">Bootswatch</a>.</p>' +
+                '<p>Thanks to everyone who contributes to these.</p>',
         }
     });
 }

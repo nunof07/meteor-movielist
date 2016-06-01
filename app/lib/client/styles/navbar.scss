@@ -17,11 +17,23 @@
     .nav .open > a {
         background-color: darken($brand-primary, 10%);
     }
+    .dropdown-menu {
+        a {
+            @include media-sm-min {
+                color: $brand-primary;
+            }
+        }
+    }
     #login-dropdown-list {
         a {
             .caret {
                 color: $gray-lighter;
             }
+        }
+    }
+    .navbar-brand {
+        .icon {
+            vertical-align: bottom;
         }
     }
     .navbar-toggle {
@@ -30,5 +42,14 @@
         .icon-bar {
             background-color: $gray-lighter;
         }
+    }
+    .navbar-collapse {
+        @include media-xs-max {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
+    // fix issue with a scrollbar appearing briefly during page load
+    .navbar-collapse {
+        overflow: hidden;
     }
 }
