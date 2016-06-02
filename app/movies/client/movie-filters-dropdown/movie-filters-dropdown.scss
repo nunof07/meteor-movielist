@@ -11,4 +11,8 @@
             margin-bottom: 0;
         }
     }
+    .ui-select-multiple.ui-select-bootstrap.form-control {
+        height: $input-height-base + 3px;
+        max-height: $input-height-base + 3px;
+    }
 }
