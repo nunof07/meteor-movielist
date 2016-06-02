@@ -4,4 +4,23 @@
     .btn-group {
         margin-bottom: $padding;
     }
+    .features {
+        text-align: center;
+        
+        .col-sm-4 {
+            margin-top: $margin;
+            margin-bottom: $margin;
+        }
+        .icon {
+            font-size: 2.5 * $font-size-large;
+        }
+        h2 {
+            margin-top: $margin-sm;
+            font-weight: normal;
+        }
+        ul {
+            font-size: $font-size-large;
+            color: $gray-light;
+        }
+    }
 }

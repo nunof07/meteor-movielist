@@ -1,7 +1,23 @@
-<div class="home" ng-if="!homeCtrl.isLoggedIn">
-    <p ml-i18n="home.notLoggedIn"></p>
+<div class="home home-loggedout" ng-if="!homeCtrl.isLoggedIn">
+    <div class="row features">
+        <div class="col-sm-4">
+            <span class="icon i-listview text-warning"></span>
+            <h2 ml-i18n="home.features.manageLists.title"></h2>
+            <ml-i18n-replace html="home.features.manageLists.content"></ml-i18n-replace>
+        </div>
+        <div class="col-sm-4">
+            <span class="icon i-gridview text-warning"></span>
+            <h2 ml-i18n="home.features.multipleViews.title"></h2>
+            <ml-i18n-replace html="home.features.multipleViews.content"></ml-i18n-replace>
+        </div>
+        <div class="col-sm-4">
+            <span class="icon i-picker text-warning"></span>
+            <h2 ml-i18n="home.features.recomendations.title"></h2>
+            <ml-i18n-replace html="home.features.recomendations.content"></ml-i18n-replace>
+        </div>
+    </div>
 </div>
-<div class="home" ng-if="homeCtrl.isLoggedIn">
+<div class="home home-loggedin" ng-if="homeCtrl.isLoggedIn">
     <div class="btn-group" role="group">
         <button type="button" class="btn btn-primary"
                 ng-click="homeCtrl.newList()">
