@@ -20,6 +20,7 @@ function HomeController($scope, $reactive, modalService) {
     ctrl.newList = newList;
     
     ctrl.autorun(updateIsLoggedIn);
+    ctrl.autorun(accountCreationDisabled);
     return;
     
     function newList() {
@@ -27,5 +28,8 @@ function HomeController($scope, $reactive, modalService) {
     }
     function updateIsLoggedIn() {
         ctrl.isLoggedIn = !!Meteor.user();
+    }
+    function accountCreationDisabled() {
+        ctrl.accountCreationDisabled = MLAccounts.getForbidClientAccountCreation();
     }
 }

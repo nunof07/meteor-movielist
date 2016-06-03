@@ -4,6 +4,21 @@
     .btn-group {
         margin-bottom: $padding;
     }
+    .jumbotron {
+        text-align: center;
+        
+        @include media-sm-min {
+            padding-bottom: 0;
+        }
+    }
+    .movielist-preview {
+        margin-top: $margin;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
     .features {
         text-align: center;
         

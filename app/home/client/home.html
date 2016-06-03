@@ -1,4 +1,28 @@
 <div class="home home-loggedout" ng-if="!homeCtrl.isLoggedIn">
+    <div class="jumbotron">
+        <h1 ml-i18n="home.features.header.title"></h1>
+        <p ml-i18n="home.features.header.description"></p>
+        <p>
+            <a class="btn btn-primary btn-lg" href role="button"
+            ml-i18n="home.signIn" ml-toggle-accounts-dropdown></a>
+            <a class="btn btn-success btn-lg" href role="button"
+            ng-disabled="homeCtrl.accountCreationDisabled" ml-toggle-accounts-dropdown="inSignupFlow">
+                <span ml-i18n="home.signUp"></span>
+                <span ng-show="homeCtrl.accountCreationDisabled">*</span>
+            </a>
+        </p>
+        <p>
+            <a class="github-button" href="https://github.com/nunof07/meteor-movielist"
+            data-count-href="/nunof07/meteor-movielist/stargazers"
+            data-count-api="/repos/nunof07/meteor-movielist#stargazers_count"
+            data-count-aria-label="# stargazers on GitHub"
+            aria-label="Star nunof07/meteor-movielist on GitHub">Star</a>
+        </p>
+        <p class="text-muted" ng-show="homeCtrl.accountCreationDisabled">
+            <span class="small" ml-i18n="home.accountCreationDisabled"></span>
+        </p>
+        <img src="images/movielist_demo.gif" alt="" class="movielist-preview hidden-xs img-responsive img-thumbnail">
+    </div>
     <div class="row features">
         <div class="col-sm-4">
             <span class="icon i-listview text-warning"></span>
@@ -19,8 +43,7 @@
 </div>
 <div class="home home-loggedin" ng-if="homeCtrl.isLoggedIn">
     <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary"
-                ng-click="homeCtrl.newList()">
+        <button type="button" class="btn btn-primary" ng-click="homeCtrl.newList()">
             <span class="icon i-add"></span>
             <span ml-i18n="lists.actions.new"></span>
         </button>
