@@ -76,6 +76,12 @@ To deploy to [Dokku][dokku]:
         - Make sure `settings.json` doesn't contain any spaces/whitespace.
         - Copy `settings.json` to your server.
         - Update the settings: `$ dokku config:set your-app.com METEOR_SETTINGS=$(cat /path/to/settings.json)`.
+        - **NOTE:** As of now a bug in Dokku prevents deployments due to quotes in the settings JSON.
+        To fix this unset the variable each time before a push to Dokku and set it again afterwards.
+        An alternative of setting the variable manually like mentioned in the point above is to install the [dokku-meteor][dokku-meteor] plugin:
+            - `$ dokku plugin:install https://github.com/JarnoLeConte/dokku-meteor.git meteor`.
+            - `$ dokku meteor:settings your-app.com /home/dokku/your-app.com/meteor-settings.json`. Copy your `settings.json` to `/home/dokku/your-app.com/meteor-settings.json`.
+            - The plugin loads the Meteor settings each time the app starts. If you need to restart the app manually use `dokku ps:restart your-app.com`.
     - Install MongoDB:
         - `$ dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo`.
         - `$ dokku mongo:create your-app`.
@@ -95,3 +101,4 @@ To deploy to [Dokku][dokku]:
 [preview-gif]: https://cdn.rawgit.com/nunof07/meteor-movielist/4fba0462f0c49acd5e4b76b4a6d8425941d2f8b6/public/images/movielist_demo.gif
 [mup]: https://github.com/arunoda/meteor-up
 [dokku]: http://dokku.viewdocs.io/dokku/
+[dokku-meteor]: https://github.com/JarnoLeConte/dokku-meteor
