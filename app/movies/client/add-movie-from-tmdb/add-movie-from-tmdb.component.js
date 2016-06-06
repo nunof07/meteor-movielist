@@ -91,7 +91,8 @@ function AddMovieFromTmdbController($scope, $reactive, $q, $timeout, $sce, logge
                 ctrl.errorMessage = errorService.getErrorMessage(err);
             } else {
                 ctrl.addSuccess = true;
-                $timeout(dismissAddSuccess, 3000);
+                ctrl.result = '';
+                $timeout(dismissAddSuccess, 4000);
                 
                 if (angular.isFunction(ctrl.onAdded)) {
                     ctrl.onAdded(res);
