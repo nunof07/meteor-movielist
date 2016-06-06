@@ -3,13 +3,13 @@
         <h1 ml-i18n="home.features.header.title"></h1>
         <p ml-i18n="home.features.header.description"></p>
         <p>
-            <a class="btn btn-primary btn-lg" href role="button"
-            ml-i18n="home.signIn" ml-toggle-accounts-dropdown></a>
-            <a class="btn btn-success btn-lg" href role="button"
+            <button class="btn btn-primary btn-lg"
+            ml-i18n="home.signIn" ml-toggle-accounts-dropdown></button>
+            <button class="btn btn-success btn-lg"
             ng-disabled="homeCtrl.accountCreationDisabled" ml-toggle-accounts-dropdown="inSignupFlow">
                 <span ml-i18n="home.signUp"></span>
                 <span ng-show="homeCtrl.accountCreationDisabled">*</span>
-            </a>
+            </button>
         </p>
         <p>
             <a class="github-button" href="https://github.com/nunof07/meteor-movielist"
