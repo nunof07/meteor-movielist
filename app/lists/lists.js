@@ -6,7 +6,7 @@ Lists = ML.createCollection('Lists', {
     movieCount: { type: Number, min: 0, optional: true },
     createdAt: { type: Date, denyUpdate: true },
     modifiedAt: { type: Date },
-}, ['name', 'isPublic', 'ownerId', 'isDeleted']);
+}, ['name', 'isPublic', 'ownerId', 'isDeleted', 'movieCount']);
 
 Lists.helpers({
     isEditableBy: listIsEditableBy

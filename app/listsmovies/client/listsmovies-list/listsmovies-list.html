@@ -62,7 +62,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="movie in listsMoviesListCtrl.view.movies | orderBy:listsMoviesListCtrl.view.sort.expression:listsMoviesListCtrl.view.sort.isReverse | filter:listsMoviesListCtrl.view.isMovieVisible">
+            <tr ng-repeat="movie in listsMoviesListCtrl.view.movies track by movie._id">
                 <td class="cell-title">
                     <a ui-sref="movieDetails({ movieId: movie._id })" ng-bind="movie.title"></a>
                 </td>

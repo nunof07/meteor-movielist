@@ -18,20 +18,23 @@ function listsMoviesViewDirective() {
 function ListsMoviesViewController($scope, $reactive, $timeout, $stateParams, logger, errorService, MoviePicker, modalService) {
     const ctrl = this;
     $reactive(ctrl).attach($scope);
-    ctrl.subscribe('listsmovies.movies', getListId);
+    //ctrl.subscribe('listsmovies.movies.paging', getSubscriptionParams);
     
     ctrl.view = ctrl;
     ctrl.selected = 'list';
+    ctrl.movies = [];
     ctrl.userScores = [];
     ctrl.moviesScores = [];
     ctrl.error = false;
     ctrl.errorMessage = false;
     ctrl.isSubmitting = false;
+    ctrl.isLoading = false;
     ctrl.sort = {
         expression: 'title',
         isReverse: false
     };
     ctrl.filter = {
+        title: '',
         userScore: {
             min: 0,
             max: 5
@@ -42,10 +45,15 @@ function ListsMoviesViewController($scope, $reactive, $timeout, $stateParams, lo
         },
         runtime: {
             min: 0,
-            max: 0
+            max: void 0
         },
         genres: []
     };
+    //ctrl.updateSubscriptionTrigger = 0;
+    //ctrl.isUpdateSubscription = false;
+    //ctrl.isFirstSubscription = true;
+    //ctrl.isFilterInitialized = false;
+    //ctrl.filterInitializedCount = 0;
     ctrl.genres = [];
     ctrl.runtimes = {
         floor: 0,
@@ -60,14 +68,117 @@ function ListsMoviesViewController($scope, $reactive, $timeout, $stateParams, lo
     ctrl.pickMovie = pickMovie;
     ctrl.onMovieAdded = onMovieAdded;
     
-    ctrl.helpers({
-        movies
-    });
+    // ctrl.helpers({
+    //     movies
+    // });
     
-    ctrl.autorun(userScores);
-    ctrl.autorun(moviesScores);
+    //ctrl.autorun(updateSubscription);
+    // ctrl.autorun(userScores);
+    // ctrl.autorun(moviesScores);
+    ctrl.autorun(load);
     return;
     
+    function load() {
+        const list = ctrl.getReactively('list');
+
+        if (list) {
+            ctrl.isLoading = true;
+            const filter = ctrl.filter;
+            const query = {
+                listId: list._id,
+                title: filter.title,
+                genres: filter.genres,
+                runtimeMin: filter.runtime.min,
+                runtimeMax: filter.runtime.max,
+                userScoreMin: filter.userScore.min,
+                userScoreMax: filter.userScore.max,
+                movieScoreMin: filter.movieScore.min,
+                movieScoreMax: filter.movieScore.max,
+                skip: 0,
+                limit: 10,
+            };
+            ListsMovies.methods.fetch.call(query, fetchResult);
+        }
+        return;
+        
+        function fetchResult(error, result) {
+            if (error) {
+                logger.error('Error fetching movies', error);
+                ctrl.error = {fetchFailed: true};
+                ctrl.errorMessage = errorService.getErrorMessage(error);
+            } else {
+                ctrl.movies = result.filtered.movies;
+                ctrl.userScores = result.filtered.userScores;
+                ctrl.moviesScores = result.filtered.movieScores;
+                ctrl.genres = result.range.genres;
+                ctrl.runtimes = result.range.runtime;
+                updateFilterRuntime();
+            }
+            ctrl.isLoading = false;
+            $scope.$apply();
+        }
+    }
+    function updateFilterRuntime() {
+        if (isRuntimesDefined()) {
+            if (!ctrl.filter.runtime.min || ctrl.runtimes.floor < ctrl.filter.runtime.min) {
+                ctrl.filter.runtime.min = ctrl.runtimes.floor;
+            }
+            
+            if (!ctrl.filter.runtime.max || ctrl.runtimes.ceil > ctrl.filter.runtime.max) {
+                ctrl.filter.runtime.max = ctrl.runtimes.ceil;
+            }
+        }
+        return;
+        
+        function isRuntimesDefined() {
+            return angular.isDefined(ctrl.runtimes) && 
+                angular.isDefined(ctrl.runtimes.floor) &&
+                !isNaN(ctrl.runtimes.floor) &&
+                angular.isDefined(ctrl.runtimes.ceil) &&
+                !isNaN(ctrl.runtimes.ceil);
+        }
+    }
+    // function updateSubscription() {
+    //     const list = ctrl.getReactively('list');
+    //     const filter = ctrl.getReactively('filter', true);
+    //     const isFirstSubscription = ctrl.getReactively('isFirstSubscription');
+    //     const filterInitializedCount = ctrl.getReactively('filterInitializedCount');
+    //     //console.log('getSubscriptionParams', { list, filter });
+    //     //console.log('isFilterInitialized', isFilterInitialized);
+        
+    //     if (list && filter && (isFirstSubscription || filterInitializedCount > 1)) {
+    //         // && ctrl.isFilterInitialized
+    //         //ctrl.isUpdateSubscription = true;
+    //         ctrl.updateSubscriptionTrigger += 1;
+    //     }
+    // }
+    function getSubscriptionParams() {
+        const list = ctrl.getReactively('list');
+        const filter = ctrl.getReactively('filter', true);
+        // const updateSubscriptionTrigger = ctrl.getReactively('updateSubscriptionTrigger');
+        // const list = ctrl.list;
+        // const filter = ctrl.filter;
+
+        if (list && filter) {
+            //ctrl.isFirstSubscription = false;
+
+            return [{
+                listId: list._id,
+                title: filter.title,
+                genres: filter.genres,
+                runtimeMin: filter.runtime.min,
+                runtimeMax: filter.runtime.max,
+                userScoreMin: filter.userScore.min,
+                userScoreMax: filter.userScore.max,
+                movieScoreMin: filter.movieScore.min,
+                movieScoreMax: filter.movieScore.max,
+                skip: 0,
+                limit: 10,
+            }];
+        } else {
+            return [{ }];
+        }
+    }
     function onMovieAdded(movieId) {
         ctrl.error = false;
         ctrl.errorMessage = false;
@@ -116,6 +227,10 @@ function ListsMoviesViewController($scope, $reactive, $timeout, $stateParams, lo
         angular.forEach(movies, updateRuntimes);
         updateFilterRuntime();
         
+        // if (ctrl.filter.runtime.min && ctrl.filter.runtime.max) {
+        //     ctrl.filterInitializedCount += 1;
+        // }
+        
         return movies;
         
         function updateGenres(movie) {
@@ -162,15 +277,6 @@ function ListsMoviesViewController($scope, $reactive, $timeout, $stateParams, lo
                     angular.isDefined(ctrl.runtimes.ceil) &&
                     !isNaN(ctrl.runtimes.ceil);
             }
-        }
-    }
-    function getListId() {
-        const list = ctrl.getReactively('list');
-        
-        if (list) {
-            return [{ listId: list._id }];
-        } else {
-            return [{ }];
         }
     }
     function deleteMovie(movie) {

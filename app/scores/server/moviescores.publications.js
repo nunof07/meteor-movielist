@@ -14,7 +14,7 @@ function publishMovieScoresMovie({ movieId }) {
         if (!this.userId) {
             return this.ready();
         } else {
-            return MovieScores.find({ movieId }, MovieScores.publicFields);
+            return MovieScores.find({ movieId }, { fields: MovieScores.publicFields });
         }
     }
 }

@@ -22,7 +22,7 @@ function publishMovieScore({ movieId }) {
         } else {
             Counts.publish(this, 'movieScore.all.count', Scores.find({ movieId }));
             
-            return Scores.find({ movieId }, Scores.publicFields);
+            return Scores.find({ movieId }, { fields: Scores.publicFields });
         }
     }
     function findUsers(score) {
@@ -55,7 +55,7 @@ function publishUserMovieScore({ movieId }) {
                 movieId
             };
                 
-            return Scores.find(selector, Scores.publicFields);
+            return Scores.find(selector, { fields: Scores.publicFields });
         }
     }
 }
@@ -69,7 +69,7 @@ function publishUserMovieScores() {
         } else {
             const selector = { userId: this.userId };
                 
-            return Scores.find(selector, Scores.publicFields);
+            return Scores.find(selector, { fields: Scores.publicFields });
         }
     }
 }

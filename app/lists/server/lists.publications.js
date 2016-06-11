@@ -11,7 +11,7 @@ function publishUserLists() {
         } else {
             const selector = Lists.getUserListsSelector(this.userId);
             
-            return Lists.find(selector, Lists.publicFields);
+            return Lists.find(selector, { fields: Lists.publicFields });
         }
     }
 }
@@ -37,7 +37,7 @@ function publishUserListDetails({ listId }) {
                     listSelector,
                     userListsSelector
                 ]
-            }, Lists.publicFields);
+            }, { fields: Lists.publicFields });
         }
     }
 }

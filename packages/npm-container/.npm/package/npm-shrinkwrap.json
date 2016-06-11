@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "angular": {
-      "version": "1.5.5"
+      "version": "1.5.6"
     },
     "angularjs-slider": {
       "version": "2.13.0"

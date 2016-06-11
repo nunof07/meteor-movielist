@@ -14,7 +14,7 @@ function publishUserMovieDetails({ movieId }) {
         if (!this.userId) {
             return this.ready();
         } else {
-            return Movies.find({ _id: movieId }, Movies.publicFields);
+            return Movies.find({ _id: movieId }, { fields: Movies.publicFields });
         }
     }
 }
