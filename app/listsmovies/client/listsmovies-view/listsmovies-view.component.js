@@ -41,6 +41,7 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
     };
     ctrl.genres = [];
     ctrl.runtimes = { floor: 0, ceil: 0 };
+    ctrl.previousQuery = {};
     
     ctrl.deleteMovie = deleteMovie;
     ctrl.dismissError = dismissError;
@@ -49,15 +50,16 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
     ctrl.pickMovie = pickMovie;
     ctrl.onMovieAdded = onMovieAdded;
 
+    var count = 0;
+
     ctrl.autorun(load);
     return;
     
     function load() {
         const list = ctrl.getReactively('list');
+        const filter = ctrl.getReactively('filter', true);
 
-        if (list) {
-            ctrl.isLoading = true;
-            const filter = ctrl.filter;
+        if (list && filter) {
             const query = {
                 listId: list._id,
                 title: filter.title,
@@ -71,7 +73,12 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
                 skip: 0,
                 limit: 10,
             };
-            ListsMovies.methods.fetch.call(query, fetchResult);
+
+            if (shouldLoad(query)) {
+                ctrl.isLoading = true;
+                ListsMovies.methods.fetch.call(query, fetchResult);
+            }
+            ctrl.previousQuery = angular.copy(query);
         }
         return;
         
@@ -91,14 +98,36 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
             ctrl.isLoading = false;
             $scope.$apply();
         }
+        function shouldLoad(query) {
+            const previousQueryCopy = angular.copy(ctrl.previousQuery);
+            previousQueryCopy.runtimeMin = query.runtimeMin;
+            previousQueryCopy.runtimeMax = query.runtimeMax;
+
+            if (angular.equals(query, previousQueryCopy) &&
+            !isRuntimeDefined(ctrl.previousQuery) &&
+            isRuntimeDefined(query)) {
+                // if the only thing that changed was the runtime
+                // and it change from undefined to defined
+                // then ignore it
+                // we do this check because the runtime is set after load
+                // and we want to avoid calling load twice
+                return false;
+            }
+
+            return true;
+
+            function isRuntimeDefined(query) {
+                return query.runtimeMin && query.runtimeMax;
+            }
+        }
     }
     function updateFilterRuntime() {
         if (isRuntimesDefined()) {
-            if (!ctrl.filter.runtime.min || ctrl.runtimes.floor < ctrl.filter.runtime.min) {
+            if (!ctrl.filter.runtime.min || ctrl.runtimes.floor > ctrl.filter.runtime.min) {
                 ctrl.filter.runtime.min = ctrl.runtimes.floor;
             }
             
-            if (!ctrl.filter.runtime.max || ctrl.runtimes.ceil > ctrl.filter.runtime.max) {
+            if (!ctrl.filter.runtime.max || ctrl.runtimes.ceil < ctrl.filter.runtime.max) {
                 ctrl.filter.runtime.max = ctrl.runtimes.ceil;
             }
         }

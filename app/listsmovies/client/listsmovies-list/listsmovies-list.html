@@ -42,7 +42,8 @@
             <tr class="active">
                 <td class="cell-title">
                     <input type="text" class="form-control" placeholder="{{ 'listsMovies.filters.title' | mlI18n }}"
-                    ng-model="listsMoviesListCtrl.view.filter.title">
+                    ng-model="listsMoviesListCtrl.view.filter.title"
+                    ng-model-options="{ debounce: 400 }">
                 </td>
                 <td class="cell-runtime text-muted hidden-xs">
                     <ml-runtime-dropdown-slider ml-runtime="listsMoviesListCtrl.view.filter.runtime"

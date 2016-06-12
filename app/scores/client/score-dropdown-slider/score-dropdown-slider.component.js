@@ -25,10 +25,14 @@ function ScoreDropdownSliderController($scope, $reactive, $timeout) {
         showTicks: true,
         hideLimitLabels: true,
         hidePointerLabels: true,
-        vertical: true
+        vertical: true,
+        onEnd: onEnd
     };
+    ctrl.data = {};
     
     ctrl.refreshSlider = refreshSlider;
+
+    ctrl.autorun(updateData);
     return;
     
     function refreshSlider() {
@@ -38,5 +42,14 @@ function ScoreDropdownSliderController($scope, $reactive, $timeout) {
         function refresh() {
             $scope.$broadcast('rzSliderForceRender');
         }
+    }
+    function onEnd() {
+        ctrl.score.min = ctrl.data.min;
+        ctrl.score.max = ctrl.data.max;
+    }
+    function updateData() {
+        const score = ctrl.getReactively('score', true);
+        ctrl.data.min = score.min;
+        ctrl.data.max = score.max;
     }
 }

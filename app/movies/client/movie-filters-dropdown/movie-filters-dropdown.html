@@ -12,7 +12,8 @@ on-toggle="movieFiltersDropdownCtrl.refreshSliders()">
                 <label ml-i18n="listsMovies.labels.title"></label>
                 <input type="text" class="form-control"
                 placeholder="{{ 'listsMovies.filters.title' | mlI18n }}"
-                ng-model="movieFiltersDropdownCtrl.filter.title">
+                ng-model="movieFiltersDropdownCtrl.filter.title"
+                ng-model-options="{ debounce: 400 }">
             </div>
             <div class="form-group filter-input-runtime">
                 <label ml-i18n="listsMovies.labels.runtime"></label>

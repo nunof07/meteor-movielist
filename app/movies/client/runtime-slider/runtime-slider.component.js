@@ -24,10 +24,13 @@ function RuntimeSliderController($scope, $reactive, mlRuntimeFilter) {
         floor: 0,
         ceil: 0,
         translate: formatSliderLabel,
-        hideLimitLabels: true
+        hideLimitLabels: true,
+        onEnd: onEnd
     };
+    ctrl.data = {};
     
     ctrl.autorun(updateOptions);
+    ctrl.autorun(updateData);
     return;
     
     function formatSliderLabel(value) {
@@ -45,5 +48,14 @@ function RuntimeSliderController($scope, $reactive, mlRuntimeFilter) {
                 ctrl.options.ceil = range.ceil;
             }
         }
+    }
+    function onEnd() {
+        ctrl.runtime.min = ctrl.data.min;
+        ctrl.runtime.max = ctrl.data.max;
+    }
+    function updateData() {
+        const runtime = ctrl.getReactively('runtime', true);
+        ctrl.data.min = runtime.min;
+        ctrl.data.max = runtime.max;
     }
 }

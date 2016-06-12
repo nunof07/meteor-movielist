@@ -24,8 +24,12 @@ function ScoreHorizontalSliderController($scope, $reactive, $timeout) {
         ceil: 5,
         showTicks: true,
         hideLimitLabels: true,
-        translate: formatLabel
+        translate: formatLabel,
+        onEnd: onEnd
     };
+    ctrl.data = {};
+
+    ctrl.autorun(updateData);
     return;
     
     function formatLabel(value) {
@@ -35,5 +39,14 @@ function ScoreHorizontalSliderController($scope, $reactive, $timeout) {
         
         return '<span class="icon i-star"></span>' +
             '<span class="value">' + value + '</span>';
+    }
+    function onEnd() {
+        ctrl.score.min = ctrl.data.min;
+        ctrl.score.max = ctrl.data.max;
+    }
+    function updateData() {
+        const score = ctrl.getReactively('score', true);
+        ctrl.data.min = score.min;
+        ctrl.data.max = score.max;
     }
 }
