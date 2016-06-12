@@ -49,8 +49,7 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
     ctrl.getMovieScore = getMovieScore;
     ctrl.pickMovie = pickMovie;
     ctrl.onMovieAdded = onMovieAdded;
-
-    var count = 0;
+    ctrl.load = load;
 
     ctrl.autorun(load);
     return;

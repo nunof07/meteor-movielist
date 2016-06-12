@@ -70,7 +70,7 @@
                 <td class="cell-runtime text-muted hidden-xs" ng-bind="movie.runtime | mlRuntime"></td>
                 <td class="cell-genres text-muted hidden-xs hidden-sm" ng-bind="movie.genres | mlGenres"></td>
                 <td colspan="2" class="cell-score">
-                    <ml-vote ml-movie="movie" ml-score="listsMoviesListCtrl.view.userScores[movie._id]"></ml-vote>
+                    <ml-vote ml-movie="movie" ml-score="listsMoviesListCtrl.view.userScores[movie._id]" ml-on-vote="listsMoviesListCtrl.view.load"></ml-vote>
                     <ml-movie-score ml-score="listsMoviesListCtrl.view.moviesScores[movie._id].average"></ml-movie-score>
                 </td>
                 <td class="cell-delete text-right">

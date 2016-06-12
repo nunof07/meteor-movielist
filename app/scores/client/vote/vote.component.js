@@ -7,7 +7,8 @@ function voteDirective() {
         restrict: 'E',
         scope: {
             movie: '=mlMovie',
-            score: '=mlScore'
+            score: '=mlScore',
+            onVote: '=mlOnVote'
         },
         bindToController: true,
         templateUrl: 'app/scores/client/vote/vote.html',
@@ -59,6 +60,10 @@ function VoteController($scope, $reactive, $timeout, logger, errorService) {
                 ctrl.error = {saveFailed: true};
                 ctrl.errorMessage = errorService.getErrorMessage(error);
                 $timeout(dismissError, 5000);
+            } else {
+                if (angular.isFunction(ctrl.onVote)) {
+                    ctrl.onVote(result);
+                }
             }
             ctrl.isSubmitting = false;
         }

@@ -28,33 +28,40 @@ function scoresVote({movieId, score}) {
         throw new Meteor.Error('unauthorized', 'Must be logged in to vote');
     }
     
-    // movie check
-    const movie = Movies.findOne(movieId, { fields: { _id: 1 } });
-    
-    if (!movie) {
-        throw new Meteor.Error('not-found', 'Movie not found');
+    // we can't run this in the client because the movies in the list
+    // are not published (they are loaded through a method)
+    // so we would never find it in the collection and it would fail
+    if (!this.isSimulation) {
+        // movie check
+        const movie = Movies.findOne(movieId, { fields: { _id: 1 } });
+        
+        if (!movie) {
+            throw new Meteor.Error('not-found', 'Movie not found');
+        }
+        
+        // insert or update
+        const findSelector = {
+            userId: this.userId,
+            movieId
+        };
+        const insertData = {
+            userId: this.userId,
+            movieId,
+            score,
+            createdAt: new Date(),
+            modifiedAt: new Date()
+        };
+        const updateData = {
+            score,
+            modifiedAt: new Date()
+        };
+        const returnId = Scores.insertOrUpdate(findSelector, insertData, updateData);
+        Scores.denormalizers.afterMovieScoresChange({ movieId });
+
+        return returnId;
     }
-    
-    // insert or update
-    const findSelector = {
-        userId: this.userId,
-        movieId
-    };
-    const insertData = {
-        userId: this.userId,
-        movieId,
-        score,
-        createdAt: new Date(),
-        modifiedAt: new Date()
-    };
-    const updateData = {
-        score,
-        modifiedAt: new Date()
-    };
-    const returnId = Scores.insertOrUpdate(findSelector, insertData, updateData);
-    Scores.denormalizers.afterMovieScoresChange({ movieId });
-    
-    return returnId;
+
+    return 0;
 }
 function afterMovieScoresChange({ movieId }) {
     const scores = Scores.find({ movieId }).fetch();
