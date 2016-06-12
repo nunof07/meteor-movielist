@@ -42,6 +42,11 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
     ctrl.genres = [];
     ctrl.runtimes = { floor: 0, ceil: 0 };
     ctrl.previousQuery = {};
+    ctrl.paging = {
+        current: 1,
+        count: 1,
+        range: [1]
+    };
     
     ctrl.deleteMovie = deleteMovie;
     ctrl.dismissError = dismissError;
@@ -50,13 +55,23 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
     ctrl.pickMovie = pickMovie;
     ctrl.onMovieAdded = onMovieAdded;
     ctrl.load = load;
+    ctrl.goToPage = goToPage;
 
     ctrl.autorun(load);
     return;
     
+    function goToPage(page) {
+        page = Math.floor(page);
+
+        if (page > 0 && page <= ctrl.paging.count) {
+            ctrl.paging.current = page;
+        }
+    }
     function load() {
         const list = ctrl.getReactively('list');
         const filter = ctrl.getReactively('filter', true);
+        const page = ctrl.getReactively('paging.current');
+        const pageSize = 10;
 
         if (list && filter) {
             const query = {
@@ -69,8 +84,8 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
                 userScoreMax: filter.userScore.max,
                 movieScoreMin: filter.movieScore.min,
                 movieScoreMax: filter.movieScore.max,
-                skip: 0,
-                limit: 10,
+                skip: (page - 1) * pageSize,
+                limit: pageSize,
             };
 
             if (shouldLoad(query)) {
@@ -93,6 +108,13 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
                 ctrl.genres = result.range.genres;
                 ctrl.runtimes = result.range.runtime;
                 updateFilterRuntime();
+                ctrl.paging.count = Math.ceil(result.range.count / pageSize);
+
+                const pagingCount = 5;
+                const pagingStart = Math.min(
+                    Math.max(1, ctrl.paging.current - Math.floor(pagingCount / 2)),
+                    ctrl.paging.count - pagingCount + 1);
+                ctrl.paging.range = _.range(pagingStart, pagingStart + pagingCount);
             }
             ctrl.isLoading = false;
             $scope.$apply();

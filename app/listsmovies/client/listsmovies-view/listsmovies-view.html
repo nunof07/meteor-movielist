@@ -59,4 +59,36 @@
             <ml-listsmovies-list ml-view="listsMoviesViewCtrl.view"></ml-listsmovies-list>
         </div>
     </div>
+    <div class="listmovies-view-pagination">
+        <nav>
+            <ul class="pagination">
+                <li ng-class="{ 'disabled': listsMoviesViewCtrl.paging.current === 1 }">
+                    <a href ng-click="listsMoviesViewCtrl.goToPage(1)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li ng-class="{ 'disabled': listsMoviesViewCtrl.paging.current === 1 }">
+                    <a href ng-click="listsMoviesViewCtrl.goToPage(listsMoviesViewCtrl.paging.current - 1)">
+                        <span aria-hidden="true">&lt;</span>
+                    </a>
+                </li>
+                <li ng-repeat="page in listsMoviesViewCtrl.paging.range"
+                ng-class="{ 'active': listsMoviesViewCtrl.paging.current === page }">
+                    <a href ng-click="listsMoviesViewCtrl.goToPage(page)">
+                        <span ng-bind="page"></span>
+                    </a>
+                </li>
+                <li ng-class="{ 'disabled': listsMoviesViewCtrl.paging.current === listsMoviesViewCtrl.paging.count }">
+                    <a href ng-click="listsMoviesViewCtrl.goToPage(listsMoviesViewCtrl.paging.current + 1)">
+                        <span aria-hidden="true">&gt;</span>
+                    </a>
+                </li>
+                <li ng-class="{ 'disabled': listsMoviesViewCtrl.paging.current === listsMoviesViewCtrl.paging.count }">
+                    <a href ng-click="listsMoviesViewCtrl.goToPage(listsMoviesViewCtrl.paging.count)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>
