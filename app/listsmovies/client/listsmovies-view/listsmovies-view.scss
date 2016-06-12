@@ -1,5 +1,7 @@
 @import "{}/app/lib/client/styles/_imports.scss";
 
+$listmovies-loading-height: 48px;
+
 .listsmovies-view {
     .listsmovies-view-controls {
         .btn {
@@ -46,5 +48,26 @@
     }
     .listsmovies-view-selected {
         margin-top: $margin;
+        min-height: $listmovies-loading-height + 2 * $margin;
+        position: relative;
+
+        .loading-panel {
+            z-index: 999;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            text-align: center;
+            background-color: rgba($gray-lighter, 0.5);
+
+            .icon {
+                position: absolute;
+                top: 50%;
+                margin-top: -0.5 * $listmovies-loading-height;
+                font-size: $listmovies-loading-height;
+                color: $gray-light;
+            }
+        }
     }
 }

@@ -48,11 +48,14 @@
             </div>
         </div>
     </div>
-    <div class="listsmovies-view-selected" ng-show="listsMoviesViewCtrl.list.movieCount">
-        <div class="listsmovies-view-child animate-show" ng-show="listsMoviesViewCtrl.selected === 'grid'">
+    <div class="listsmovies-view-selected">
+        <div class="animate-show loading-panel" ng-show="listsMoviesViewCtrl.isLoading">
+            <span class="icon i-loading"></span>
+        </div>
+        <div class="listsmovies-view-child animate-show" ng-show="listsMoviesViewCtrl.list.movieCount && listsMoviesViewCtrl.selected === 'grid'">
             <ml-listsmovies-grid ml-view="listsMoviesViewCtrl.view"></ml-listsmovies-grid>
         </div>
-        <div class="listsmovies-view-child animate-show" ng-show="listsMoviesViewCtrl.selected !== 'grid'">
+        <div class="listsmovies-view-child animate-show" ng-show="listsMoviesViewCtrl.list.movieCount && listsMoviesViewCtrl.selected !== 'grid'">
             <ml-listsmovies-list ml-view="listsMoviesViewCtrl.view"></ml-listsmovies-list>
         </div>
     </div>
