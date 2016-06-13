@@ -172,3 +172,27 @@
         content: '\f09b';
     }
 }
+.i-first {
+    &:before {
+        // fa-angle-double-left
+        content: '\f100';
+    }
+}
+.i-previous {
+    &:before {
+        // fa-angle-left
+        content: '\f104';
+    }
+}
+.i-last {
+    &:before {
+        // fa-angle-double-right
+        content: '\f101';
+    }
+}
+.i-next {
+    &:before {
+        // fa-angle-right
+        content: '\f105';
+    }
+}
