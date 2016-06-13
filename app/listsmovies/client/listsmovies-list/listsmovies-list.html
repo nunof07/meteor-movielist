@@ -23,16 +23,16 @@
                     ml-is-reverse="listsMoviesListCtrl.view.sort.isReverse"
                     ml-icon="'alpha'"></ml-sort-button>
                 </th>
-                <th class="cell-user-score">
-                    <ml-sort-button ml-label="'listsMovies.labels.userScore' | mlI18n"
-                    ml-value="listsMoviesListCtrl.view.getUserScore"
+                <th class="cell-movie-score">
+                    <ml-sort-button ml-label="'listsMovies.labels.movieScore' | mlI18n"
+                    ml-value="listsMoviesListCtrl.view.getMovieScore"
                     ml-expression="listsMoviesListCtrl.view.sort.expression"
                     ml-is-reverse="listsMoviesListCtrl.view.sort.isReverse"
                     ml-icon="'amount'"></ml-sort-button>
                 </th>
-                <th class="cell-movie-score">
-                    <ml-sort-button ml-label="'listsMovies.labels.movieScore' | mlI18n"
-                    ml-value="listsMoviesListCtrl.view.getMovieScore"
+                <th class="cell-user-score">
+                    <ml-sort-button ml-label="'listsMovies.labels.userScore' | mlI18n"
+                    ml-value="listsMoviesListCtrl.view.getUserScore"
                     ml-expression="listsMoviesListCtrl.view.sort.expression"
                     ml-is-reverse="listsMoviesListCtrl.view.sort.isReverse"
                     ml-icon="'amount'"></ml-sort-button>
@@ -53,11 +53,11 @@
                     <ml-genres-multiselect ml-filter="listsMoviesListCtrl.view.filter.genres"
                     ml-genres="listsMoviesListCtrl.view.genres"></ml-genres-multiselect>
                 </td>
-                <td class="cell-user-score">
-                    <ml-score-dropdown-slider ml-score="listsMoviesListCtrl.view.filter.userScore"></ml-score-dropdown-slider>
-                </td>
                 <td class="cell-movie-score">
                     <ml-score-dropdown-slider ml-score="listsMoviesListCtrl.view.filter.movieScore"></ml-score-dropdown-slider>
+                </td>
+                <td class="cell-user-score">
+                    <ml-score-dropdown-slider ml-score="listsMoviesListCtrl.view.filter.userScore"></ml-score-dropdown-slider>
                 </td>
                 <td class="cell-delete"></td>
             </tr>
@@ -67,11 +67,17 @@
                 <td class="cell-title">
                     <a ui-sref="movieDetails({ movieId: movie._id })" ng-bind="movie.title"></a>
                 </td>
-                <td class="cell-runtime text-muted hidden-xs" ng-bind="movie.runtime | mlRuntime"></td>
-                <td class="cell-genres text-muted hidden-xs hidden-sm" ng-bind="movie.genres | mlGenres"></td>
-                <td colspan="2" class="cell-score">
+                <td class="cell-runtime hidden-xs" ng-bind="movie.runtime | mlRuntime"></td>
+                <td class="cell-genres hidden-xs hidden-sm" ng-bind="movie.genres | mlGenres"></td>
+                <td class="cell-movie-score">
+                    <span class="icon i-star-hollow" ng-hide="listsMoviesListCtrl.view.moviesScores[movie._id].average"></span>
+                    <span class="icon i-star" ng-show="listsMoviesListCtrl.view.moviesScores[movie._id].average"></span>
+                    <span class="numeric-score"
+                    ng-bind="listsMoviesListCtrl.view.moviesScores[movie._id].average | mlScoreFilter"
+                    ng-show="listsMoviesListCtrl.view.moviesScores[movie._id].average"></span>
+                </td>
+                <td class="cell-user-score">
                     <ml-vote ml-movie="movie" ml-score="listsMoviesListCtrl.view.userScores[movie._id]" ml-on-vote="listsMoviesListCtrl.view.load"></ml-vote>
-                    <ml-movie-score ml-score="listsMoviesListCtrl.view.moviesScores[movie._id].average"></ml-movie-score>
                 </td>
                 <td class="cell-delete text-right">
                     <a href ng-click="listsMoviesListCtrl.view.deleteMovie(movie)">
