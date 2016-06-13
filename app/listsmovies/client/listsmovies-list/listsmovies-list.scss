@@ -4,28 +4,32 @@
     .vote > .btn {
         @include btn-xs();
     }
-    table thead {
-        th:first-child {
-            border-top-left-radius: 3px;
-        }
-        th:last-child {
-            border-top-right-radius: 3px;
-        }
-        td {
-            border-bottom: 1px solid $gray-lighter;
-            border-color: $gray-lighter !important;
-        }
-        .cell-genres {
-            .input-group {
-                max-width: 380px;
-                
-                @include media-lg-min {
-                    max-width: 420px;
+    table {
+        margin-bottom: $margin-sm;
+        
+        thead {
+            th:first-child {
+                border-top-left-radius: 3px;
+            }
+            th:last-child {
+                border-top-right-radius: 3px;
+            }
+            td {
+                border-bottom: 1px solid $gray-lighter;
+                border-color: $gray-lighter !important;
+            }
+            .cell-genres {
+                .input-group {
+                    max-width: 380px;
+                    
+                    @include media-lg-min {
+                        max-width: 420px;
+                    }
                 }
             }
-        }
-        .cell-movie-score {
-            white-space: nowrap;
+            .cell-movie-score {
+                white-space: nowrap;
+            }
         }
     }
 }

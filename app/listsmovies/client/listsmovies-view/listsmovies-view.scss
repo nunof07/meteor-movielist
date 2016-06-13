@@ -71,8 +71,12 @@ $listmovies-loading-height: 48px;
         }
     }
     .listmovies-view-pagination {
+        margin-top: $margin-sm;
         text-align: center;
-
+        
+        .pagination {
+            margin-bottom: 0;
+        }
         .icon {
             font-weight: bold;
         }

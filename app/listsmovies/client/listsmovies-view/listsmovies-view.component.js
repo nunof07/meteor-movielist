@@ -72,7 +72,7 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
         const filter = ctrl.getReactively('filter', true);
         const sort = ctrl.getReactively('sort', true);
         const page = ctrl.getReactively('paging.current');
-        const pageSize = 10;
+        const pageSize = 12;
 
         if (list && filter) {
             const query = {
