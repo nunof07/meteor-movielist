@@ -108,13 +108,7 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
                 ctrl.genres = result.range.genres;
                 ctrl.runtimes = result.range.runtime;
                 updateFilterRuntime();
-                ctrl.paging.count = Math.ceil(result.range.count / pageSize);
-
-                const pagingCount = 5;
-                const pagingStart = Math.min(
-                    Math.max(1, ctrl.paging.current - Math.floor(pagingCount / 2)),
-                    ctrl.paging.count - pagingCount + 1);
-                ctrl.paging.range = _.range(pagingStart, pagingStart + pagingCount);
+                updatePagination(result.range.count, pageSize);
             }
             ctrl.isLoading = false;
             $scope.$apply();
@@ -141,6 +135,15 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
                 return query.runtimeMin && query.runtimeMax;
             }
         }
+    }
+    function updatePagination(count, pageSize) {
+        ctrl.paging.count = Math.ceil(count / pageSize);
+
+        const pagingCount = Math.min(5, ctrl.paging.count);
+        const pagingStart = Math.min(
+            Math.max(1, ctrl.paging.current - Math.floor(pagingCount / 2)),
+            ctrl.paging.count - pagingCount + 1);
+        ctrl.paging.range = _.range(pagingStart, pagingStart + pagingCount);
     }
     function updateFilterRuntime() {
         if (isRuntimesDefined()) {
