@@ -27,7 +27,9 @@ ML.createMethods(ListsMovies, [
             { movieScoreMin: { type: Number, min: 0, max: 5 } },
             { movieScoreMax: { type: Number, min: 0, max: 5 } },
             { skip: { type: Number, min: 0 } },
-            { limit: { type: Number, min: 1, max: 20 } }
+            { limit: { type: Number, min: 1, max: 20 } },
+            { sortExpression: { type: String } },
+            { sortIsReverse: { type: Boolean } },
         ],
         run: listsMoviesFetch
     }
@@ -98,7 +100,9 @@ function listsMoviesFetch({
     movieScoreMin,
     movieScoreMax,
     skip,
-    limit
+    limit,
+    sortExpression,
+    sortIsReverse
 }) {
     if (!Lists.methods.hasAccess.call({ listId })) {
         throw new Meteor.Error('unauthorized', 'User not authorized to view list');
@@ -112,9 +116,13 @@ function listsMoviesFetch({
         skip,
         limit
     };
+    const sort = {
+        expression: sortExpression,
+        isReverse: sortIsReverse
+    };
     const allMovies = getMoviesFromList(listId);
     const range = getRange(allMovies);
-    const filtered = getFiltered(allMovies, filter, this.userId);
+    const filtered = getFiltered(allMovies, filter, sort, this.userId);
 
     return {
         filtered,
@@ -126,10 +134,7 @@ function listsMoviesFetch({
 
         return Movies.find(
             { _id: { $in: listsMoviesIds } },
-            {
-                sort: { title: 1 },
-                fields: Movies.publicFields
-            })
+            { fields: Movies.publicFields })
         .fetch();
 
         function getListsMovieIds(listId) {
@@ -173,7 +178,7 @@ function listsMoviesFetch({
             return runtime;
         }
     }
-    function getFiltered(allMovies, filter, userId) {
+    function getFiltered(allMovies, filter, sort, userId) {
         let movies = [];
         let userScores = [];
         let movieScores = [];
@@ -185,6 +190,7 @@ function listsMoviesFetch({
             movieScores = getMovieScores(ids);
 
             movies = filterMoviesWithScores(movies, userScores, movieScores, filter);
+            movies = sortMovies(movies, userScores, movieScores, sort);
             movies = filterMoviesWithPaging(movies, filter);
             
             userScores = filterScores(userScores, movies);
@@ -321,6 +327,28 @@ function listsMoviesFetch({
             });
 
             return result;
+        }
+        function sortMovies(movies, userScores, movieScores, sort) {
+            let sorted = [];
+            const directSorting = ['title', 'runtime', 'genres'];
+
+            if (_.contains(directSorting, sort.expression)) {
+                sorted = _.sortBy(movies, sort.expression);
+            } else if (sort.expression === 'userScore') {
+                const scores = _.groupBy(userScores, 'movieId');
+                sorted = _.sortBy(movies, (movie) => scores[movie._id] ? scores[movie._id][0].score : 0);
+            } else if (sort.expression === 'movieScore') {
+                const scores = _.groupBy(movieScores, 'movieId');
+                sorted = _.sortBy(movies, (movie) => scores[movie._id] ? scores[movie._id][0].average : 0);
+            } else {
+                sorted = movies;
+            }
+
+            if (sort.isReverse) {
+                sorted = sorted.reverse();
+            }
+
+            return sorted;
         }
     }
 }

@@ -70,6 +70,7 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
     function load() {
         const list = ctrl.getReactively('list');
         const filter = ctrl.getReactively('filter', true);
+        const sort = ctrl.getReactively('sort', true);
         const page = ctrl.getReactively('paging.current');
         const pageSize = 10;
 
@@ -86,6 +87,8 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
                 movieScoreMax: filter.movieScore.max,
                 skip: (page - 1) * pageSize,
                 limit: pageSize,
+                sortExpression: sort.expression,
+                sortIsReverse: sort.isReverse,
             };
 
             if (shouldLoad(query)) {
