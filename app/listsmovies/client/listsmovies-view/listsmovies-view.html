@@ -49,7 +49,7 @@
         </div>
     </div>
     <div class="listsmovies-view-selected">
-        <div class="animate-show loading-panel" ng-show="listsMoviesViewCtrl.isLoading">
+        <div class="animate-hide loading-panel" ng-show="listsMoviesViewCtrl.isLoading">
             <span class="icon i-loading"></span>
         </div>
         <div class="listsmovies-view-child animate-show" ng-show="listsMoviesViewCtrl.list.movieCount && listsMoviesViewCtrl.selected === 'grid'">
@@ -59,7 +59,7 @@
             <ml-listsmovies-list ml-view="listsMoviesViewCtrl.view"></ml-listsmovies-list>
         </div>
     </div>
-    <div class="listmovies-view-pagination">
+    <div class="listmovies-view-pagination animate-hide" ng-show="listsMoviesViewCtrl.paging.count > 1">
         <nav>
             <ul class="pagination">
                 <li ng-class="{ 'disabled': listsMoviesViewCtrl.paging.current === 1 }">
