@@ -58,8 +58,9 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
     ctrl.onMovieAdded = onMovieAdded;
     ctrl.load = load;
     ctrl.goToPage = goToPage;
+    ctrl.reload = reload;
 
-    ctrl.autorun(load);
+    ctrl.autorun(autoload);
     return;
     
     function goToPage(page) {
@@ -67,6 +68,7 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
 
         if (page > 0 && page <= ctrl.paging.count) {
             ctrl.paging.current = page;
+            load(ctrl.list, ctrl.filter, ctrl.sort, page);
         }
     }
     function getQuery(listId, filter, sort) {
@@ -84,16 +86,22 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
             sortIsReverse: sort.isReverse,
         };
     }
-    function load() {
+    function autoload() {
         const list = ctrl.getReactively('list');
         const filter = ctrl.getReactively('filter', true);
         const sort = ctrl.getReactively('sort', true);
-        const page = ctrl.getReactively('paging.current');
+        ctrl.paging.current = 1;
+        load(list, filter, sort, ctrl.paging.current);
+    }
+    function reload() {
+        load(ctrl.list, ctrl.filter, ctrl.sort, ctrl.paging.current);
+    }
+    function load(list, filter, sort, page) {
         const pageSize = 12;
 
         if (list && filter) {
             const query = getQuery(list._id, filter, sort);
-            query.skip = (page - 1) * pageSize;
+            query.skip = Math.max((page - 1) * pageSize, 0);
             query.limit = pageSize;
 
             if (shouldLoad(query)) {
@@ -152,7 +160,6 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
         if (ctrl.paging.current > ctrl.paging.count) {
             ctrl.paging.current = ctrl.paging.count;
         }
-
         const pagingCount = Math.min(5, ctrl.paging.count);
         const pagingStart = Math.min(
             Math.max(1, ctrl.paging.current - Math.floor(pagingCount / 2)),
