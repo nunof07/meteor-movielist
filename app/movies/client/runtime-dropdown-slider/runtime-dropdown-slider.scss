@@ -1,6 +1,10 @@
 @import "{}/app/lib/client/styles/_imports.scss";
 
 .runtime-dropdown-slider {
+    > .btn {
+        // enough width for 3 digits on each side (i.e. 000-000)
+        min-width: 90.17px;
+    }
     .uib-dropdown-menu {
         padding-left: $padding-xs-horizontal;
         padding-right: $padding-xs-horizontal;
