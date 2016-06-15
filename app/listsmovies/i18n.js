@@ -9,6 +9,7 @@ function i18nListsMoviesStartup() {
             addToList: 'Add movie to list',
             removeFromList: 'Remove from list',
             pickMovie: 'Pick me a movie!',
+            filteredCount: '{$1} filtered movies',
             labels: {
                 title: 'Title',
                 runtime: 'Runtime',

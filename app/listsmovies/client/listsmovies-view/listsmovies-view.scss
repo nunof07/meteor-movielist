@@ -48,6 +48,7 @@ $listmovies-loading-height: 48px;
     }
     .listsmovies-view-selected {
         margin-top: $margin;
+        margin-bottom: $margin;
         min-height: $listmovies-loading-height + 2 * $margin;
         position: relative;
 
@@ -71,7 +72,7 @@ $listmovies-loading-height: 48px;
         }
     }
     .listmovies-view-pagination {
-        margin-top: $margin-sm;
+        margin-bottom: $margin;
         text-align: center;
         
         .pagination {
@@ -80,5 +81,8 @@ $listmovies-loading-height: 48px;
         .icon {
             font-weight: bold;
         }
+    }
+    .movie-count {
+        margin-bottom: 0;
     }
 }

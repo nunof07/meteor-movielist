@@ -47,6 +47,8 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
         count: 1,
         range: [1]
     };
+    ctrl.filteredCount = 0;
+    ctrl.totalCount = 0;
     
     ctrl.deleteMovie = deleteMovie;
     ctrl.dismissError = dismissError;
@@ -113,6 +115,8 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
                 ctrl.moviesScores = result.filtered.movieScores;
                 ctrl.genres = result.range.genres;
                 ctrl.runtimes = result.range.runtime;
+                ctrl.filteredCount = result.filtered.count;
+                ctrl.totalCount = result.range.count;
                 updateFilterRuntime();
                 updatePagination(result.filtered.count, pageSize);
             }

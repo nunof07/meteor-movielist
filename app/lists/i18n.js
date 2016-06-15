@@ -24,7 +24,7 @@ function i18nListsStartup() {
             },
             movies: {
                 addFailed: 'Failed to add movie to list. {$1}',
-                count: '{$1} movies in list'
+                count: '{$1} total movies in list'
             }
         }
     });
