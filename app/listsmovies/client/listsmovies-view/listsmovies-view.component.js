@@ -114,7 +114,7 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
                 ctrl.genres = result.range.genres;
                 ctrl.runtimes = result.range.runtime;
                 updateFilterRuntime();
-                updatePagination(result.range.count, pageSize);
+                updatePagination(result.filtered.count, pageSize);
             }
             ctrl.isLoading = false;
             $scope.$apply();
@@ -144,6 +144,10 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
     }
     function updatePagination(count, pageSize) {
         ctrl.paging.count = Math.ceil(count / pageSize);
+
+        if (ctrl.paging.current > ctrl.paging.count) {
+            ctrl.paging.current = ctrl.paging.count;
+        }
 
         const pagingCount = Math.min(5, ctrl.paging.count);
         const pagingStart = Math.min(

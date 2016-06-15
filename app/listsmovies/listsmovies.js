@@ -182,6 +182,7 @@ function listsMoviesFetch({
         let movies = [];
         let userScores = [];
         let movieScores = [];
+        let count = 0;
 
         if (allMovies && allMovies.length) {
             movies = filterMovies(allMovies, filter);
@@ -191,6 +192,7 @@ function listsMoviesFetch({
 
             movies = filterMoviesWithScores(movies, userScores, movieScores, filter);
             movies = sortMovies(movies, userScores, movieScores, sort);
+            count = movies.length;
 
             if (filter.limit) {
                 movies = filterMoviesWithPaging(movies, filter);
@@ -201,37 +203,28 @@ function listsMoviesFetch({
         }
 
         return {
+            count,
             movies,
             userScores,
             movieScores
         };
 
         function filterMovies(allMovies, filter) {
-            const count = {
-                runtime: 0,
-                title: 0,
-                genres: 0,
-                total: 0
-            };
             const result = _.filter(allMovies, isMovieFiltered);
             return result;
 
             function isMovieFiltered(movie) {
                 if (runtimeOutsideRange(movie, filter.runtime)) {
-                    count.runtime++;
                     return false;
                 }
 
                 if (titleNotContains(movie, filter.title)) {
-                    count.title++;
                     return false;
                 }
 
                 if (missingGenres(movie, filter.genres)) {
-                    count.genres++;
                     return false;
                 }
-                count.total++;
                 return true;
             }
             function runtimeOutsideRange(movie, runtime) {
