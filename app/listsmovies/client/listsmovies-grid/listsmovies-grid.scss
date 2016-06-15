@@ -6,13 +6,44 @@
     
     .col-movie {
         margin-top: $margin;
+
+        @include media-xs-max {
+            text-align: center;
+        }
     }
     .movie-title {
         color: $text-inverted;
     }
     .poster-link {
-        display: block;
+        display: inline-block;
+        overflow: hidden;
+        height: 200px;
+        max-width: 100%;
         
+        @media (min-width: 464.84px) {
+            height: 300px;
+        }
+        @media (min-width: 599.78px) {
+            height: 400px;
+        }
+        @include media-xs-max {
+            position: relative;
+        }
+        @include media-sm-min {
+            display: block;
+            height: 330px;
+        }
+        @include media-md-min {
+            height: 318.75px;
+        }
+        @include media-lg-min {
+            height: 393.75px;
+        }
+        .poster {
+            display: block;
+            max-height: 100%;
+            width: auto;
+        }
         &:hover {
             .movie-info {
                 opacity: 1;
@@ -22,12 +53,17 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            left: $grid-padding-left;
-            right: $grid-padding-right;
+            left: 0;
+            right: 0;
             opacity: 0;
             transition: opacity linear 0.2s;
             background-color: rgba($brand-primary, 0.85);
             color: $text-inverted;
+
+            @include media-sm-min {
+                left: $grid-padding-left;
+                right: $grid-padding-right;
+            }
         }
         .movie-info-outer {
             display: table;

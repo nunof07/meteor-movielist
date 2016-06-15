@@ -3,7 +3,7 @@
         <div class="col-md-3 col-sm-4 col-xs-6 col-movie"
         ng-repeat="movie in listsMoviesGridCtrl.view.movies track by movie._id">
             <a ui-sref="movieDetails({ movieId: movie._id })" class="poster-link">
-                <img class="img-responsive poster"
+                <img class="poster"
                     ng-src="http://image.tmdb.org/t/p/w500/{{movie.tmdbPosterUrl}}"
                     alt="{{movie.title}}">
                 <div class="movie-info">
