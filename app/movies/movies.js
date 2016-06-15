@@ -146,11 +146,7 @@ function moviesIsYouTubeTrailerValid({ movieId }) {
     }
     const movie = Movies.findOne(movieId);
     
-    if (!movie) {
-        throw new Meteor.Error('not-found', 'Movie not found');
-    }
-    
-    if (movie.trailerYouTubeId && !this.isSimulation) {
+    if (movie && movie.trailerYouTubeId && !this.isSimulation) {
         const url = 'http://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=' +
             movie.trailerYouTubeId + '&format=json';
         this.unblock();

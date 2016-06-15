@@ -15,10 +15,12 @@ function MoviePickerDialogController($scope, $reactive, logger, $timeout) {
     const ctrl = this;
     const picker = $scope.picker;
     $reactive(ctrl).attach($scope);
+    ctrl.subscribe('movieDetails.user', getMovieId);
     
     ctrl.isLoading = false;
     ctrl.error = false;
     ctrl.errorMessage = '';
+    ctrl.pick = {};
     
     ctrl.next = next;
     ctrl.close = close;
@@ -27,6 +29,15 @@ function MoviePickerDialogController($scope, $reactive, logger, $timeout) {
     next();
     return;
     
+    function getMovieId() {
+        const pick = ctrl.getReactively('pick');
+
+        if (pick) {
+            return [{ movieId: pick.movie._id }];
+        } else {
+            return [{}];
+        }
+    }
     function next() {
         ctrl.isLoading = true;
         ctrl.error = false;

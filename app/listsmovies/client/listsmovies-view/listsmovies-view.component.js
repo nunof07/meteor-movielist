@@ -67,6 +67,21 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
             ctrl.paging.current = page;
         }
     }
+    function getQuery(listId, filter, sort) {
+        return {
+            listId: listId,
+            title: filter.title,
+            genres: filter.genres,
+            runtimeMin: filter.runtime.min,
+            runtimeMax: filter.runtime.max,
+            userScoreMin: filter.userScore.min,
+            userScoreMax: filter.userScore.max,
+            movieScoreMin: filter.movieScore.min,
+            movieScoreMax: filter.movieScore.max,
+            sortExpression: sort.expression,
+            sortIsReverse: sort.isReverse,
+        };
+    }
     function load() {
         const list = ctrl.getReactively('list');
         const filter = ctrl.getReactively('filter', true);
@@ -75,21 +90,9 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
         const pageSize = 12;
 
         if (list && filter) {
-            const query = {
-                listId: list._id,
-                title: filter.title,
-                genres: filter.genres,
-                runtimeMin: filter.runtime.min,
-                runtimeMax: filter.runtime.max,
-                userScoreMin: filter.userScore.min,
-                userScoreMax: filter.userScore.max,
-                movieScoreMin: filter.movieScore.min,
-                movieScoreMax: filter.movieScore.max,
-                skip: (page - 1) * pageSize,
-                limit: pageSize,
-                sortExpression: sort.expression,
-                sortIsReverse: sort.isReverse,
-            };
+            const query = getQuery(list._id, filter, sort);
+            query.skip = (page - 1) * pageSize;
+            query.limit = pageSize;
 
             if (shouldLoad(query)) {
                 ctrl.isLoading = true;
@@ -213,50 +216,55 @@ function ListsMoviesViewController($scope, $reactive, $stateParams, logger, erro
     function dismissError() {
         ctrl.error = false;
     }
-    function getUserScoreObject(movie) {
-        if (ctrl.userScores && ctrl.userScores.hasOwnProperty(movie._id)) {
-            return ctrl.userScores[movie._id];
-        } else {
-            return null;
-        }
-    }
-    function getMovieScoreObject(movie) {
-        if (ctrl.moviesScores && ctrl.moviesScores.hasOwnProperty(movie._id)) {
-            return ctrl.moviesScores[movie._id];
-        } else {
-            return null;
-        }
-    }
     function getUserScore(movie) {
         const userScore = getUserScoreObject(movie);
         
         return (userScore ? userScore.score : 0);
+
+        function getUserScoreObject(movie) {
+            if (ctrl.userScores && ctrl.userScores.hasOwnProperty(movie._id)) {
+                return ctrl.userScores[movie._id];
+            } else {
+                return null;
+            }
+        }
     }
     function getMovieScore(movie) {
         const movieScore = getMovieScoreObject(movie);
         
         return (movieScore ? movieScore.average : 0);
+        
+        function getMovieScoreObject(movie) {
+            if (ctrl.moviesScores && ctrl.moviesScores.hasOwnProperty(movie._id)) {
+                return ctrl.moviesScores[movie._id];
+            } else {
+                return null;
+            }
+        }
     }
     function pickMovie() {
-        const movies = getMovies();
-        const picker = new MoviePicker(movies, getUserScoreObject, getMovieScoreObject);
-        
-        modalService.open(
-            {
-                template: '<ml-movie-picker-dialog></ml-movie-picker-dialog>',
-                size: 'lg'
-            },
-            $scope,
-            { picker });
+        if (ctrl.list) {
+            const query = getQuery(ctrl.list._id, ctrl.filter, ctrl.sort);
+            ListsMovies.methods.fetch.call(query, fetchResult);
+        }
         return;
         
-        function getMovies() {
-            const visible = [];
-            angular.forEach(ctrl.movies, processMovie);
-            return visible;
-            
-            function processMovie(movie) {
-                visible.push(movie);
+        function fetchResult(error, result) {
+            if (error) {
+                logger.error('Error fetching movies for movie picker', error);
+            } else {
+                const picker = new MoviePicker({
+                    movies: result.filtered.movies,
+                    userScores: result.filtered.userScores,
+                    movieScores: result.filtered.movieScores
+                });
+                modalService.open(
+                    {
+                        template: '<ml-movie-picker-dialog></ml-movie-picker-dialog>',
+                        size: 'lg'
+                    },
+                    $scope,
+                    { picker });
             }
         }
     }

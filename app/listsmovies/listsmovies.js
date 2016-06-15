@@ -26,8 +26,8 @@ ML.createMethods(ListsMovies, [
             { userScoreMax: { type: Number, min: 0, max: 5 } },
             { movieScoreMin: { type: Number, min: 0, max: 5 } },
             { movieScoreMax: { type: Number, min: 0, max: 5 } },
-            { skip: { type: Number, min: 0 } },
-            { limit: { type: Number, min: 1, max: 20 } },
+            { skip: { type: Number, min: 0, optional: true } },
+            { limit: { type: Number, min: 1, max: 20, optional: true } },
             { sortExpression: { type: String } },
             { sortIsReverse: { type: Boolean } },
         ],
@@ -191,7 +191,10 @@ function listsMoviesFetch({
 
             movies = filterMoviesWithScores(movies, userScores, movieScores, filter);
             movies = sortMovies(movies, userScores, movieScores, sort);
-            movies = filterMoviesWithPaging(movies, filter);
+
+            if (filter.limit) {
+                movies = filterMoviesWithPaging(movies, filter);
+            }
             
             userScores = filterScores(userScores, movies);
             movieScores = filterScores(movieScores, movies);

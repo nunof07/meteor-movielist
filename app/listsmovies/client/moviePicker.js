@@ -5,7 +5,7 @@ angular
 function MoviePicker($q) {
     return MoviePickerClass;
     
-    function MoviePickerClass(movies, getUserScore, getMovieScore) {
+    function MoviePickerClass({ movies, userScores, movieScores }) {
         // public methods
         this.pick = pick;
         
@@ -15,22 +15,22 @@ function MoviePicker($q) {
             userScore: null,
             movieScore: null
         };
-        this.selectable = getSelectable(movies, getUserScore, getMovieScore);
+        this.selectable = getSelectable(movies, userScores, movieScores);
         this.all = angular.copy(this.selectable);
         return;
         
-        function getSelectable(movies, getUserScore, getMovieScore) {
+        function getSelectable(movies, userScores, movieScores) {
             const selectable = [];
             angular.forEach(movies, addMovie);
             return selectable;
             
             function addMovie(movie, index) {
-                const movieScore = getMovieScore(movie);
+                const movieScore = movieScores[movie._id];
                 
                 if (movieScore) {
                     selectable.push({
                         movie,
-                        userScore: getUserScore(movie),
+                        userScore: userScores[movie._id],
                         movieScore
                     });
                 }
