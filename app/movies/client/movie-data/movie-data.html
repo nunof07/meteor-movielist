@@ -22,8 +22,8 @@
                 <li ng-bind="movieDataCtrl.movie.runtime | mlRuntime"></li>
                 <li ng-bind="movieDataCtrl.movie.genres | mlGenres"></li>
                 <li>
-                    <a ng-href="http://www.imdb.com/title/{{movieDetailsCtrl.movie.imdbId}}/">IMDb</a>,
-                    <a ng-href="https://www.themoviedb.org/movie/{{movieDetailsCtrl.movie.tmdbId}}/">TMDb</a>
+                    <a ng-href="http://www.imdb.com/title/{{movieDataCtrl.movie.imdbId}}/">IMDb</a>,
+                    <a ng-href="https://www.themoviedb.org/movie/{{movieDataCtrl.movie.tmdbId}}/">TMDb</a>
                 </li>
             </ul>
         </div>
