@@ -1,6 +1,6 @@
 FROM node:4.4.7
 
-ADD ./build/bundle /opt/app
+COPY ./build/bundle /opt/app
 
 RUN cd /opt/app/programs/server \
   && ([ -f package.json ] || npm init -f) \
