@@ -63,10 +63,13 @@ For remote deployments I recommend [meteor-up][mup]. The steps are basically the
 
 ### Deploy to Dokku
 
-To deploy to [Dokku][dokku]:
+To deploy to [Dokku][dokku] you can either deploy using a buildpack or with a Dockerfile.
+
+#### Deploy using a buildpack
 
 - Clone or download the source code: `$ git clone https://github.com/nunof07/meteor-movielist.git`.
 - Change to the project directory.
+- Create an `.env` file with the following content: `export BUILDPACK_URL='https://github.com/AdmitHub/meteor-buildpack-horse.git'`.
 - Create your `settings.json` file (see above).
 - Add git remote: `$ git remote add dokku dokku@your-host.com:your-app.com`.
 - Push to Dokku: `$ git push dokku master`. **You should see an error at this point.**
@@ -82,6 +85,21 @@ To deploy to [Dokku][dokku]:
             - `$ dokku plugin:install https://github.com/JarnoLeConte/dokku-meteor.git meteor`.
             - `$ dokku meteor:settings your-app.com /home/dokku/your-app.com/meteor-settings.json`. Copy your `settings.json` to `/home/dokku/your-app.com/meteor-settings.json`.
             - The plugin loads the Meteor settings each time the app starts. If you need to restart the app manually use `dokku ps:restart your-app.com`.
+    - Install MongoDB:
+        - `$ dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo`.
+        - `$ dokku mongo:create your-app`.
+        - `$ dokku mongo:link your-app your-app.com`.
+- Now push again from your machine: `$ git push dokku master`. The app should be deployed now.
+
+#### Deploy using a Dockerfile
+
+- Clone or download the source code: `$ git clone https://github.com/nunof07/meteor-movielist.git`.
+- Change to the project directory.
+- Add git remote: `$ git remote add dokku dokku@your-host.com:your-app.com`.
+- Push to Dokku: `$ git push dokku master`. **You should see an error at this point.**
+- In your server where you have Dokku installed:
+    - Create a build argument: `dokku docker-options:add your-app.com build '--build-arg METEOR_SETTINGS={"public":{"forbidClientAccountCreation":"true"},"private":{"tmdb":"...TMDb_key_here..."}}'`.
+        - Make sure `METEOR_SETTINGS` has no whitespace and that it's still valid JSON.
     - Install MongoDB:
         - `$ dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo`.
         - `$ dokku mongo:create your-app`.
