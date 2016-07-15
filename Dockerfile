@@ -1,8 +1,8 @@
 FROM node:4.4.7
 
-ONBUILD ADD ./build/bundle /opt/app
+ADD ./build/bundle /opt/app
 
-ONBUILD RUN cd /opt/app/programs/server \
+RUN cd /opt/app/programs/server \
   && ([ -f package.json ] || npm init -f) \
   && npm i
 
